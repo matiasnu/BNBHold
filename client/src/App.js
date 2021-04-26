@@ -1,7 +1,14 @@
 import React, { Component } from "react";
+import ThunderHold from "./contracts/ThunderHold.json";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
-import HelloWorld from "./contracts/HelloWorld.json";
 import getWeb3 from "./getWeb3";
+
+import { Route, Router, Switch } from 'react-router-dom';
+import { Container, Menu, Button } from 'semantic-ui-react';
+//import { Campaign } from './components/Campaign';
+import { Plan } from './components/Plan';
+import { NotFound } from './components/NotFound';
+import history from './history';
 
 import "./App.css";
 
@@ -23,15 +30,15 @@ class App extends Component {
         SimpleStorageContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
-      deployedNetwork = HelloWorld.networks[networkId];
-      const helloWorldInstance = new web3.eth.Contract(
-        HelloWorld.abi,
+      deployedNetwork = ThunderHold.networks[networkId];
+      const thunderInstance = new web3.eth.Contract(
+        ThunderHold.abi,
         deployedNetwork && deployedNetwork.address
       );
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, storageContract: storageInstance, helloWorldContract: helloWorldInstance }, this.runExample);
+      this.setState({ web3, accounts, storageContract: storageInstance, thunderContract: thunderInstance });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -41,19 +48,16 @@ class App extends Component {
     }
   };
 
-  runExample = async () => {
-    const { accounts, storageContract, helloWorldContract } = this.state;
+  connectWallet = async () => {
+    const { accounts, storageContract, thunderContract } = this.state;
 
-    // Stores a given value, 5 by default.
     await storageContract.methods.set(5).send({ from: accounts[0] });
-
-    // Get the value from the contract to prove it worked.
     const storageResponse = await storageContract.methods.get().call();
 
-    const greetingResponse = await helloWorldContract.methods.getGreeting().call();
+    const thunderContractResponse = await thunderContract.methods.getContractBalance().call();
 
     // Update state with the result.
-    this.setState({ storageValue: storageResponse, greeting: greetingResponse });
+    this.setState({ balanceContract: thunderContractResponse });
   };
 
   render() {
@@ -62,6 +66,19 @@ class App extends Component {
     }
     return (
       <div className="App">
+        <Router history={history}>
+          <Container>
+            <Menu secondary>
+              <Menu.Item name='home' onClick={this.navigateToHome} />
+            </Menu>
+            <Switch>
+              <Route exact path='/' component={Plan} />
+              {/* <Route path='/campaing:address' component={Campaign} /> */}
+              <Route component={NotFound} />
+            </Switch>
+          </Container>
+        </Router>
+        <Button onClick={this.connectWallet}>Connect wallet</Button>
         <h1>Good to Go!</h1>
         <p>Your Truffle Box is installed and ready.</p>
         <h2>Smart Contract Example</h2>
@@ -73,9 +90,14 @@ class App extends Component {
           Try changing the value stored on <strong>line 40</strong> of App.js.
         </p>
         <div>The stored value is: {this.state.storageValue}</div>
-        <div>The greeting response is: {this.state.greeting}</div>
+        <div>The contract balance response is: {this.state.balanceContract}</div>
       </div>
     );
+  }
+
+  navigateToHome(e){
+    e.preventDefault();
+    history.push('/');
   }
 }
 

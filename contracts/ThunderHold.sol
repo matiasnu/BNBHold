@@ -14,7 +14,7 @@ Premisas:
 - Que sea duradero (minimo de 2 meses)
 */
 
-pragma solidity 0.5.16;
+pragma solidity >=0.8.4;
 
 contract ThunderHold {
 	using SafeMath for uint256;
@@ -108,10 +108,10 @@ contract ThunderHold {
 	event RefBonus(address indexed referrer, address indexed referral, uint256 indexed level, uint256 amount);
 	event NewParticipantLotto(address indexed user, uint256 amount, uint256 pt);
 
-	constructor(address payable wallet, uint256 start)public{
+	constructor(address payable wallet, uint256 start){
 		require(!isContract(wallet) && start > 0);
 		marketingWallet = wallet;
-		developerWallet = msg.sender;
+		developerWallet = payable(msg.sender);
 		startUNIX = start;
 
         // Agregamos solo 1 plan los demas los comentamos 
@@ -222,7 +222,7 @@ contract ThunderHold {
         // No sacar comision de las reinversiones para que el contrato no se vaya debilitando
 		
 		
-		msg.sender.transfer(totalAmount);
+		payable(msg.sender).transfer(totalAmount);
 
 		emit Withdrawn(msg.sender, totalAmount);
 
