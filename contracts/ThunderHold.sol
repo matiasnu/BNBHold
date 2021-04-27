@@ -297,35 +297,35 @@ contract ThunderHold {
             
            if (nlotto.currentLotto[i].ticketNumber == win1) {
                profit = (lottoCurrentPot.mul(LOTTO_WIN_PERCENT[0])).div(100);
-               address(uint160(nlotto.currentLotto[i].lottoId)).transfer(profit);
+               payable(address(uint160(nlotto.currentLotto[i].lottoId))).transfer(profit);
                users[nlotto.currentLotto[i].lottoId].lottobonus = (users[nlotto.currentLotto[i].lottoId].lottobonus).add(profit);
                lottoLastWin1a = nlotto.currentLotto[i].lottoId;
                PLastWin1 = profit;
            }
            if (nlotto.currentLotto[i].ticketNumber == win2) {
                profit = (lottoCurrentPot.mul(LOTTO_WIN_PERCENT[1])).div(100);
-               address(uint160(nlotto.currentLotto[i].lottoId)).transfer(profit);
+               payable(address(uint160(nlotto.currentLotto[i].lottoId))).transfer(profit);
                users[nlotto.currentLotto[i].lottoId].lottobonus = (users[nlotto.currentLotto[i].lottoId].lottobonus).add(profit);
                lottoLastWin2a = nlotto.currentLotto[i].lottoId;
                PLastWin2 = profit;
            }
            if (nlotto.currentLotto[i].ticketNumber == win3) {
               profit = (lottoCurrentPot.mul(LOTTO_WIN_PERCENT[2])).div(100);
-              address(uint160(nlotto.currentLotto[i].lottoId)).transfer(profit);
+              payable(address(uint160(nlotto.currentLotto[i].lottoId))).transfer(profit);
               users[nlotto.currentLotto[i].lottoId].lottobonus = (users[nlotto.currentLotto[i].lottoId].lottobonus).add(profit);
               lottoLastWin3a = nlotto.currentLotto[i].lottoId;
               PLastWin3 = profit;
            }
            if (nlotto.currentLotto[i].ticketNumber == win4) {
               profit = (lottoCurrentPot.mul(LOTTO_WIN_PERCENT[3])).div(100);
-              address(uint160(nlotto.currentLotto[i].lottoId)).transfer(profit);
+              payable(address(uint160(nlotto.currentLotto[i].lottoId))).transfer(profit);
               users[nlotto.currentLotto[i].lottoId].lottobonus = (users[nlotto.currentLotto[i].lottoId].lottobonus).add(profit);
               lottoLastWin4a = nlotto.currentLotto[i].lottoId;
               PLastWin4 = profit;
            }
            if (nlotto.currentLotto[i].ticketNumber == win5) {
-               profit = (lottoCurrentPot.mul(LOTTO_WIN_PERCENT[4])).div(100);
-               address(uint160(nlotto.currentLotto[i].lottoId)).transfer(profit);
+              profit = (lottoCurrentPot.mul(LOTTO_WIN_PERCENT[4])).div(100);
+              payable(address(uint160(nlotto.currentLotto[i].lottoId))).transfer(profit);
               users[nlotto.currentLotto[i].lottoId].lottobonus = (users[nlotto.currentLotto[i].lottoId].lottobonus).add(profit);
               lottoLastWin5a = nlotto.currentLotto[i].lottoId;
               PLastWin5 = profit;
