@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 export class Plan extends Component {
 
   state = {
-    invest: ''
+    invest: 0
   }
 
   constructor(props) {
@@ -28,7 +28,7 @@ export class Plan extends Component {
           />
           <Button primary
             type='submit'
-            onClick={this.onSubmit}
+            onClick={this.props.investContract(this.state.invest)}
           >
             Stake TT
           </Button>

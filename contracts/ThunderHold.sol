@@ -128,10 +128,10 @@ contract ThunderHold {
 	}
 
 	function invest(address referrer, uint8 plan) public payable {
-	    require(block.timestamp >= startUNIX ,"Not Launch");
-		require(msg.value >= INVEST_MIN_AMOUNT);
-        require(msg.value <= INVEST_MAX_AMOUNT);
-        require(plan < 3, "Invalid plan");
+	    //require(block.timestamp >= startUNIX ,"Not Launch");
+		//require(msg.value >= INVEST_MIN_AMOUNT);
+        //require(msg.value <= INVEST_MAX_AMOUNT);
+        //require(plan < 1, "Invalid plan");
 
 		Feepayout(msg.value); // Cobran devs
 		

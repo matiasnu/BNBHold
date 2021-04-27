@@ -4,16 +4,16 @@ import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
 
 import { Route, Router, Switch } from 'react-router-dom';
-import { Container, Menu, Button } from 'semantic-ui-react';
+import { Container, Menu, Button, Header, Input } from 'semantic-ui-react';
 //import { Campaign } from './components/Campaign';
-import { Plan } from './components/Plan';
+//import { Plan } from './components/Plan';
 import { NotFound } from './components/NotFound';
 import history from './history';
 
 import "./App.css";
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  state = { storageValue: 0, web3: null, accounts: null, contract: null, userWallet: "Connect wallet", invest: 0 };
 
   componentDidMount = async () => {
     try {
@@ -35,7 +35,7 @@ class App extends Component {
         ThunderHold.abi,
         deployedNetwork && deployedNetwork.address
       );
-
+      this.onChange = this.onChange.bind(this);
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, storageContract: storageInstance, thunderContract: thunderInstance });
@@ -51,14 +51,22 @@ class App extends Component {
   connectWallet = async () => {
     const { accounts, storageContract, thunderContract } = this.state;
 
-    await storageContract.methods.set(5).send({ from: accounts[0] });
+    //await storageContract.methods.set(5).send({ from: accounts[0] });
     const storageResponse = await storageContract.methods.get().call();
-
     const thunderContractResponse = await thunderContract.methods.getContractBalance().call();
 
     // Update state with the result.
-    this.setState({ balanceContract: thunderContractResponse });
+    this.setState({ storageValue: storageResponse, balanceContract: thunderContractResponse, userWallet: accounts[0] });
+
   };
+
+  investContract = async () => {
+    const { web3, accounts, thunderContract } = this.state;
+    await thunderContract.methods.invest("0x94B50Ad34FD502831471B6f5583316820C77B94E",0).send({
+      from: accounts[0],
+      value: this.state.invest
+    });
+  }
 
   render() {
     if (!this.state.web3) {
@@ -72,13 +80,18 @@ class App extends Component {
               <Menu.Item name='home' onClick={this.navigateToHome} />
             </Menu>
             <Switch>
-              <Route exact path='/' component={Plan} />
+              {/* <Route exact path='/' component={Plan} /> */}
               {/* <Route path='/campaing:address' component={Campaign} /> */}
               <Route component={NotFound} />
             </Switch>
           </Container>
         </Router>
-        <Button onClick={this.connectWallet}>Connect wallet</Button>
+        <div>
+          <Header as='h1'>Plan 1</Header>
+          <Input label='Contract Address' type='text' value={this.state.invest} onChange={this.onChange} />
+          <Button primary type='submit' onClick={this.investContract}>Stake TT</Button>
+        </div>
+        <Button onClick={this.connectWallet}>{this.state.userWallet}</Button>
         <h1>Good to Go!</h1>
         <p>Your Truffle Box is installed and ready.</p>
         <h2>Smart Contract Example</h2>
@@ -98,6 +111,10 @@ class App extends Component {
   navigateToHome(e){
     e.preventDefault();
     history.push('/');
+  }
+
+  onChange(event) {
+    this.setState({invest: event.target.value});
   }
 }
 

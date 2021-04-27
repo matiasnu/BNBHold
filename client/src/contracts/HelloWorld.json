@@ -17,7 +17,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"getGreeting\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/mnunez/BNBHold/contracts/HelloWorld.sol\":\"HelloWorld\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/mnunez/BNBHold/contracts/HelloWorld.sol\":{\"keccak256\":\"0xddbadbee2120f96e25b202c4f84a2daaf4b1c0c59775c82dd77337932cbf6c3b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f448368b6f2660397393b00aaa8b846518b45348426cb5fff290a1c413eab9b1\",\"dweb:/ipfs/QmezeTzLtChJqVWTS9FcywQ2XxeTavJLokyizzjwuzSaBW\"]}},\"version\":1}",
@@ -2006,12 +2007,13 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x8a4bcd52706F8D9c10fFdF0cC65E2b5665C4C95c",
-      "transactionHash": "0x55e5a20c66add655b39026e332e0577bd6836a3d017f9803d3117afff7e83a37"
+      "address": "0x203106c837d52a552551c29944458A257FabB49C",
+      "transactionHash": "0xa97b4fbec78aac555d48cc2ce237442d16a8604b5cc4b6bf3f5479c20ced0d82"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-27T01:25:51.560Z",
+  "updatedAt": "2021-04-27T02:39:05.004Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},
