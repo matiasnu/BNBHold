@@ -11,6 +11,8 @@ truffle test
 
 Para iniciar la pagina web corremos.
 ```bash
+cd client/
+npm install
 npm run start
 ```
 

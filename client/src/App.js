@@ -3,11 +3,8 @@ import ThunderHold from "./contracts/ThunderHold.json";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
 
-import { Route, Router, Switch } from 'react-router-dom';
-import { Container, Menu, Button, Header, Input } from 'semantic-ui-react';
-//import { Campaign } from './components/Campaign';
-//import { Plan } from './components/Plan';
-import { NotFound } from './components/NotFound';
+import { Button, Header, Input } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import history from './history';
 
 import "./App.css";
@@ -61,7 +58,7 @@ class App extends Component {
   };
 
   investContract = async () => {
-    const { web3, accounts, thunderContract } = this.state;
+    const { accounts, thunderContract } = this.state;
     await thunderContract.methods.invest("0x94B50Ad34FD502831471B6f5583316820C77B94E",0).send({
       from: accounts[0],
       value: this.state.invest
@@ -74,18 +71,6 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <Router history={history}>
-          <Container>
-            <Menu secondary>
-              <Menu.Item name='home' onClick={this.navigateToHome} />
-            </Menu>
-            <Switch>
-              {/* <Route exact path='/' component={Plan} /> */}
-              {/* <Route path='/campaing:address' component={Campaign} /> */}
-              <Route component={NotFound} />
-            </Switch>
-          </Container>
-        </Router>
         <div>
           <Header as='h1'>Plan 1</Header>
           <Input label='Contract Address' type='text' value={this.state.invest} onChange={this.onChange} />
@@ -104,6 +89,9 @@ class App extends Component {
         </p>
         <div>The stored value is: {this.state.storageValue}</div>
         <div>The contract balance response is: {this.state.balanceContract}</div>
+        <span className="input-group-btn">
+          <Link to="/chat">ChatRoom</Link>
+        </span>
       </div>
     );
   }
