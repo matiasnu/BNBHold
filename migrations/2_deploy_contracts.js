@@ -1,7 +1,6 @@
-var SimpleStorage = artifacts.require("./SimpleStorage.sol");
-var HelloWorld = artifacts.require("./HelloWorld.sol");
+var AntiWallet = artifacts.require("./AntiWallet.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(SimpleStorage);
-  deployer.deploy(HelloWorld);
+  deployer.deploy(AntiWallet, 1619324276);
 };
+
