@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { Lottery } from './components/Lottery';
 import { NotFound } from './components/NotFound';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -15,6 +16,7 @@ ReactDOM.render(
         <Container>
             <Switch>
                 <Route exact path="/" component={App}></Route>
+                <Route exact path="/lottery" component={Lottery}></Route>
                 <Route exact path="/chat" component={ getChat }></Route>
                 <Route component={NotFound} />
             </Switch>

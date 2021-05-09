@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ThunderHold from "./contracts/ThunderHold.json";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
-import getWeb3 from "./getWeb3";
+import getWeb3Modal from "./getWeb3Modal";
 
 import { Button, Header, Input } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
@@ -15,7 +15,7 @@ class App extends Component {
   componentDidMount = async () => {
     try {
       // Get network provider and web3 instance.
-      const web3 = await getWeb3();
+      const web3 = await getWeb3Modal();
 
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
@@ -36,6 +36,7 @@ class App extends Component {
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, storageContract: storageInstance, thunderContract: thunderInstance });
+      this.connectWallet();
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -57,6 +58,11 @@ class App extends Component {
 
   };
 
+  getDataToContract = async () => {
+    // Get data to the contract.
+    //const thunderContractResponse = await thunderContract.methods.getPlanInfo(1).call();
+  }
+
   investContract = async () => {
     const { accounts, thunderContract } = this.state;
     await thunderContract.methods.invest("0x94B50Ad34FD502831471B6f5583316820C77B94E",0).send({
@@ -66,9 +72,9 @@ class App extends Component {
   }
 
   render() {
-    if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
-    }
+    // if (!this.state.web3) {
+    //   return <div>Loading Web3, accounts, and contract...</div>;
+    // }
     return (
       <div className="App">
         <div>
@@ -76,17 +82,8 @@ class App extends Component {
           <Input label='Contract Address' type='text' value={this.state.invest} onChange={this.onChange} />
           <Button primary type='submit' onClick={this.investContract}>Stake TT</Button>
         </div>
-        <Button onClick={this.connectWallet}>{this.state.userWallet}</Button>
-        <h1>Good to Go!</h1>
-        <p>Your Truffle Box is installed and ready.</p>
+        <Button onClick={this.componentDidMount}>{this.state.userWallet}</Button>
         <h2>Smart Contract Example</h2>
-        <p>
-          If your contracts compiled and migrated successfully, below will show
-          a stored value of 5 (by default).
-        </p>
-        <p>
-          Try changing the value stored on <strong>line 40</strong> of App.js.
-        </p>
         <div>The stored value is: {this.state.storageValue}</div>
         <div>The contract balance response is: {this.state.balanceContract}</div>
         <span className="input-group-btn">

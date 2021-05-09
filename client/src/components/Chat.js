@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react';
 import '../views/Chat.css';
+import chatIcon from '../views/images/chatIcon.png';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import 'firebase/analytics';
+//import 'firebase/analytics';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -57,6 +58,7 @@ function SignIn() {
     <div className="sign-in">
       <button onClick={signInWithGoogle}>Sign in with Google</button>
       <p>Do not violate the community guidelines or you will be banned for life!</p>
+      <img src={chatIcon} className='ChatIcon'/>
     </div>
   )
 
