@@ -4,34 +4,56 @@ const getWeb3 = () =>
   new Promise((resolve, reject) => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
     window.addEventListener("load", async () => {
-      // Modern dapp browsers...
-      if (window.ethereum) {
-        const web3 = new Web3(window.ethereum);
-        try {
-          // Request account access if needed
-          await window.ethereum.enable();
-          // Acccounts now exposed
-          resolve(web3);
-        } catch (error) {
-          reject(error);
-        }
-      }
-      // Legacy dapp browsers...
-      else if (window.web3) {
-        // Use Mist/MetaMask's provider.
-        const web3 = window.web3;
-        console.log("Injected web3 detected.");
-        resolve(web3);
-      }
-      // Fallback to localhost; use dev console port by default...
-      else {
-        const provider = new Web3.providers.HttpProvider(
-          "http://127.0.0.1:8545"
-        );
-        const web3 = new Web3(provider);
-        console.log("No web3 instance injected, using Local web3.");
-        resolve(web3);
-      }
+
+
+      // Reemplazo por un provider que me permita utilizar WebSockets para trabajar con eventos
+
+      // // Modern dapp browsers...
+      // if (window.ethereum) {
+      //   const web3 = new Web3(window.ethereum);
+      //   try {
+      //     // Request account access if needed
+      //     await window.ethereum.enable();
+      //     // Acccounts now exposed
+      //     resolve(web3);
+      //   } catch (error) {
+      //     reject(error);
+      //   }
+      // }
+      // // Legacy dapp browsers...
+      // else if (window.web3) {
+      //   // Use Mist/MetaMask's provider.
+      //   const web3 = window.web3;
+      //   console.log("Injected web3 detected.");
+      //   resolve(web3);
+      // }
+      // // Fallback to localhost; use dev console port by default...
+      // else {
+      //   const provider = new Web3.providers.HttpProvider(
+      //     "http://127.0.0.1:8545"
+      //   );
+      //   const web3 = new Web3(provider);
+      //   console.log("No web3 instance injected, using Local web3.");
+      //   resolve(web3);
+      // }
+
+      // Segun esta pagina ganache soporta WebSockets
+      //https://ethereum.stackexchange.com/questions/34836/do-i-need-to-use-ws-provider-in-order-to-watch-events/34840
+
+      //const web3WSProvider = new Web3.providers.WebsocketProvider("ws://127.0.0.1:8545");
+      const web3WSProvider = new Web3.providers.WebsocketProvider("ws://127.0.0.1:8545");
+      ganache.provider()
+      //const web3WSProvider = new Web3.providers.IpcProvider("~/.ethereum/geth.ipc");
+
+      // Test with Ropstein network
+      // https://ethereum.stackexchange.com/questions/27048/comparison-of-the-different-testnets
+
+      //const web3WSProvider = new Web3.providers.WebsocketProvider("wss://ropsten.infura.io/ws/v3/87d911548b2c45218ed2667b4f57b0bc");
+      //const web3WSProvider = new Web3.providers.WebsocketProvider("ws://127.0.0.1:8546");
+      
+      const web3 = new Web3(web3WSProvider);
+      resolve(web3);
+
     });
   });
 

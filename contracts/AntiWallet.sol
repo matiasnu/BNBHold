@@ -66,7 +66,9 @@ contract AntiWallet {
     // Propiedad privada, porque?
     address payable private developerWallet;
 
-    event Const(uint256 data, uint256 date);
+    // Evento
+    event AliciaEvent(uint256 indexed val1, uint256 indexed val2);
+
     event Newbie(address user);
     event NewDeposit(
         address indexed user,
@@ -90,12 +92,20 @@ contract AntiWallet {
         developerWallet = payable(msg.sender);
         startUNIX = start;
 
-        emit Const(10, 23);
+        emit AliciaEvent(10, 23);
 
         // Agregamos solo 1 plan los demas los comentamos
         plans.push(Plan(7, 200e2, 300e2)); // 20% per day for 7 days, 30% reinvest
         plans.push(Plan(15, 180e2, 300e2)); // 18% per day for 15 days, 30% reinvest
         plans.push(Plan(20, 170e2, 200e2)); // 17% per day for 20 days, 20% reinvest
+    }
+
+    function alice(uint256 val1, uint256 val2) public returns (uint256) {
+        uint256 res1 = val1;
+        uint256 res2 = val2;
+        emit AliciaEvent(res1, res2);
+
+        return res1 * res2;
     }
 
     function feepayout(uint256 amt) internal {

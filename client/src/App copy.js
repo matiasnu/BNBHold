@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Button } from "semantic-ui-react"
+import { Button } from "semantic-ui-react"
 import AntiWallet from "./contracts/AntiWallet.json";
 import getWeb3 from "./getWeb3";
 
@@ -7,6 +7,13 @@ import "./App.css";
 
 class App extends Component {
   state = { web3: null, accounts: null, contract: null };
+
+
+  // This syntax ensures `this` is bound within handleClick.
+  // Warning: this is *experimental* syntax.
+  handleClick = () => {
+    console.log('this is:', this);
+  }  
 
   componentDidMount = async () => {
     try {
@@ -48,7 +55,7 @@ class App extends Component {
     PROJECT_FEE
     const PROJECT_FEE = await antiWalletContract.methods.getPROJECT_FEE().call();
     const contractBalanceResponse = await antiWalletContract.methods.getContractBalance().call();
-
+    
     // Update state with the result.
     this.setState({ contractBalance: contractBalanceResponse });
   };
@@ -74,6 +81,11 @@ class App extends Component {
 
         <div>User Dividends: {this.state.contractBalance}</div>
 
+        <div>
+          <Button onClick={this.handleClick}>
+            Click me to invoque a contract method
+          </Button>
+        </div>
       </div>
     );
   }
