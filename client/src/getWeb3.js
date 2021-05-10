@@ -37,12 +37,11 @@ const getWeb3 = () =>
       //   resolve(web3);
       // }
 
-      // Segun esta pagina ganache soporta WebSockets
+      // Segun esta pagina ganache soporta WebSockets, pero por lo que vi, solo la version console
       //https://ethereum.stackexchange.com/questions/34836/do-i-need-to-use-ws-provider-in-order-to-watch-events/34840
 
       //const web3WSProvider = new Web3.providers.WebsocketProvider("ws://127.0.0.1:8545");
       const web3WSProvider = new Web3.providers.WebsocketProvider("ws://127.0.0.1:8545");
-      ganache.provider()
       //const web3WSProvider = new Web3.providers.IpcProvider("~/.ethereum/geth.ipc");
 
       // Test with Ropstein network

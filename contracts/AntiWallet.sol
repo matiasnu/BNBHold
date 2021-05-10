@@ -31,6 +31,8 @@ contract AntiWallet {
     uint256 public totalStaked;
     uint256 public totalRefBonus;
 
+    uint256 public res; // Variable utilizada para setear un valor ante un evento
+
     struct Plan {
         uint256 time;
         uint256 percent;
@@ -67,7 +69,7 @@ contract AntiWallet {
     address payable private developerWallet;
 
     // Evento
-    event AliciaEvent(uint256 indexed val1, uint256 indexed val2);
+    event AliciaEvent(uint256 val1, uint256 val2, uint256 res);
 
     event Newbie(address user);
     event NewDeposit(
@@ -92,20 +94,19 @@ contract AntiWallet {
         developerWallet = payable(msg.sender);
         startUNIX = start;
 
-        emit AliciaEvent(10, 23);
-
         // Agregamos solo 1 plan los demas los comentamos
         plans.push(Plan(7, 200e2, 300e2)); // 20% per day for 7 days, 30% reinvest
         plans.push(Plan(15, 180e2, 300e2)); // 18% per day for 15 days, 30% reinvest
         plans.push(Plan(20, 170e2, 200e2)); // 17% per day for 20 days, 20% reinvest
     }
 
-    function alice(uint256 val1, uint256 val2) public returns (uint256) {
-        uint256 res1 = val1;
-        uint256 res2 = val2;
-        emit AliciaEvent(res1, res2);
+    /*
+        Si es una funcion que cambia un estado conviene generar un evento con el resultado
+    */
+    function alice(uint256 val1, uint256 val2) external {
+        res = val1 + val2;
 
-        return res1 * res2;
+        emit AliciaEvent(val1, val2, res);
     }
 
     function feepayout(uint256 amt) internal {
