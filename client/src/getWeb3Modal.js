@@ -16,18 +16,18 @@ const providerOptions = {
     }
   }
 
-  // portis: {
-  //   package: Portis, // required
-  //   options: {
-  //     id: "8e23465f-c9a7-410a-92df-18b2e3d1c38f",
-  //     network: "maticMumbai"
-  //   }
-  // }
+  /*portis: {
+    package: Portis, // required
+    options: {
+      id: "8e23465f-c9a7-410a-92df-18b2e3d1c38f",
+      network: "maticMumbai"
+    }
+  }*/
 };
 
 let provider = null;
 let web3 = null;
-let accounts = null;
+//let accounts = null;
 
 const getWeb3Modal = async() => {
     if (!provider) {
@@ -40,14 +40,14 @@ const getWeb3Modal = async() => {
       web3 = new Web3(provider);
     }
 
-    //provider._portis.showPortis();
+    /*provider._portis.showPortis();
 
-    if (!accounts) {
+    if (!accounts) { //Not necesary
       accounts = await web3.eth.getAccounts();
       const p = document.createElement("p");
       p.innerText = (`Wallet address: ${accounts[0].toLowerCase()}`);
       document.getElementById("userWalletAddress").appendChild(p);
-    }
+    }*/
 
 }
 
