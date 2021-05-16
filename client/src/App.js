@@ -49,7 +49,19 @@ class App extends Component {
       //   storageContract: storageInstance,
       //   thunderContract: thunderInstance,
       // });
+      // Para poder utilizar una cuenta debo desbloquearla por un tiempo determinado
+      web3.eth.personal.unlockAccount(accounts[1], "", 300);
 
+      // Obtengo e imprimo el Balance en Ether de la cuenta principal 'coinBase'
+      // Probar con otra cuenta cualquiera que desee el usuario
+      web3.eth
+        .getBalance(accounts[1])
+        .then(function (etherBalance) {
+          console.log("Ether:", web3.utils.fromWei(etherBalance, "ether"));
+        })
+        .catch(function (error) {
+          console.log("ERROR", error);
+        });
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       //this.setState({ web3, accounts, contract: antiWalletContract }, this.updateState);
@@ -256,11 +268,15 @@ class App extends Component {
 
   investContract = async () => {
     const { accounts, thunderContract } = this.state;
+
+    console.log("Account usada para invertir: ", accounts[1]);
+
     await thunderContract.methods
       .invest("0x94B50Ad34FD502831471B6f5583316820C77B94E", 0)
       .send({
-        from: accounts[0],
+        from: accounts[1],
         value: this.state.invest,
+        gas: 3000000,
       });
   };
 
