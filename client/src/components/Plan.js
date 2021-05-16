@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import { Button, Header, Input } from 'semantic-ui-react'
-import { withRouter } from 'react-router';
+import React, { Component } from "react";
+import { Button, Header, Input } from "semantic-ui-react";
+import { withRouter } from "react-router";
 
 export class Plan extends Component {
-
   state = {
-    invest: 0
-  }
+    invest: 0,
+  };
 
   constructor(props) {
     super(props);
@@ -18,31 +17,32 @@ export class Plan extends Component {
   render() {
     return (
       <div>
-        <Header as='h1'>Plan 1</Header>
+        <Header as="h1">Plan 1</Header>
 
-          <Input
-            label='Contract Address'
-            type='text'
-            value={this.state.invest}
-            onChange={this.onChange}
-          />
-          <Button primary
-            type='submit'
-            onClick={this.props.investContract(this.state.invest)}
-          >
-            Stake TT
-          </Button>
+        <Input
+          label="Contract Address"
+          type="text"
+          value={this.state.invest}
+          onChange={this.onChange}
+        />
+        <Button
+          primary
+          type="submit"
+          onClick={this.props.investContract(this.state.invest)}
+        >
+          Stake TT
+        </Button>
       </div>
     );
   }
 
   onChange(event) {
-    this.setState({invest: event.target.value});
+    this.setState({ invest: event.target.value });
   }
 
   onSubmit(event) {
     event.preventDefault();
-    this.props.history.push(`/campaigns/${this.state.invest}`)
+    this.props.history.push(`/campaigns/${this.state.invest}`);
   }
 }
 
