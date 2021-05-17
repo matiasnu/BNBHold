@@ -5,3 +5,4 @@
 - Incluyo la suscripcion a los eventos requeridos
 - (TODO) Agregar el saldo de la cuenta actual en el formulario de planes de inversion
 - Agrego 'gas' en el metodo invest
+- Se refactoriza la carga del web3Modal ya que el mismo no funcionaba correctamente

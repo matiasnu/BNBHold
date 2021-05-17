@@ -29,16 +29,23 @@ let provider = null;
 let web3 = null;
 //let accounts = null;
 
-const getWeb3Modal = async() => {
+const getWeb3Modal = () => 
+  new Promise((resolve, reject) => {
+  window.addEventListener('load', async () => {
     if (!provider) {
       const web3Modal = new Web3Modal({
         cacheProvider: false, // optional
         disableInjectedProvider: false,
         providerOptions // required
       });
-      provider = await web3Modal.connect();
+      try {
+        provider = await web3Modal.connect();
+      } catch(error) {
+        reject(error);
+      }
       web3 = new Web3(provider);
     }
+    resolve(web3);
 
     /*provider._portis.showPortis();
 
@@ -48,7 +55,7 @@ const getWeb3Modal = async() => {
       p.innerText = (`Wallet address: ${accounts[0].toLowerCase()}`);
       document.getElementById("userWalletAddress").appendChild(p);
     }*/
-
-}
+  });
+});
 
 export default getWeb3Modal;
