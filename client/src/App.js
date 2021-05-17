@@ -27,6 +27,7 @@ class App extends Component {
 
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
+      console.log(accounts);
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
@@ -51,7 +52,7 @@ class App extends Component {
       // });
       // Para poder utilizar una cuenta debo desbloquearla por un tiempo determinado
       web3.eth.personal.unlockAccount(accounts[1], "", 300);
-
+      console.log("Wallet a utilizar: ", accounts[1]);
       // Obtengo e imprimo el Balance en Ether de la cuenta principal 'coinBase'
       // Probar con otra cuenta cualquiera que desee el usuario
       web3.eth
@@ -104,7 +105,8 @@ class App extends Component {
     thunderContract.events
       .Newbie()
       .on("data", function (event) {
-        console.log("event:", event.returnValues.res); // same results as the optional callback above
+        console.log("event Newbie arrived");
+        console.log(event.returnValues);
         //alert(event.returnValues.res);
       })
       .on("changed", function (event) {
@@ -116,7 +118,8 @@ class App extends Component {
     thunderContract.events
       .NewDeposit()
       .on("data", function (event) {
-        console.log("event:", event.returnValues.res); // same results as the optional callback above
+        console.log("event NewDeposit arrived");
+        console.log(event.returnValues);
         //alert(event.returnValues.res);
       })
       .on("changed", function (event) {
@@ -128,7 +131,9 @@ class App extends Component {
     thunderContract.events
       .Withdrawn()
       .on("data", function (event) {
-        console.log("event:", event.returnValues.res); // same results as the optional callback above
+        console.log("event Withdrawn arrived");
+        console.log(event.returnValues);
+
         //alert(event.returnValues.res);
       })
       .on("changed", function (event) {
@@ -140,7 +145,9 @@ class App extends Component {
     thunderContract.events
       .RefBonus()
       .on("data", function (event) {
-        console.log("event:", event.returnValues.res); // same results as the optional callback above
+        console.log("event RefBonus arrived");
+        console.log(event.returnValues);
+
         //alert(event.returnValues.res);
       })
       .on("changed", function (event) {
@@ -152,7 +159,8 @@ class App extends Component {
     thunderContract.events
       .NewParticipantLotto()
       .on("data", function (event) {
-        console.log("event:", event.returnValues.res); // same results as the optional callback above
+        console.log("event NewParticipantLotto arrived");
+        console.log(event.returnValues);
         //alert(event.returnValues.res);
       })
       .on("changed", function (event) {
@@ -167,41 +175,40 @@ class App extends Component {
   getPastEvents = async () => {
     console.log("getPastEvents");
 
-    const { accounts, contract } = this.state;
+    const { accounts, thunderContract } = this.state;
 
     // Esta forma de obtener los eventos no suscribe a nuevos eventos y es necesario suscribirse
     // con el metodo subscribe
-    // let events = contract.getPastEvents(
-    //   "AliciaEvent",
-    //   {
-    //     // El evento se puede denominar puntualmente o se pueden traer todos los eventos pasados
-    //     // utilizando 'allEvents'. Se podria combinar el 'allEvents' con un switch.
-    //     filter: {}, // Este parametro es opcional, en este caso no voy a filtrar nada
-    //     fromBlock: 0, // Este parametro es opcional. Como lo llamo una unica vez, cuando se refrezca la
-    //     // pagina, obtendo todos los eventos pasados de un
-    //     // fromBlock: web3.eth.getBlockNumber() // si deseo tomar solo los nuevos eventos desde
-    //     // que se inicio esta session del usuario. Cuando el usuario refrezque la pagina se vuelve a cargar
-    //     // Otra opcion es registrar el Bloque con el cual se creo el contrato y usarlo como cota inferior
-    //     toBlock: "latest", // Este parametro es opcional
-    //   },
-    //   (error, events) => {
-    //     if (!error) {
-    //       var obj = JSON.parse(JSON.stringify(events));
-    //       var array = Object.keys(obj);
+    // Sumando este monto puedo saber cuanta es la cantidad total de TT que fue retirado hasta este preciso momento
+    // Pienso que no es taqn importante la precicion de este valor...
+    let events = thunderContract.getPastEvents(
+      "NewDeposit",
+      {
+        // El evento se puede denominar puntualmente o se pueden traer todos los eventos pasados
+        // utilizando 'allEvents'. Se podria combinar el 'allEvents' con un switch.
+        filter: {}, // Este parametro es opcional, en este caso no voy a filtrar nada
+        fromBlock: 0, // Este parametro es opcional. Como lo llamo una unica vez, cuando se refrezca la
+        // pagina, obtendo todos los eventos pasados de un
+        // fromBlock: web3.eth.getBlockNumber() // si deseo tomar solo los nuevos eventos desde
+        // que se inicio esta session del usuario. Cuando el usuario refrezque la pagina se vuelve a cargar
+        // Otra opcion es registrar el Bloque con el cual se creo el contrato y usarlo como cota inferior
+        toBlock: "latest", // Este parametro es opcional
+      },
+      (error, events) => {
+        if (!error) {
+          var obj = JSON.parse(JSON.stringify(events));
+          var array = Object.keys(obj);
 
-    //       // Itero por el array imprimiendo los distintos past eventos
-    //       var i = 0;
-    //       for (i = 0; i < array.length; i++) {
-    //         console.log(obj[array[i]].returnValues);
-    //       }
-
-    //       console.log(obj);
-    //       console.log(array);
-    //     } else {
-    //       console.log(error);
-    //     }
-    //   }
-    // );
+          // Itero por el array imprimiendo los distintos past eventos
+          var i = 0;
+          for (i = 0; i < array.length; i++) {
+            console.log(obj[array[i]].returnValues);
+          }
+        } else {
+          console.log(error);
+        }
+      }
+    );
   };
 
   /*
@@ -276,7 +283,7 @@ class App extends Component {
       .send({
         from: accounts[1],
         value: this.state.invest,
-        gas: 3000000,
+        gas: 300000,
       });
   };
 
