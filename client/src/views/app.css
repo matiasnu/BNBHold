@@ -1,0 +1,961 @@
+* {
+  box-sizing: border-box;
+}
+
+.plan {
+  width: 200px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 293px;
+  left: 435px;
+  font-family: Poppins;
+  font-weight: SemiBold;
+  font-size: 50px;
+  opacity: 1;
+  text-align: left;
+}
+
+.my-stakes {
+  width: 255px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 72px;
+  left: 1445px;
+  font-family: Poppins;
+  font-weight: SemiBold;
+  font-size: 50px;
+  opacity: 1;
+  text-align: left;
+}
+
+.home {
+  width: 245px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 237px;
+  left: 85px;
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 25px;
+  opacity: 1;
+  text-align: left;
+}
+
+.lottery {
+  width: 245px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 287px;
+  left: 85px;
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 25px;
+  opacity: 1;
+  text-align: left;
+}
+
+.support {
+  width: 245px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 387px;
+  left: 85px;
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 25px;
+  opacity: 1;
+  text-align: left;
+}
+
+.presentation {
+  width: 245px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 437px;
+  left: 85px;
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 25px;
+  opacity: 1;
+  text-align: left;
+}
+
+.daily-profit {
+  width: 163px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.total-balance {
+  width: 276px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.contract-balance {
+  width: 185px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 0px;
+  left: 220px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: right;
+}
+
+.total-staked {
+  width: 187px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.profit-number {
+  width: 97px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 0px;
+  left: 308px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: right;
+}
+
+.total-return {
+  width: 163px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.withdraw-time {
+  width: 178px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.every-time {
+  width: 183px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 0px;
+  left: 222px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: right;
+}
+
+.dato1 {
+  width: 185px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 0px;
+  left: 220px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: right;
+}
+
+.dato2 {
+  width: 97px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 0px;
+  left: 308px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: right;
+}
+
+.days {
+  width: 163px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato3 {
+  width: 97px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 0px;
+  left: 308px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: right;
+}
+
+.dato4 {
+  width: 205px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 872px;
+  left: 535px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 32px;
+  opacity: 1;
+  text-align: center;
+}
+
+.min-tt {
+  width: 403px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 746px;
+  left: 437px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.max-tt {
+  width: 403px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 776px;
+  left: 437px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.enter-ammount {
+  width: 316px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 612px;
+  left: 475px;
+  font-family: Poppins;
+  font-weight: SemiBold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.dato5 {
+  width: 405px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 846px;
+  left: 435px;
+  font-family: Poppins;
+  font-weight: SemiBold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.stake {
+  position: absolute;
+  width: 194px;
+  height: 55px;
+  left: 541px;
+  top: 952px;
+
+  background: #625656;
+  border-radius: 40px;
+}
+
+.withdraw {
+  width: 118px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 8px;
+  left: 38px;
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.contract-address {
+  position: absolute;
+  width: 268px;
+  height: 45px;
+  left: 435px;
+  top: 68px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 45px;
+  /* identical to box height */
+  display: flex;
+  align-items: center;
+  color: #000000;
+}
+
+.dato6 {
+  position: absolute;
+  width: 315px;
+  height: 33px;
+  left: 452px;
+  top: 148px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 33px;
+  /* identical to box height */
+  display: flex;
+  align-items: center;
+  color: #000000;
+}
+
+.total-withdraw {
+  width: 218px;
+  color: rgba(0, 0, 0, 1);
+  position: relative;
+  top: 0px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.dato7 {
+  width: 218px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 41px;
+  left: 0px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.idea {
+  width: 364px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 816px;
+  left: 963px;
+  font-family: Poppins;
+  font-weight: SemiBold;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato8 {
+  width: 137px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 10px;
+  left: 101px;
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato9 {
+  width: 52px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 55px;
+  left: 142px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato10 {
+  width: 140px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 55px;
+  left: 233px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: center;
+}
+
+.dato11 {
+  width: 137px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 10px;
+  left: 101px;
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato12 {
+  width: 52px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 55px;
+  left: 142px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato13 {
+  width: 140px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 55px;
+  left: 233px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: center;
+}
+
+.dato14 {
+  width: 137px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 10px;
+  left: 101px;
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato15 {
+  width: 52px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 55px;
+  left: 142px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato16 {
+  width: 140px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 55px;
+  left: 233px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: center;
+}
+
+.dato17 {
+  width: 137px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 10px;
+  left: 101px;
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato18 {
+  width: 52px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 55px;
+  left: 142px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato19 {
+  width: 140px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 55px;
+  left: 233px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: center;
+}
+
+.dato20 {
+  width: 137px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 10px;
+  left: 101px;
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato21 {
+  width: 52px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 55px;
+  left: 142px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato22 {
+  width: 140px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 55px;
+  left: 233px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: center;
+}
+
+.dato23 {
+  width: 137px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 10px;
+  left: 101px;
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato24 {
+  width: 52px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 55px;
+  left: 142px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato25 {
+  width: 140px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 55px;
+  left: 233px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: center;
+}
+
+.your-total-staked {
+  width: 220px;
+  color: rgba(0, 0, 0, 1);
+  position: relative;
+  top: 0px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.total-deposits {
+  width: 220px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 0px;
+  left: 245px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.dato26 {
+  width: 220px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 32px;
+  left: 245px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.dato27 {
+  width: 220px;
+  color: rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 32px;
+  left: 0px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.primary {
+  background: rgba(123, 123, 123, 1);
+  padding-left: 74px;
+  padding-top: 32px;
+}
+
+.input-group-btn {
+  padding-left: 1800px;
+}
+
+.plan-block {
+  position: absolute;
+  width: 473px;
+  height: 771px;
+  left: 402px;
+  top: 272px;
+  background: #c4c4c4;
+  border-radius: 30px;
+}
+
+.plan1 {
+  position: absolute;
+  width: 405px;
+  height: 18px;
+  left: 435px;
+  top: 397px;
+}
+
+.plan2 {
+  position: absolute;
+  width: 405px;
+  height: 18px;
+  left: 435px;
+  top: 444px;
+}
+
+.plan3 {
+  position: absolute;
+  width: 405px;
+  height: 18px;
+  left: 435px;
+  top: 491px;
+}
+
+.plan4 {
+  position: absolute;
+  width: 405px;
+  height: 18px;
+  left: 435px;
+  top: 538px;
+}
+
+.input-value {
+  position: absolute;
+  width: 316px;
+  height: 78px;
+  left: 475px;
+  top: 668px;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.stake1 {
+  position: absolute;
+  width: 405px;
+  height: 100px;
+  left: 1445px;
+  top: 161px;
+  background: #7c7c7c;
+  border-radius: 30px;
+}
+
+.stake2 {
+  position: absolute;
+  width: 405px;
+  height: 100px;
+  left: 1445px;
+  top: 291px;
+  background: #7c7c7c;
+  border-radius: 30px;
+}
+
+.stake3 {
+  position: absolute;
+  width: 405px;
+  height: 100px;
+  left: 1445px;
+  top: 421px;
+  background: #7c7c7c;
+  border-radius: 30px;
+}
+
+.stake4 {
+  position: absolute;
+  width: 405px;
+  height: 100px;
+  left: 1445px;
+  top: 551px;
+  background: #7c7c7c;
+  border-radius: 30px;
+}
+
+.stake5 {
+  position: absolute;
+  width: 405px;
+  height: 100px;
+  left: 1445px;
+  top: 681px;
+  background: #7c7c7c;
+  border-radius: 30px;
+}
+
+.stake6 {
+  position: absolute;
+  width: 405px;
+  height: 100px;
+  left: 1445px;
+  top: 811px;
+  background: #7c7c7c;
+  border-radius: 30px;
+}
+
+.stake-check {
+  width: 80px;
+  height: 80px;
+  background: #d2d2d2;
+  margin-top: 10px;
+  margin-left: 8px;
+  border-radius: 30px;
+}
+
+.stakes-block {
+  background: #e5e5e5;
+}
+
+.idea-block {
+  position: absolute;
+  width: 465px;
+  height: 387px;
+  left: 912px;
+  top: 655px;
+  background: #c4c4c4;
+  border-radius: 30px;
+}
+
+.withdraw-block {
+  position: absolute;
+  width: 465px;
+  height: 121px;
+  left: 910px;
+  top: 499px;
+
+  background: #c4c4c4;
+  border-radius: 30px;
+}
+
+.address1 {
+  position: absolute;
+  width: 405px;
+  height: 18px;
+  left: 910px;
+  top: 80px;
+}
+
+.address2 {
+  position: absolute;
+  width: 405px;
+  height: 18px;
+  left: 910px;
+  top: 152px;
+}
+
+.address-block {
+  position: absolute;
+  width: 975px;
+  height: 200px;
+  left: 400px;
+  top: 37px;
+  background: #c4c4c4;
+  border-radius: 30px;
+}
+
+.dato6-block {
+  position: absolute;
+  width: 405px;
+  height: 68px;
+  left: 435px;
+  top: 129px;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.data-numbers {
+  position: absolute;
+  width: 465px;
+  height: 49px;
+  left: 910px;
+  top: 375px;
+}
+
+.data-block {
+  position: absolute;
+  width: 465px;
+  height: 192px;
+  left: 910px;
+  top: 272px;
+}
+
+.data1 {
+  position: absolute;
+  width: 220px;
+  height: 192px;
+  left: 910px;
+  top: 272px;
+  background: #c4c4c4;
+  border-radius: 30px;
+}
+
+.data2 {
+  position: absolute;
+  width: 220px;
+  height: 192px;
+  left: 1155px;
+  top: 272px;
+  background: #c4c4c4;
+  border-radius: 30px;
+}
+
+.audit {
+  position: absolute;
+  width: 245px;
+  height: 35px;
+  left: 85px;
+  top: 337px;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 37px;
+  display: flex;
+  align-items: center;
+
+  color: #000000;
+}
+
+.connect-wallet-block {
+  position: absolute;
+  width: 295.5px;
+  height: 94px;
+  left: 34px;
+  top: 916px;
+  background: #7b7b7b;
+}
+
+.data-withdraw-block {
+  position: absolute;
+  width: 218px;
+  height: 57px;
+  left: 930px;
+  top: 522px;
+}
+
+.withdraw-button {
+  position: absolute;
+  width: 194px;
+  height: 55px;
+  left: 1161px;
+  top: 534px;
+
+  background: #625656;
+  border-radius: 40px;
+}

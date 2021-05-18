@@ -30,7 +30,7 @@ function Chat() {
   const [user] = useAuthState(auth);
 
   return (
-    <div className="App">
+    <div className="chat-app">
       <header>
         <h1>⚛️🔥💬</h1>
         <h2>ThunderHold ChatRoom for investors</h2>

@@ -8,6 +8,16 @@ import Portis from "@portis/web3";
 
 const WalletConnectProvider = window.WalletConnectProvider.default;
 const providerOptions = {
+  // injected: {
+  //   display:{
+  //     description: "Test"
+  //   },
+  //   connector: async () => {
+  //     const provider = new Web3.providers.WebsocketProvider("ws://127.0.0.1:8545");
+  //     await provider.enable()
+  //     return provider;
+  //   }
+  // },
   walletconnect: {
     package: WalletConnectProvider,
     options: {
@@ -36,6 +46,7 @@ const getWeb3Modal = () =>
       const web3Modal = new Web3Modal({
         cacheProvider: false, // optional
         disableInjectedProvider: false,
+        theme: "dark",
         providerOptions // required
       });
       try {
