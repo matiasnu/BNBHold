@@ -20,9 +20,12 @@ class App extends Component {
 
   componentDidMount = async () => {
     try {
+      const web3EventReader = await getWeb3WS();
+      console.log("web3EventReader-->", web3EventReader);
+
       // Get network provider and web3 instance.
       const web3 = await getWeb3Modal();
-      //const web3EventReader = await getWeb3WS();
+      console.log("web3-->", web3);
 
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
@@ -283,118 +286,129 @@ class App extends Component {
     // if (!this.state.web3) {
     //   return <div>Loading Web3, accounts, and contract...</div>;
     // }
+
     return (
       <div className="App">
-        <div class="address-block"></div>
-          <span class="contract-address">Contract address</span>
-          <div class="dato6-block"></div>
-          <span class="dato6">0X6738D62FFD3436...E16E3</span>
-          <div class="address1">
-            <span class="total-balance">Total balance</span>
-            <span class="contract-balance">{this.state.balanceContract} TT</span>
-          </div>
-          <div class="address2">
-            <span class="total-staked">Total TT staked</span>
-            <span class="dato1">50000.1 TT</span>
-          </div>
+        <div className="address-block"></div>
+        <span className="contract-address">Contract address</span>
+        <div className="dato6-block"></div>
+        <span className="dato6">0X6738D62FFD3436...E16E3</span>
+        <div className="address1">
+          <span className="total-balance">Total balance</span>
+          <span className="contract-balance">
+            {this.state.balanceContract} TT
+          </span>
+        </div>
+        <div className="address2">
+          <span className="total-staked">Total TT staked</span>
+          <span className="dato1">50000.1 TT</span>
+        </div>
 
-        <div class="plan-block"></div>
-          <span class="plan">Plan 1</span>
-          <div class="plan1">
-            <span class="daily-profit">Daily profit</span>
-            <span class="profit-number">35.3%</span>
-          </div>
-          <div class="plan2">
-            <span class="total-return">Total return</span>
-            <span class="dato2">706%</span>
-          </div>
-          <div class="plan3">
-            <span class="days">Days</span>
-            <span class="dato3">20</span>
-          </div>
-          <div class="plan4">
-            <span class="withdraw-time">Withdraw time</span>
-            <span class="every-time">Every 24 hours</span>
-          </div>
-          <span class="enter-ammount">Enter amount</span>
-          <input class="input-value" type="text" value={this.state.invest} onChange={this.onChange} />
-          <span class="min-tt">Minimum 500 TT</span>
-          <span class="max-tt">Maximum 100000 TT</span>
-          <span class="dato5">In 20 days you will get</span>
-          <span class="dato4">0,43893494</span>
-          <button class="stake" type="button" onClick={this.investContract}>Stake TT</button>
+        <div className="plan-block"></div>
+        <span className="plan">Plan 1</span>
+        <div className="plan1">
+          <span className="daily-profit">Daily profit</span>
+          <span className="profit-number">35.3%</span>
+        </div>
+        <div className="plan2">
+          <span className="total-return">Total return</span>
+          <span className="dato2">706%</span>
+        </div>
+        <div className="plan3">
+          <span className="days">Days</span>
+          <span className="dato3">20</span>
+        </div>
+        <div className="plan4">
+          <span className="withdraw-time">Withdraw time</span>
+          <span className="every-time">Every 24 hours</span>
+        </div>
+        <span className="enter-ammount">Enter amount</span>
+        <input
+          className="input-value"
+          type="text"
+          value={this.state.invest}
+          onChange={this.onChange}
+        />
+        <span className="min-tt">Minimum 500 TT</span>
+        <span className="max-tt">Maximum 100000 TT</span>
+        <span className="dato5">In 20 days you will get</span>
+        <span className="dato4">0,43893494</span>
+        <button className="stake" type="button" onClick={this.investContract}>
+          Stake TT
+        </button>
 
-        <div class="data-block"></div>
-          <div class="data1"></div>
-          <div class="data2"></div>
-          <div class="data-numbers">
-            <span class="your-total-staked">Your total staked</span>
-            <span class="dato27">50000.1 TT</span>
-            <span class="total-deposits">Total deposits</span>
-            <span class="dato26">50000.1 TT</span>
-          </div>
-        
-        <div class="withdraw-block"></div>
-          <div class="data-withdraw-block">
-            <span class="total-withdraw">Total withdrawn</span>
-            <span class="dato7">50000.1 TT</span>
-          </div>
-          <button class="withdraw-button"><span class="withdraw">Withdraw</span></button>
-        
+        <div className="data-block"></div>
+        <div className="data1"></div>
+        <div className="data2"></div>
+        <div className="data-numbers">
+          <span className="your-total-staked">Your total staked</span>
+          <span className="dato27">50000.1 TT</span>
+          <span className="total-deposits">Total deposits</span>
+          <span className="dato26">50000.1 TT</span>
+        </div>
 
-        <div class="idea-block"></div>
-          <span class="idea">Agregado, idea friendly</span>
+        <div className="withdraw-block"></div>
+        <div className="data-withdraw-block">
+          <span className="total-withdraw">Total withdrawn</span>
+          <span className="dato7">50000.1 TT</span>
+        </div>
+        <button className="withdraw-button">
+          <span className="withdraw">Withdraw</span>
+        </button>
 
-        <div class="stakes-block"></div>
-          <span class="my-stakes">My stakes</span>
-          <div class="stake1">
-          <div class="stake-check"></div>
-            <span class="dato23">83498 TT</span>
-            <span class="dato9">560%</span>
-            <span class="dato10">01/01/21 - 01/01/21</span>
-          </div>
-          <div class="stake2">
-            <div class="stake-check"></div>
-            <span class="dato11">83498 TT</span>
-            <span class="dato12">560%</span>
-            <span class="dato13">01/01/21 - 01/01/21</span>
-          </div>
-          <div class="stake3">
-          <div class="stake-check"></div>
-            <span class="dato20">83498 TT</span>
-            <span class="dato24">560%</span>
-            <span class="dato25">01/01/21 - 01/01/21</span>
-          </div>
-          <div class="stake4">
-          <div class="stake-check"></div>
-            <span class="dato17">83498 TT</span>
-            <span class="dato21">560%</span>
-            <span class="dato22">01/01/21 - 01/01/21</span>
-          </div>
-          <div class="stake5">
-          <div class="stake-check"></div>
-            <span class="dato14">83498 TT</span>
-            <span class="dato18">560%</span>
-            <span class="dato19">01/01/21 - 01/01/21</span>
-          </div>
-          <div class="stake6">
-          <div class="stake-check"></div>
-            <span class="dato8">83498 TT</span>
-            <span class="dato15">560%</span>
-            <span class="dato16">01/01/21 - 01/01/21</span>
-          </div>
+        <div className="idea-block"></div>
+        <span className="idea">Agregado, idea friendly</span>
 
-        <span class="home">Home</span>
-        <span class="lottery">Lottery</span>
-        <span class="audit">Audit</span>
-        <span class="support">Support</span>
-        <span class="presentation">Presentation</span>
-        <div class="connect-wallet-block">
+        <div className="stakes-block"></div>
+        <span className="my-stakes">My stakes</span>
+        <div className="stake1">
+          <div className="stake-check"></div>
+          <span className="dato23">83498 TT</span>
+          <span className="dato9">560%</span>
+          <span className="dato10">01/01/21 - 01/01/21</span>
+        </div>
+        <div className="stake2">
+          <div className="stake-check"></div>
+          <span className="dato11">83498 TT</span>
+          <span className="dato12">560%</span>
+          <span className="dato13">01/01/21 - 01/01/21</span>
+        </div>
+        <div className="stake3">
+          <div className="stake-check"></div>
+          <span className="dato20">83498 TT</span>
+          <span className="dato24">560%</span>
+          <span className="dato25">01/01/21 - 01/01/21</span>
+        </div>
+        <div className="stake4">
+          <div className="stake-check"></div>
+          <span className="dato17">83498 TT</span>
+          <span className="dato21">560%</span>
+          <span className="dato22">01/01/21 - 01/01/21</span>
+        </div>
+        <div className="stake5">
+          <div className="stake-check"></div>
+          <span className="dato14">83498 TT</span>
+          <span className="dato18">560%</span>
+          <span className="dato19">01/01/21 - 01/01/21</span>
+        </div>
+        <div className="stake6">
+          <div className="stake-check"></div>
+          <span className="dato8">83498 TT</span>
+          <span className="dato15">560%</span>
+          <span className="dato16">01/01/21 - 01/01/21</span>
+        </div>
+
+        <span className="home">Home</span>
+        <span className="lottery">Lottery</span>
+        <span className="audit">Audit</span>
+        <span className="support">Support</span>
+        <span className="presentation">Presentation</span>
+        <div className="connect-wallet-block">
           <Button primary onClick={this.componentDidMount}>
             {this.state.userWallet}
           </Button>
         </div>
-        
+
         <span className="input-group-btn">
           <Link to="/chat">ChatRoom</Link>
         </span>
