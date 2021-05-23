@@ -294,22 +294,6 @@
   border-radius: 30px;
 }
 
-.audit {
-  position: absolute;
-  width: 245px;
-  height: 35px;
-  left: 85px;
-  top: 337px;
-
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 25px;
-  line-height: 37px;
-  display: flex;
-  align-items: center;
-}
-
 /* Barra lateral Izquierda (Dashboard General)*/
 .dashboard {
   position: absolute;
@@ -345,56 +329,118 @@
 }
 
 .home-logo {
-  
+  background-image: url(./images/home-dashboard.png);
+  position: absolute;
+  width: 27px;
+  height: 28px;
 }
 
 .home {
   width: 245px;
+  height: 35px;
   position: absolute;
   top: 237px;
-  left: 85px;
+  left: 78px;
   font-family: Poppins;
+  font-style: normal;
   font-weight: 500;
   font-size: 25px;
   line-height: 37px;
-  opacity: 1;
-  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.lottery-logo {
+  background-image: url(./images/lottery-dashboard.png);
+  position: absolute;
+  width: 31px;
+  height: 31px;
+  top: 50px;
 }
 
 .lottery {
   width: 245px;
+  height: 35px;
   position: absolute;
   top: 287px;
-  left: 85px;
+  left: 78px;
   font-family: Poppins;
-  font-weight: Medium;
+  font-style: normal;
+  font-weight: 500;
   font-size: 25px;
-  opacity: 1;
-  text-align: left;
+  line-height: 37px;
+  display: flex;
+  align-items: center;
+}
+
+.audit-logo {
+  background-image: url(./images/audit-dashboard.png);
+  position: absolute;
+  width: 21px;
+  height: 29px;
+  top: 100px;
+}
+
+.audit {
+  position: absolute;
+  width: 245px;
+  height: 35px;
+  left: 78px;
+  top: 337px;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 37px;
+  display: flex;
+  align-items: center;
+}
+
+.support-logo {
+  background-image: url(./images/support-dashboard.png);
+  position: absolute;
+  width: 29px;
+  height: 28px;
+  top: 150px;
 }
 
 .support {
   width: 245px;
+  height: 35px;
   position: absolute;
   top: 387px;
-  left: 85px;
+  left: 78px;
   font-family: Poppins;
-  font-weight: Medium;
+  font-style: normal;
+  font-weight: 500;
   font-size: 25px;
-  opacity: 1;
-  text-align: left;
+  line-height: 37px;
+  display: flex;
+  align-items: center;
+}
+
+.presentation-logo {
+  background-image: url(./images/presentation-dashboard.png);
+  position: absolute;
+  width: 24px;
+  height: 30px;
+  top: 200px;
 }
 
 .presentation {
   width: 245px;
+  height: 35px;
   position: absolute;
   top: 437px;
-  left: 85px;
+  left: 78px;
   font-family: Poppins;
-  font-weight: Medium;
+  font-style: normal;
+  font-weight: 500;
   font-size: 25px;
-  opacity: 1;
-  text-align: left;
+  line-height: 37px;
+  display: flex;
+  align-items: center;
 }
 
 .connect-wallet-block {
@@ -418,12 +464,31 @@
 
 .connect-wallet-logo {
   background-image: url(./images/connect-wallet-dashboard.png);
+  position: absolute;
+  width: 38px;
+  height: 25px;
+  left: 30px;
+  top: 32px;
 }
 
 .primary {
   background-color: Transparent;
-  padding-left: 74px;
-  padding-top: 32px;
+}
+
+.connect-wallet-state {
+  position: absolute;
+  width: 183px;
+  height: 90px;
+  left: 87px;
+  top: 2px;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
   color: #2e2e2e;
 }
 
@@ -817,13 +882,23 @@
   box-shadow: -15px -15px 100px rgba(88, 88, 88, 0.25),
     15px 15px 50px rgba(11, 11, 11, 0.25);
   border-radius: 40px;
-  color: #2e2e2e;
+}
+
+.stake-snap {
+  /* Stake TT */
+  position: absolute;
+  width: 102px;
+  height: 55px;
+  left: 46px;
+  top: 1px;
   font-family: Poppins;
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 36px;
+  display: flex;
   align-items: center;
+  color: #2e2e2e;
 }
 
 /* Data for total staked and total deposits */

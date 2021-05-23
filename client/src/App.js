@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import history from "./history";
 
 import "./views/app.css";
-import logo from "./views/images/logo.png";
+import coonectWalletLogo from "./views/images/connect-wallet-dashboard.png";
 
 class App extends Component {
   state = {
@@ -323,6 +323,10 @@ class App extends Component {
           <div className="logo-dashboard"></div>
           <div className="logos-dashboard">
             <div className="home-logo"></div>
+            <div className="lottery-logo"></div>
+            <div className="audit-logo"></div>
+            <div className="support-logo"></div>
+            <div className="presentation-logo"></div>
           </div>
           <span className="home">Home</span>
           <span className="lottery">Lottery</span>
@@ -330,9 +334,10 @@ class App extends Component {
           <span className="support">Support</span>
           <span className="presentation">Presentation</span>
           <div className="connect-wallet-block">
-            <div className="connect-wallet-logo"></div>
+            {/* <div className="connect-wallet-logo"></div> */}
+            <img className="connect-wallet-logo" src={coonectWalletLogo}></img>
             <Button primary onClick={this.componentDidMount}>
-              {this.state.userWallet}
+              <span className="connect-wallet-state">{this.state.userWallet}</span>
             </Button>
           </div>
           <span className="input-group-btn">
@@ -386,7 +391,7 @@ class App extends Component {
         <span className="dato5">In 20 days you will get</span>
         <span className="dato4">0,43893494</span>
         <button className="stake" type="button" onClick={this.investContract}>
-          Stake TT
+          <snap className="stake-snap">Stake TT</snap>
         </button>
 
         <div className="data-block"></div>
