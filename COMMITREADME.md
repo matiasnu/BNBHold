@@ -7,4 +7,5 @@
 - Agrego 'gas' en el metodo invest
 - Se refactoriza la carga del web3Modal ya que el mismo no funcionaba correctamente
 - Se agrega diseño frontend del home con algunos cambios en otros componentes (sobre el diseño)
+- Fix del class por className en Rect
 - Se modifica diseño frontend
