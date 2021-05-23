@@ -9,291 +9,6 @@
   background: #2c2c2c;
 }
 
-.dato8 {
-  width: 137px;
-  position: absolute;
-  top: 10px;
-  left: 101px;
-  font-family: Poppins;
-  font-weight: Medium;
-  font-size: 30px;
-  opacity: 1;
-  text-align: left;
-}
-
-.dato9 {
-  width: 52px;
-  position: absolute;
-  top: 55px;
-  left: 142px;
-  font-family: Open Sans;
-  font-weight: Regular;
-  font-size: 15px;
-  opacity: 1;
-  text-align: left;
-}
-
-.dato10 {
-  width: 140px;
-  position: absolute;
-  top: 55px;
-  left: 233px;
-  font-family: Open Sans;
-  font-weight: Regular;
-  font-size: 15px;
-  opacity: 1;
-  text-align: center;
-}
-
-.dato11 {
-  width: 137px;
-  position: absolute;
-  top: 10px;
-  left: 101px;
-  font-family: Poppins;
-  font-weight: Medium;
-  font-size: 30px;
-  opacity: 1;
-  text-align: left;
-}
-
-.dato12 {
-  width: 52px;
-  position: absolute;
-  top: 55px;
-  left: 142px;
-  font-family: Open Sans;
-  font-weight: Regular;
-  font-size: 15px;
-  opacity: 1;
-  text-align: left;
-}
-
-.dato13 {
-  width: 140px;
-  position: absolute;
-  top: 55px;
-  left: 233px;
-  font-family: Open Sans;
-  font-weight: Regular;
-  font-size: 15px;
-  opacity: 1;
-  text-align: center;
-}
-
-.dato14 {
-  width: 137px;
-  position: absolute;
-  top: 10px;
-  left: 101px;
-  font-family: Poppins;
-  font-weight: Medium;
-  font-size: 30px;
-  opacity: 1;
-  text-align: left;
-}
-
-.dato15 {
-  width: 52px;
-  position: absolute;
-  top: 55px;
-  left: 142px;
-  font-family: Open Sans;
-  font-weight: Regular;
-  font-size: 15px;
-  opacity: 1;
-  text-align: left;
-}
-
-.dato16 {
-  width: 140px;
-  position: absolute;
-  top: 55px;
-  left: 233px;
-  font-family: Open Sans;
-  font-weight: Regular;
-  font-size: 15px;
-  opacity: 1;
-  text-align: center;
-}
-
-.dato17 {
-  width: 137px;
-  position: absolute;
-  top: 10px;
-  left: 101px;
-  font-family: Poppins;
-  font-weight: Medium;
-  font-size: 30px;
-  opacity: 1;
-  text-align: left;
-}
-
-.dato18 {
-  width: 52px;
-  position: absolute;
-  top: 55px;
-  left: 142px;
-  font-family: Open Sans;
-  font-weight: Regular;
-  font-size: 15px;
-  opacity: 1;
-  text-align: left;
-}
-
-.dato19 {
-  width: 140px;
-  position: absolute;
-  top: 55px;
-  left: 233px;
-  font-family: Open Sans;
-  font-weight: Regular;
-  font-size: 15px;
-  opacity: 1;
-  text-align: center;
-}
-
-.dato20 {
-  width: 137px;
-  position: absolute;
-  top: 10px;
-  left: 101px;
-  font-family: Poppins;
-  font-weight: Medium;
-  font-size: 30px;
-  opacity: 1;
-  text-align: left;
-}
-
-.dato21 {
-  width: 52px;
-  position: absolute;
-  top: 55px;
-  left: 142px;
-  font-family: Open Sans;
-  font-weight: Regular;
-  font-size: 15px;
-  opacity: 1;
-  text-align: left;
-}
-
-.dato22 {
-  width: 140px;
-  position: absolute;
-  top: 55px;
-  left: 233px;
-  font-family: Open Sans;
-  font-weight: Regular;
-  font-size: 15px;
-  opacity: 1;
-  text-align: center;
-}
-
-.dato23 {
-  width: 137px;
-  position: absolute;
-  top: 10px;
-  left: 101px;
-  font-family: Poppins;
-  font-weight: Medium;
-  font-size: 30px;
-  opacity: 1;
-  text-align: left;
-}
-
-.dato24 {
-  width: 52px;
-  position: absolute;
-  top: 55px;
-  left: 142px;
-  font-family: Open Sans;
-  font-weight: Regular;
-  font-size: 15px;
-  opacity: 1;
-  text-align: left;
-}
-
-.dato25 {
-  width: 140px;
-  position: absolute;
-  top: 55px;
-  left: 233px;
-  font-family: Open Sans;
-  font-weight: Regular;
-  font-size: 15px;
-  opacity: 1;
-  text-align: center;
-}
-
-.stake1 {
-  position: absolute;
-  width: 405px;
-  height: 100px;
-  left: 1445px;
-  top: 161px;
-  background: #7c7c7c;
-  border-radius: 30px;
-}
-
-.stake2 {
-  position: absolute;
-  width: 405px;
-  height: 100px;
-  left: 1445px;
-  top: 291px;
-  background: #7c7c7c;
-  border-radius: 30px;
-}
-
-.stake3 {
-  position: absolute;
-  width: 405px;
-  height: 100px;
-  left: 1445px;
-  top: 421px;
-  background: #7c7c7c;
-  border-radius: 30px;
-}
-
-.stake4 {
-  position: absolute;
-  width: 405px;
-  height: 100px;
-  left: 1445px;
-  top: 551px;
-  background: #7c7c7c;
-  border-radius: 30px;
-}
-
-.stake5 {
-  position: absolute;
-  width: 405px;
-  height: 100px;
-  left: 1445px;
-  top: 681px;
-  background: #7c7c7c;
-  border-radius: 30px;
-}
-
-.stake6 {
-  position: absolute;
-  width: 405px;
-  height: 100px;
-  left: 1445px;
-  top: 811px;
-  background: #7c7c7c;
-  border-radius: 30px;
-}
-
-.stake-check {
-  width: 80px;
-  height: 80px;
-  background: #d2d2d2;
-  margin-top: 10px;
-  margin-left: 8px;
-  border-radius: 30px;
-}
-
 /* Barra lateral Izquierda (Dashboard General)*/
 .dashboard {
   position: absolute;
@@ -400,7 +115,7 @@
 .support-logo {
   background-image: url(./images/support-dashboard.png);
   position: absolute;
-  width: 29px;
+  width: 28px;
   height: 28px;
   top: 150px;
 }
@@ -441,6 +156,35 @@
   line-height: 37px;
   display: flex;
   align-items: center;
+}
+
+.chat-logo {
+  background-image: url(./images/chat-dashboard.png);
+  position: absolute;
+  width: 29px;
+  height: 29px;
+  top: 250px;
+}
+
+.chat-dashboard {
+  position: absolute;
+  width: 245px;
+  height: 35px;
+  left: 78px;
+  top: 487px;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 37px;
+  display: flex;
+  align-items: center;
+}
+
+.chat-link {
+  text-decoration: none;
+  color: #fff;
 }
 
 .connect-wallet-block {
@@ -942,6 +686,26 @@
   border-radius: 30px;
 }
 
+.your-total-stake-logo {
+  background-image: url(./images/your-total-stakes.png);
+  position: absolute;
+  left: 51.62%;
+  right: 32.4%;
+  top: 27.78%;
+  bottom: 66.11%;
+  width: 57px;
+  height: 59px;
+}
+
+.total-deposits-logo {
+  background-image: url(./images/total-deposits.png);
+  position: absolute;
+  left: 64.17%;
+  right: 32.4%;
+  top: 27.78%;
+  bottom: 66.11%;
+}
+
 .data-numbers {
   position: absolute;
   width: 465px;
@@ -1117,6 +881,8 @@
   text-align: left;
 }
 
+/* My stakes styles*/
+
 .stakes-block {
   position: absolute;
   width: 475px;
@@ -1144,4 +910,171 @@
   font-size: 50px;
   opacity: 1;
   text-align: left;
+}
+
+.stake-check {
+  width: 80px;
+  height: 80px;
+  background: #d2d2d2;
+  margin-top: 10px;
+  margin-left: 8px;
+  border-radius: 30px;
+}
+
+.stake-check-success {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  margin-top: 10px;
+  margin-left: 8px;
+  background: linear-gradient(136.74deg, #27ff57 -9.03%, #199334 104.51%);
+  border-radius: 30px;
+}
+
+.stake-check-in-progress {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  margin-top: 10px;
+  margin-left: 8px;
+
+  background: linear-gradient(136.74deg, #ff9c27 -9.03%, #be7621 104.51%);
+  border-radius: 30px;
+}
+
+.stake-check-logo-success {
+  background-image: url(./images/my-stakes-success.png);
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 23px;
+  top: 26px;
+
+  border-radius: 30px;
+}
+
+.stake-check-logo-in-progress {
+  background-image: url(./images/my-stakes-in-progress.png);
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 23px;
+  top: 26px;
+
+  border-radius: 30px;
+}
+
+.stake1 {
+  position: absolute;
+  width: 405px;
+  height: 100px;
+  left: 1445px;
+  top: 161px;
+  background: #7c7c7c;
+  border-radius: 30px;
+}
+
+.dato8 {
+  width: 137px;
+  position: absolute;
+  top: 10px;
+  left: 101px;
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}
+
+.total-profit-stake {
+  width: 52px;
+  position: absolute;
+  top: 65px;
+  left: 142px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: left;
+}
+
+.my-stakes-profit {
+  background-image: url(./images/my-stakes-estadistic.png);
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  left: -35px;
+  top: -7px;
+}
+
+.date-to-start {
+  width: 140px;
+  position: absolute;
+  top: 65px;
+  left: 233px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: center;
+}
+
+.my-stakes-calendar {
+  background-image: url(./images/my-stakes-calendar.png);
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  left: -38px;
+  top: -7px;
+  border-radius: 30px;
+}
+
+.stake2 {
+  position: absolute;
+  width: 405px;
+  height: 100px;
+  left: 1445px;
+  top: 291px;
+  background: #7c7c7c;
+  border-radius: 30px;
+}
+
+.stake3 {
+  position: absolute;
+  width: 405px;
+  height: 100px;
+  left: 1445px;
+  top: 421px;
+  background: #7c7c7c;
+  border-radius: 30px;
+}
+
+.stake4 {
+  position: absolute;
+  width: 405px;
+  height: 100px;
+  left: 1445px;
+  top: 551px;
+  background: #7c7c7c;
+  border-radius: 30px;
+}
+
+.stake5 {
+  position: absolute;
+  width: 405px;
+  height: 100px;
+  left: 1445px;
+  top: 681px;
+  background: #7c7c7c;
+  border-radius: 30px;
+}
+
+.stake6 {
+  position: absolute;
+  width: 405px;
+  height: 100px;
+  left: 1445px;
+  top: 811px;
+  background: #7c7c7c;
+  border-radius: 30px;
 }

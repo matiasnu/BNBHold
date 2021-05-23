@@ -327,21 +327,22 @@ class App extends Component {
             <div className="audit-logo"></div>
             <div className="support-logo"></div>
             <div className="presentation-logo"></div>
+            <div className="chat-logo"></div>
           </div>
           <span className="home">Home</span>
           <span className="lottery">Lottery</span>
           <span className="audit">Audit</span>
           <span className="support">Support</span>
           <span className="presentation">Presentation</span>
+          <span className="chat-dashboard"><a className="chat-link" href="/chat">Chat</a></span>
           <div className="connect-wallet-block">
-            {/* <div className="connect-wallet-logo"></div> */}
             <img className="connect-wallet-logo" src={coonectWalletLogo}></img>
             <Button primary onClick={this.componentDidMount}>
               <span className="connect-wallet-state">{this.state.userWallet}</span>
             </Button>
           </div>
           <span className="input-group-btn">
-            <Link to="/chat">ChatRoom</Link>
+            
           </span>
 
         <div className="address-block"></div>
@@ -397,6 +398,8 @@ class App extends Component {
         <div className="data-block"></div>
         <div className="data1"></div>
         <div className="data2"></div>
+        <div className="your-total-stake-logo"></div>
+        <div className="total-deposits-logo"></div>
         <div className="data-numbers">
           <span className="your-total-staked">Your total staked</span>
           <span className="dato27">50000.1 TT</span>
@@ -420,40 +423,46 @@ class App extends Component {
         <div className="stakes-block"></div>
         <span className="my-stakes">My stakes</span>
         <div className="stake1">
-          <div className="stake-check"></div>
-          <span className="dato23">83498 TT</span>
-          <span className="dato9">560%</span>
-          <span className="dato10">01/01/21 - 01/01/21</span>
+          <div className="stake-check-success"></div>
+          <div className="stake-check-logo-success"></div>
+          <span className="dato8">83498 TT</span>
+          <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
+          <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
         </div>
         <div className="stake2">
-          <div className="stake-check"></div>
-          <span className="dato11">83498 TT</span>
-          <span className="dato12">560%</span>
-          <span className="dato13">01/01/21 - 01/01/21</span>
+          <div className="stake-check-in-progress"></div>
+          <div className="stake-check-logo-in-progress"></div>
+          <span className="dato8">83498 TT</span>
+          <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
+          <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
         </div>
         <div className="stake3">
-          <div className="stake-check"></div>
-          <span className="dato20">83498 TT</span>
-          <span className="dato24">560%</span>
-          <span className="dato25">01/01/21 - 01/01/21</span>
+        <div className="stake-check-success"></div>
+          <div className="stake-check-logo-success"></div>
+          <span className="dato8">83498 TT</span>
+          <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
+          <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
         </div>
         <div className="stake4">
-          <div className="stake-check"></div>
-          <span className="dato17">83498 TT</span>
-          <span className="dato21">560%</span>
-          <span className="dato22">01/01/21 - 01/01/21</span>
+          <div className="stake-check-success"></div>
+          <div className="stake-check-logo-success"></div>
+          <span className="dato8">83498 TT</span>
+          <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
+          <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
         </div>
         <div className="stake5">
-          <div className="stake-check"></div>
-          <span className="dato14">83498 TT</span>
-          <span className="dato18">560%</span>
-          <span className="dato19">01/01/21 - 01/01/21</span>
+          <div className="stake-check-success"></div>
+          <div className="stake-check-logo-success"></div>
+          <span className="dato8">83498 TT</span>
+          <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
+          <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
         </div>
         <div className="stake6">
-          <div className="stake-check"></div>
+          <div className="stake-check-success"></div>
+          <div className="stake-check-logo-success"></div>
           <span className="dato8">83498 TT</span>
-          <span className="dato15">560%</span>
-          <span className="dato16">01/01/21 - 01/01/21</span>
+          <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
+          <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
         </div>
       </div>
     );
