@@ -512,7 +512,7 @@
 .withdraw-time {
   width: 178px;
   position: absolute;
-  top: 2px;
+  top: 3px;
   left: 0px;
   font-family: Poppins;
   font-weight: Regular;
@@ -831,7 +831,7 @@
 .withdraw {
   width: 118px;
   position: absolute;
-  top: 8px;
+  top: 10px;
   left: 38px;
   font-family: Poppins;
   font-weight: Medium;

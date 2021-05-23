@@ -317,6 +317,16 @@ class App extends Component {
     //   return <div>Loading Web3, accounts, and contract...</div>;
     // }
 
+    // En este if se deberia sacar si la inversion termino o no para mostrarla en my stakes correctamente
+    var myStakeCheckSuccess = <React.Fragment><div className="stake-check-success"></div><div className="stake-check-logo-success"></div></React.Fragment>;
+    var myStakeCheckInProgress = <React.Fragment><div className="stake-check-in-progress"></div><div className="stake-check-logo-in-progress"></div></React.Fragment>;
+
+    if(true) {
+      var my_stake_check = myStakeCheckSuccess;
+    } else {
+      my_stake_check = myStakeCheckInProgress;
+    }
+
     return (
       <div className="App">
         <div className="dashboard"></div>
@@ -423,43 +433,38 @@ class App extends Component {
         <div className="stakes-block"></div>
         <span className="my-stakes">My stakes</span>
         <div className="stake1">
-          <div className="stake-check-success"></div>
-          <div className="stake-check-logo-success"></div>
-          <span className="dato8">83498 TT</span>
-          <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
-          <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
-        </div>
-        <div className="stake2">
           <div className="stake-check-in-progress"></div>
           <div className="stake-check-logo-in-progress"></div>
           <span className="dato8">83498 TT</span>
           <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
           <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
         </div>
+        <div className="stake2">
+          {my_stake_check}
+          <span className="dato8">83498 TT</span>
+          <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
+          <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
+        </div>
         <div className="stake3">
-        <div className="stake-check-success"></div>
-          <div className="stake-check-logo-success"></div>
+          {my_stake_check}
           <span className="dato8">83498 TT</span>
           <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
           <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
         </div>
         <div className="stake4">
-          <div className="stake-check-success"></div>
-          <div className="stake-check-logo-success"></div>
+          {my_stake_check}
           <span className="dato8">83498 TT</span>
           <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
           <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
         </div>
         <div className="stake5">
-          <div className="stake-check-success"></div>
-          <div className="stake-check-logo-success"></div>
+          {my_stake_check}
           <span className="dato8">83498 TT</span>
           <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
           <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
         </div>
         <div className="stake6">
-          <div className="stake-check-success"></div>
-          <div className="stake-check-logo-success"></div>
+          {my_stake_check}
           <span className="dato8">83498 TT</span>
           <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
           <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
