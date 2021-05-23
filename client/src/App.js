@@ -20,16 +20,12 @@ class App extends Component {
 
   componentDidMount = async () => {
     try {
-      const web3EventReader = await getWeb3WS();
-      console.log("web3EventReader-->", web3EventReader);
+      // const web3EventReader = await Web3Modal();
+      // console.log("web3EventReader-->", web3EventReader);
 
       // Get network provider and web3 instance.
       const web3 = await getWeb3Modal();
-      console.log("web3-->", web3);
-
-      // Use web3 to get the user's accounts.
-      const accounts = await web3.eth.getAccounts();
-      console.log(accounts);
+      //console.log("web3-->", web3);
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
@@ -39,6 +35,11 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address
       );
       this.onChange = this.onChange.bind(this);
+
+      // Use web3 to get the user's accounts.
+      const accounts = await web3.eth.getAccounts();
+      console.log(accounts);
+
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       // this.setState({
@@ -48,8 +49,8 @@ class App extends Component {
       //   thunderContract: thunderInstance,
       // });
       // Para poder utilizar una cuenta debo desbloquearla por un tiempo determinado
-      web3.eth.personal.unlockAccount(accounts[1], "", 300);
-      console.log("Wallet a utilizar: ", accounts[1]);
+      // web3.eth.personal.unlockAccount(accounts[0], "", 300);
+      // console.log("Wallet a utilizar: ", accounts[0]);
 
       // Obtengo e imprimo el Balance en Ether de la cuenta principal 'coinBase'
       // Probar con otra cuenta cualquiera que desee el usuario
@@ -65,17 +66,16 @@ class App extends Component {
       // example of interacting with the contract's methods.
       //this.setState({ web3, accounts, contract: antiWalletContract }, this.updateState);
       // Seteo como estado un objeto state y le agrego un metodo que se ejecuta..
-      this.setState(
-        {
-          web3,
-          accounts,
-          thunderContract: thunderInstance,
-        }
-        //this.getContractStatistics
-      );
+      this.setState({
+        web3,
+        accounts,
+        thunderContract: thunderInstance,
+      });
 
       // Me suscribo a los eventos de interes
       this.setSuscriptions();
+
+      this.getContractStatistics();
 
       // Obtengo los eventos anterios que ocurrietron. Logicamente estos no cambian el estado actual
       // del contrato y solo sirven para recabar informacion previa
@@ -169,16 +169,45 @@ class App extends Component {
               getPastEvents: Obtiene la data de eventos que ya ocurrieron en el contrato
           */
   getPastEvents = async () => {
-    console.log("getPastEvents");
-
     const { accounts, thunderContract } = this.state;
 
     // Esta forma de obtener los eventos no suscribe a nuevos eventos y es necesario suscribirse
     // con el metodo subscribe
     // Sumando este monto puedo saber cuanta es la cantidad total de TT que fue retirado hasta este preciso momento
     // Pienso que no es taqn importante la precicion de este valor...
+    console.log("getPastEvents.NewDeposits");
     let events = thunderContract.getPastEvents(
       "NewDeposit",
+      {
+        // El evento se puede denominar puntualmente o se pueden traer todos los eventos pasados
+        // utilizando 'allEvents'. Se podria combinar el 'allEvents' con un switch.
+        filter: {}, // Este parametro es opcional, en este caso no voy a filtrar nada
+        fromBlock: 0, // Este parametro es opcional. Como lo llamo una unica vez, cuando se refrezca la
+        // pagina, obtendo todos los eventos pasados de un
+        // fromBlock: web3.eth.getBlockNumber() // si deseo tomar solo los nuevos eventos desde
+        // que se inicio esta session del usuario. Cuando el usuario refrezque la pagina se vuelve a cargar
+        // Otra opcion es registrar el Bloque con el cual se creo el contrato y usarlo como cota inferior
+        toBlock: "latest", // Este parametro es opcional
+      },
+      (error, events) => {
+        if (!error) {
+          var obj = JSON.parse(JSON.stringify(events));
+          var array = Object.keys(obj);
+
+          // Itero por el array imprimiendo los distintos past eventos
+          var i = 0;
+          for (i = 0; i < array.length; i++) {
+            console.log(obj[array[i]].returnValues);
+          }
+        } else {
+          console.log(error);
+        }
+      }
+    );
+
+    console.log("getPastEvents.RefBonus");
+    let eventsRefBonus = thunderContract.getPastEvents(
+      "RefBonus",
       {
         // El evento se puede denominar puntualmente o se pueden traer todos los eventos pasados
         // utilizando 'allEvents'. Se podria combinar el 'allEvents' con un switch.
@@ -278,7 +307,7 @@ class App extends Component {
       .send({
         from: accounts[0],
         value: this.state.invest,
-        gas: 300000,
+        gas: 500000,
       });
   };
 
