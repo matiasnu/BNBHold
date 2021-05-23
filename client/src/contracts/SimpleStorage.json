@@ -25,13 +25,12 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"x\",\"type\":\"uint256\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/madim/Desktop/proyectos/BNBHold/contracts/SimpleStorage.sol\":\"SimpleStorage\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/madim/Desktop/proyectos/BNBHold/contracts/SimpleStorage.sol\":{\"keccak256\":\"0x2d6cb5c69f08bdb8ab28fed02ddf1817de179cf240daddb3b63e1d95f422d798\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4dd8aec50457fe15b6ececc4a6dae5b2b118e1637d1d2016b68377a44ea7d748\",\"dweb:/ipfs/QmWRoZaEjCudquksroSUgkyPsM6ik2BWkbHWNnSGub7MFv\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b5061012f806100206000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c14604f575b600080fd5b604d600480360381019060499190608f565b6069565b005b60556073565b6040516060919060c2565b60405180910390f35b8060008190555050565b60008054905090565b60008135905060898160e5565b92915050565b60006020828403121560a057600080fd5b600060ac84828501607c565b91505092915050565b60bc8160db565b82525050565b600060208201905060d5600083018460b5565b92915050565b6000819050919050565b60ec8160db565b811460f657600080fd5b5056fea2646970667358221220c3d3fc7c0da6ad9e3a1bf3ce3ee461f28cf9851878a3bc50a053adc1d63d3f2364736f6c63430008040033",
-  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c14604f575b600080fd5b604d600480360381019060499190608f565b6069565b005b60556073565b6040516060919060c2565b60405180910390f35b8060008190555050565b60008054905090565b60008135905060898160e5565b92915050565b60006020828403121560a057600080fd5b600060ac84828501607c565b91505092915050565b60bc8160db565b82525050565b600060208201905060d5600083018460b5565b92915050565b6000819050919050565b60ec8160db565b811460f657600080fd5b5056fea2646970667358221220c3d3fc7c0da6ad9e3a1bf3ce3ee461f28cf9851878a3bc50a053adc1d63d3f2364736f6c63430008040033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"x\",\"type\":\"uint256\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/mnunez/BNBHold/contracts/SimpleStorage.sol\":\"SimpleStorage\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/mnunez/BNBHold/contracts/SimpleStorage.sol\":{\"keccak256\":\"0x2d6cb5c69f08bdb8ab28fed02ddf1817de179cf240daddb3b63e1d95f422d798\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4dd8aec50457fe15b6ececc4a6dae5b2b118e1637d1d2016b68377a44ea7d748\",\"dweb:/ipfs/QmWRoZaEjCudquksroSUgkyPsM6ik2BWkbHWNnSGub7MFv\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061012f806100206000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c14604f575b600080fd5b604d600480360381019060499190608f565b6069565b005b60556073565b6040516060919060c2565b60405180910390f35b8060008190555050565b60008054905090565b60008135905060898160e5565b92915050565b60006020828403121560a057600080fd5b600060ac84828501607c565b91505092915050565b60bc8160db565b82525050565b600060208201905060d5600083018460b5565b92915050565b6000819050919050565b60ec8160db565b811460f657600080fd5b5056fea26469706673582212203fc6985d76dd0a88519d4b224441c34835db3329c974abce911ff179562c0af564736f6c63430008040033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c14604f575b600080fd5b604d600480360381019060499190608f565b6069565b005b60556073565b6040516060919060c2565b60405180910390f35b8060008190555050565b60008054905090565b60008135905060898160e5565b92915050565b60006020828403121560a057600080fd5b600060ac84828501607c565b91505092915050565b60bc8160db565b82525050565b600060208201905060d5600083018460b5565b92915050565b6000819050919050565b60ec8160db565b811460f657600080fd5b5056fea26469706673582212203fc6985d76dd0a88519d4b224441c34835db3329c974abce911ff179562c0af564736f6c63430008040033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [
@@ -630,9 +629,9 @@
   "sourceMap": "58:176:2:-:0;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "58:176:2:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;105:53;;;;;;;;;;;;;:::i;:::-;;:::i;:::-;;162:70;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;105:53;152:1;139:10;:14;;;;105:53;:::o;162:70::-;198:4;217:10;;210:17;;162:70;:::o;7:139:4:-;53:5;91:6;78:20;69:29;;107:33;134:5;107:33;:::i;:::-;59:87;;;;:::o;152:262::-;211:6;260:2;248:9;239:7;235:23;231:32;228:2;;;276:1;273;266:12;228:2;319:1;344:53;389:7;380:6;369:9;365:22;344:53;:::i;:::-;334:63;;290:117;218:196;;;;:::o;420:118::-;507:24;525:5;507:24;:::i;:::-;502:3;495:37;485:53;;:::o;544:222::-;637:4;675:2;664:9;660:18;652:26;;688:71;756:1;745:9;741:17;732:6;688:71;:::i;:::-;642:124;;;;:::o;772:77::-;809:7;838:5;827:16;;817:32;;;:::o;855:122::-;928:24;946:5;928:24;:::i;:::-;921:5;918:35;908:2;;967:1;964;957:12;908:2;898:79;:::o",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.8.4;\n\ncontract SimpleStorage {\n  uint storedData;\n\n  function set(uint x) public {\n    storedData = x;\n  }\n\n  function get() public view returns (uint) {\n    return storedData;\n  }\n}\n",
-  "sourcePath": "/home/madim/Desktop/proyectos/BNBHold/contracts/SimpleStorage.sol",
+  "sourcePath": "/home/mnunez/BNBHold/contracts/SimpleStorage.sol",
   "ast": {
-    "absolutePath": "/home/madim/Desktop/proyectos/BNBHold/contracts/SimpleStorage.sol",
+    "absolutePath": "/home/mnunez/BNBHold/contracts/SimpleStorage.sol",
     "exportedSymbols": {
       "SimpleStorage": [
         80
@@ -888,7 +887,7 @@
     "src": "32:203:2"
   },
   "legacyAST": {
-    "absolutePath": "/home/madim/Desktop/proyectos/BNBHold/contracts/SimpleStorage.sol",
+    "absolutePath": "/home/mnunez/BNBHold/contracts/SimpleStorage.sol",
     "exportedSymbols": {
       "SimpleStorage": [
         80
@@ -1173,9 +1172,8 @@
       "transactionHash": "0x59f52720b018da10482d054d65866763e8a2097e51e130f38bb84134ed6cb38d"
     }
   },
-  "schemaVersion": "3.4.0",
-  "updatedAt": "2021-05-20T18:57:24.544Z",
-  "networkType": "ethereum",
+  "schemaVersion": "3.3.4",
+  "updatedAt": "2021-05-22T19:24:56.881Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

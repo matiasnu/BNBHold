@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import history from "./history";
 
 import "./views/app.css";
+import logo from "./views/images/logo.png";
 
 class App extends Component {
   state = {
@@ -48,7 +49,7 @@ class App extends Component {
       //   thunderContract: thunderInstance,
       // });
       // Para poder utilizar una cuenta debo desbloquearla por un tiempo determinado
-      web3.eth.personal.unlockAccount(accounts[1], "", 300);
+      web3.eth.personal.unlockAccount(accounts[0], "", 300);
       console.log("Wallet a utilizar: ", accounts[1]);
 
       // Obtengo e imprimo el Balance en Ether de la cuenta principal 'coinBase'
@@ -289,10 +290,32 @@ class App extends Component {
 
     return (
       <div className="App">
+        <div className="dashboard"></div>
+          <div className="logo-dashboard"></div>
+          <div className="logos-dashboard">
+            <div className="home-logo"></div>
+          </div>
+          <span className="home">Home</span>
+          <span className="lottery">Lottery</span>
+          <span className="audit">Audit</span>
+          <span className="support">Support</span>
+          <span className="presentation">Presentation</span>
+          <div className="connect-wallet-block">
+            <div className="connect-wallet-logo"></div>
+            <Button primary onClick={this.componentDidMount}>
+              {this.state.userWallet}
+            </Button>
+          </div>
+          <span className="input-group-btn">
+            <Link to="/chat">ChatRoom</Link>
+          </span>
+
         <div className="address-block"></div>
         <span className="contract-address">Contract address</span>
-        <div className="dato6-block"></div>
-        <span className="dato6">0X6738D62FFD3436...E16E3</span>
+        <div className="dato6-block">
+          <span className="dato6">0X6738D62FFD3436...E16E3</span>
+          <div className="contract-address-logo"></div>
+        </div>
         <div className="address1">
           <span className="total-balance">Total balance</span>
           <span className="contract-balance">
@@ -357,7 +380,8 @@ class App extends Component {
         </button>
 
         <div className="idea-block"></div>
-        <span className="idea">Agregado, idea friendly</span>
+        <div className="pinguino-logo"></div>
+        <span className="idea">Agregado</span>
 
         <div className="stakes-block"></div>
         <span className="my-stakes">My stakes</span>
@@ -397,21 +421,6 @@ class App extends Component {
           <span className="dato15">560%</span>
           <span className="dato16">01/01/21 - 01/01/21</span>
         </div>
-
-        <span className="home">Home</span>
-        <span className="lottery">Lottery</span>
-        <span className="audit">Audit</span>
-        <span className="support">Support</span>
-        <span className="presentation">Presentation</span>
-        <div className="connect-wallet-block">
-          <Button primary onClick={this.componentDidMount}>
-            {this.state.userWallet}
-          </Button>
-        </div>
-
-        <span className="input-group-btn">
-          <Link to="/chat">ChatRoom</Link>
-        </span>
       </div>
     );
   }
