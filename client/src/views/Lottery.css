@@ -1,5 +1,79 @@
-h1 {
-    text-align: center;
-    margin: 0 auto;
-    color: #000
-  }
+/* .Lottery {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  background: #2c2c2c;
+}
+
+/* Buy a ticket styles */
+
+.buy-ticket-block {
+  /* Rectangle 132 */
+
+  position: absolute;
+  width: 475px;
+  height: 530px;
+  left: 400px;
+  top: 35px;
+
+  /* Gris Thunder Caja */
+
+  background: linear-gradient(151.17deg, #636363 -7.23%, #3e3e3e 107.43%);
+  /* Thunder Caja */
+
+  box-shadow: -15px -15px 100px rgba(88, 88, 88, 0.25),
+    15px 15px 50px rgba(11, 11, 11, 0.25);
+  border-radius: 30px;
+}
+
+.buy-a-ticket {
+  position: absolute;
+  width: 405px;
+  height: 54px;
+  left: 35px;
+  top: 36px;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 50px;
+  line-height: 75px;
+  display: flex;
+  align-items: center;
+}
+
+.buy-ticket-data1 {
+  position: absolute;
+  width: 405px;
+  height: 18px;
+  left: 35px;
+  top: 112px;
+}
+
+.estadistic {
+  position: absolute;
+  width: 163px;
+  height: 16px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.estadistic-data {
+  position: absolute;
+  width: 97px;
+  height: 17px;
+  left: 343px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  text-align: right;
+}
