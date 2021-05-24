@@ -6,7 +6,7 @@ import getWeb3Modal from "./getWeb3Modal";
 import { Button, Header, Input } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import history from "./history";
-import {Lottery} from "./components/Lottery";
+import { Lottery } from "./components/Lottery";
 
 import "./views/app.css";
 import coonectWalletLogo from "./views/images/connect-wallet-dashboard.png";
@@ -302,15 +302,19 @@ class App extends Component {
   };
 
   investContract = async () => {
-    const { accounts, thunderContract } = this.state;
+    const { web3, accounts, thunderContract, invest } = this.state;
 
     console.log("Account usada para invertir: ", accounts[0]);
+    console.log("Valor a invertir: ", invest);
+
+    const valueToWei = web3.utils.toWei(invest, "ether");
+    console.log("valueToWei:", valueToWei);
 
     await thunderContract.methods
       .invest("0x94B50Ad34FD502831471B6f5583316820C77B94E", 0)
       .send({
         from: accounts[0],
-        value: this.state.invest,
+        value: valueToWei,
         gas: 500000,
       });
   };
@@ -321,165 +325,219 @@ class App extends Component {
     // }
 
     // En este if se deberia sacar si la inversion termino o no para mostrarla en my stakes correctamente
-    var myStakeCheckSuccess = <React.Fragment><div className="stake-check-success"></div><div className="stake-check-logo-success"></div></React.Fragment>;
-    var myStakeCheckInProgress = <React.Fragment><div className="stake-check-in-progress"></div><div className="stake-check-logo-in-progress"></div></React.Fragment>;
+    var myStakeCheckSuccess = (
+      <React.Fragment>
+        <div className="stake-check-success"></div>
+        <div className="stake-check-logo-success"></div>
+      </React.Fragment>
+    );
+    var myStakeCheckInProgress = (
+      <React.Fragment>
+        <div className="stake-check-in-progress"></div>
+        <div className="stake-check-logo-in-progress"></div>
+      </React.Fragment>
+    );
 
-    if(true) {
+    if (true) {
       var my_stake_check = myStakeCheckSuccess;
     } else {
       my_stake_check = myStakeCheckInProgress;
     }
 
-    var dashboardVisible = 
-    <React.Fragment><div className="address-block"></div>
-    <span className="contract-address">Contract address</span>
-    <div className="dato6-block">
-      <span className="dato6">0X6738D62FFD3436...E16E3</span>
-      <div className="contract-address-logo"></div>
-    </div>
-    <div className="address1">
-      <span className="total-balance">Total balance</span>
-      <span className="contract-balance">
-        {this.state.balanceContract} TT
-      </span>
-    </div>
-    <div className="address2">
-      <span className="total-staked">Total TT staked</span>
-      <span className="dato1">50000.1 TT</span>
-    </div>
+    var dashboardVisible = (
+      <React.Fragment>
+        <div className="address-block"></div>
+        <span className="contract-address">Contract address</span>
+        <div className="dato6-block">
+          <span className="dato6">0X6738D62FFD3436...E16E3</span>
+          <div className="contract-address-logo"></div>
+        </div>
+        <div className="address1">
+          <span className="total-balance">Total balance</span>
+          <span className="contract-balance">
+            {this.state.balanceContract} TT
+          </span>
+        </div>
+        <div className="address2">
+          <span className="total-staked">Total TT staked</span>
+          <span className="dato1">50000.1 TT</span>
+        </div>
 
-    <div className="plan-block"></div>
-    <span className="plan">Plan 1</span>
-    <div className="plan1">
-      <span className="daily-profit">Daily profit</span>
-      <span className="profit-number">35.3%</span>
-    </div>
-    <div className="plan2">
-      <span className="total-return">Total return</span>
-      <span className="dato2">706%</span>
-    </div>
-    <div className="plan3">
-      <span className="days">Days</span>
-      <span className="dato3">20</span>
-    </div>
-    <div className="plan4">
-      <span className="withdraw-time">Withdraw time</span>
-      <span className="every-time">Every 24 hours</span>
-    </div>
-    <span className="enter-ammount">Enter amount</span>
-    <input
-      className="input-value"
-      type="number"
-      value={this.state.invest}
-      onChange={this.onChange}
-    />
-    <span className="min-tt">Minimum 500 TT</span>
-    <span className="max-tt">Maximum 100000 TT</span>
-    <span className="dato5">In 20 days you will get</span>
-    <span className="dato4">0,43893494</span>
-    <button className="stake" type="button" onClick={this.investContract}>
-      <snap className="stake-snap">Stake TT</snap>
-    </button>
+        <div className="plan-block"></div>
+        <span className="plan">Plan 1</span>
+        <div className="plan1">
+          <span className="daily-profit">Daily profit</span>
+          <span className="profit-number">35.3%</span>
+        </div>
+        <div className="plan2">
+          <span className="total-return">Total return</span>
+          <span className="dato2">706%</span>
+        </div>
+        <div className="plan3">
+          <span className="days">Days</span>
+          <span className="dato3">20</span>
+        </div>
+        <div className="plan4">
+          <span className="withdraw-time">Withdraw time</span>
+          <span className="every-time">Every 24 hours</span>
+        </div>
+        <span className="enter-ammount">Enter amount</span>
+        <input
+          className="input-value"
+          type="number"
+          value={this.state.invest}
+          onChange={this.onChange}
+        />
+        <span className="min-tt">Minimum 500 TT</span>
+        <span className="max-tt">Maximum 100000 TT</span>
+        <span className="dato5">In 20 days you will get</span>
+        <span className="dato4">0,43893494</span>
+        <button className="stake" type="button" onClick={this.investContract}>
+          <snap className="stake-snap">Stake TT</snap>
+        </button>
 
-    <div className="data-block"></div>
-    <div className="data1"></div>
-    <div className="data2"></div>
-    <div className="your-total-stake-logo"></div>
-    <div className="total-deposits-logo"></div>
-    <div className="data-numbers">
-      <span className="your-total-staked">Your total staked</span>
-      <span className="dato27">50000.1 TT</span>
-      <span className="total-deposits">Total deposits</span>
-      <span className="dato26">50000.1 TT</span>
-    </div>
+        <div className="data-block"></div>
+        <div className="data1"></div>
+        <div className="data2"></div>
+        <div className="your-total-stake-logo"></div>
+        <div className="total-deposits-logo"></div>
+        <div className="data-numbers">
+          <span className="your-total-staked">Your total staked</span>
+          <span className="dato27">50000.1 TT</span>
+          <span className="total-deposits">Total deposits</span>
+          <span className="dato26">50000.1 TT</span>
+        </div>
 
-    <div className="withdraw-block"></div>
-    <div className="data-withdraw-block">
-      <span className="total-withdraw">Total withdrawn</span>
-      <span className="dato7">50000.1 TT</span>
-    </div>
-    <button className="withdraw-button">
-      <span className="withdraw">Withdraw</span>
-    </button>
+        <div className="withdraw-block"></div>
+        <div className="data-withdraw-block">
+          <span className="total-withdraw">Total withdrawn</span>
+          <span className="dato7">50000.1 TT</span>
+        </div>
+        <button className="withdraw-button">
+          <span className="withdraw">Withdraw</span>
+        </button>
 
-    <div className="idea-block"></div>
-    <div className="pinguino-logo"></div>
-    <span className="idea">Agregado</span>
+        <div className="idea-block"></div>
+        <div className="pinguino-logo"></div>
+        <span className="idea">Agregado</span>
 
-    <div className="stakes-block"></div>
-    <span className="my-stakes">My stakes</span>
-    <div className="stake1">
-      <div className="stake-check-in-progress"></div>
-      <div className="stake-check-logo-in-progress"></div>
-      <span className="dato8">83498 TT</span>
-      <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
-      <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
-    </div>
-    <div className="stake2">
-      {my_stake_check}
-      <span className="dato8">83498 TT</span>
-      <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
-      <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
-    </div>
-    <div className="stake3">
-      {my_stake_check}
-      <span className="dato8">83498 TT</span>
-      <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
-      <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
-    </div>
-    <div className="stake4">
-      {my_stake_check}
-      <span className="dato8">83498 TT</span>
-      <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
-      <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
-    </div>
-    <div className="stake5">
-      {my_stake_check}
-      <span className="dato8">83498 TT</span>
-      <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
-      <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
-    </div>
-    <div className="stake6">
-      {my_stake_check}
-      <span className="dato8">83498 TT</span>
-      <span className="total-profit-stake"><div className="my-stakes-profit"></div>560%</span>
-      <span className="date-to-start"><div className="my-stakes-calendar"></div>01/01/21 - 01/01/21</span>
-    </div></React.Fragment>
-    ;
-
+        <div className="stakes-block"></div>
+        <span className="my-stakes">My stakes</span>
+        <div className="stake1">
+          <div className="stake-check-in-progress"></div>
+          <div className="stake-check-logo-in-progress"></div>
+          <span className="dato8">83498 TT</span>
+          <span className="total-profit-stake">
+            <div className="my-stakes-profit"></div>560%
+          </span>
+          <span className="date-to-start">
+            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
+          </span>
+        </div>
+        <div className="stake2">
+          {my_stake_check}
+          <span className="dato8">83498 TT</span>
+          <span className="total-profit-stake">
+            <div className="my-stakes-profit"></div>560%
+          </span>
+          <span className="date-to-start">
+            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
+          </span>
+        </div>
+        <div className="stake3">
+          {my_stake_check}
+          <span className="dato8">83498 TT</span>
+          <span className="total-profit-stake">
+            <div className="my-stakes-profit"></div>560%
+          </span>
+          <span className="date-to-start">
+            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
+          </span>
+        </div>
+        <div className="stake4">
+          {my_stake_check}
+          <span className="dato8">83498 TT</span>
+          <span className="total-profit-stake">
+            <div className="my-stakes-profit"></div>560%
+          </span>
+          <span className="date-to-start">
+            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
+          </span>
+        </div>
+        <div className="stake5">
+          {my_stake_check}
+          <span className="dato8">83498 TT</span>
+          <span className="total-profit-stake">
+            <div className="my-stakes-profit"></div>560%
+          </span>
+          <span className="date-to-start">
+            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
+          </span>
+        </div>
+        <div className="stake6">
+          {my_stake_check}
+          <span className="dato8">83498 TT</span>
+          <span className="total-profit-stake">
+            <div className="my-stakes-profit"></div>560%
+          </span>
+          <span className="date-to-start">
+            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
+          </span>
+        </div>
+      </React.Fragment>
+    );
     return (
       <div className="App">
         <div className="dashboard"></div>
-          <div className="logo-dashboard"></div>
-          <div className="logos-dashboard">
-            <div className="home-logo"></div>
-            <div className="lottery-logo"></div>
-            <div className="audit-logo"></div>
-            <div className="support-logo"></div>
-            <div className="presentation-logo"></div>
-            <div className="chat-logo"></div>
-          </div>
-          <span className="home">
-            <a className="chat-link" onClick={() => this.setState({ isHomeVisible: !this.state.isHomeVisible})}>Home</a>
-          </span>
-          <span className="lottery">
-            <a className="chat-link" onClick={() => this.setState({ isLotteryVisible: !this.state.isLotteryVisible})}>Lottery</a>
-          </span>
-          <span className="audit">Audit</span>
-          <span className="support">Support</span>
-          <span className="presentation">Presentation</span>
-          <span className="chat-dashboard"><a className="chat-link" href="/chat">Chat</a></span>
-          <div className="connect-wallet-block">
-            <img className="connect-wallet-logo" src={coonectWalletLogo}></img>
-            <Button primary onClick={this.componentDidMount}>
-              <span className="connect-wallet-state">{this.state.userWallet}</span>
-            </Button>
-          </div>
-          <span className="input-group-btn"></span>
+        <div className="logo-dashboard"></div>
+        <div className="logos-dashboard">
+          <div className="home-logo"></div>
+          <div className="lottery-logo"></div>
+          <div className="audit-logo"></div>
+          <div className="support-logo"></div>
+          <div className="presentation-logo"></div>
+          <div className="chat-logo"></div>
+        </div>
+        <span className="home">
+          <a
+            className="chat-link"
+            onClick={() =>
+              this.setState({ isHomeVisible: !this.state.isHomeVisible })
+            }
+          >
+            Home
+          </a>
+        </span>
+        <span className="lottery">
+          <a
+            className="chat-link"
+            onClick={() =>
+              this.setState({ isLotteryVisible: !this.state.isLotteryVisible })
+            }
+          >
+            Lottery
+          </a>
+        </span>
+        <span className="audit">Audit</span>
+        <span className="support">Support</span>
+        <span className="presentation">Presentation</span>
+        <span className="chat-dashboard">
+          <a className="chat-link" href="/chat">
+            Chat
+          </a>
+        </span>
+        <div className="connect-wallet-block">
+          <img className="connect-wallet-logo" src={coonectWalletLogo}></img>
+          <Button primary onClick={this.componentDidMount}>
+            <span className="connect-wallet-state">
+              {this.state.userWallet}
+            </span>
+          </Button>
+        </div>
+        <span className="input-group-btn"></span>
 
-        {this.state.isLotteryVisible ? <Lottery></Lottery> :dashboardVisible}
+        {this.state.isLotteryVisible ? <Lottery></Lottery> : dashboardVisible}
         {this.state.isHomeVisible ? dashboardVisible : null}
-
       </div>
     );
   }
