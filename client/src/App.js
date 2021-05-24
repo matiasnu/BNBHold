@@ -340,7 +340,7 @@ class App extends Component {
             <div className="chat-logo"></div>
           </div>
           <span className="home">Home</span>
-          <span className="lottery">Lottery</span>
+          <span className="lottery"><a className="chat-link" href="/lottery">Lottery</a></span>
           <span className="audit">Audit</span>
           <span className="support">Support</span>
           <span className="presentation">Presentation</span>
@@ -393,7 +393,7 @@ class App extends Component {
         <span className="enter-ammount">Enter amount</span>
         <input
           className="input-value"
-          type="text"
+          type="number"
           value={this.state.invest}
           onChange={this.onChange}
         />
