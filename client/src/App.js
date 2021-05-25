@@ -21,6 +21,7 @@ class App extends Component {
     isHomeVisible: false,
     parsedWallet: null, // wallet parseada para mostrar en la pantalla (lease truncada con puntos)
     totalStaked: 0,
+    contractBalance: 0,
   };
 
   componentDidMount = async () => {
@@ -88,7 +89,6 @@ class App extends Component {
       // del contrato y solo sirven para recabar informacion previa
       // Este metodo se debe llamar una vez que esta actualizado el state de la pagina
       this.getPastEvents();
-      this.connectWallet();
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -271,9 +271,11 @@ class App extends Component {
     /*
       GET VARIABLES FROM THE RAW CONTRACT
     */
-    const contractBalance = await thunderContract.methods
+    let contractBalance = await thunderContract.methods
       .getContractBalance()
       .call();
+    contractBalance = web3.utils.fromWei(contractBalance);
+    console.log("contractBalance:", contractBalance);
 
     // Update state with the result.
     // Setear un valor en el contrato, que no reemplaza un nombre previo, logra apendear el nuevo
@@ -282,22 +284,6 @@ class App extends Component {
       contractBalance: contractBalance,
       totalStaked: totalStaked,
       totalRefBonus: totalRefBonus,
-    });
-  };
-
-  connectWallet = async () => {
-    const { accounts, thunderContract } = this.state;
-
-    //await storageContract.methods.set(5).send({ from: accounts[0] });
-    //const storageResponse = await storageContract.methods.get().call();
-    const thunderContractResponse = await thunderContract.methods
-      .getContractBalance()
-      .call();
-
-    // Update state with the result.
-    this.setState({
-      balanceContract: thunderContractResponse,
-      userWallet: accounts[0],
     });
   };
 
@@ -363,7 +349,7 @@ class App extends Component {
         <div className="address1">
           <span className="total-balance">Total balance</span>
           <span className="contract-balance">
-            {this.state.balanceContract} TT
+            {this.state.contractBalance} TT
           </span>
         </div>
         <div className="address2">
