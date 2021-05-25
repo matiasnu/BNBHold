@@ -13,3 +13,4 @@
 - Se fixea valor a invertir en el FE
 - Se parsea/trunca el valor de la direccion publica
 - Actualixo el state (yourTotalStake) de algunos valores luego de invertir para que se reflejen los nuevos valores
+- Se inserta diseño en la Lottery
