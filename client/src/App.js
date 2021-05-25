@@ -187,10 +187,10 @@ class App extends Component {
           var array = Object.keys(obj);
 
           // Itero por el array imprimiendo los distintos past eventos
-          var i = 0;
-          for (i = 0; i < array.length; i++) {
-            console.log(obj[array[i]].returnValues);
-          }
+          // var i = 0;
+          // for (i = 0; i < array.length; i++) {
+          //   console.log(obj[array[i]].returnValues);
+          // }
         } else {
           console.log(error);
         }
@@ -217,10 +217,10 @@ class App extends Component {
           var array = Object.keys(obj);
 
           // Itero por el array imprimiendo los distintos past eventos
-          var i = 0;
-          for (i = 0; i < array.length; i++) {
-            console.log(obj[array[i]].returnValues);
-          }
+          // var i = 0;
+          // for (i = 0; i < array.length; i++) {
+          //   console.log(obj[array[i]].returnValues);
+          // }
         } else {
           console.log(error);
         }
@@ -278,12 +278,14 @@ class App extends Component {
       userDepositsInfo[indice] = await thunderContract.methods
         .getUserDepositInfo(accounts[0], parseInt(indice))
         .call();
+      if (userDepositsInfo[indice].amount) {
+        userDepositsInfo[indice].amount = web3.utils.fromWei(
+          userDepositsInfo[indice].amount
+        );
+      }
     }
 
-    for (var indice = 0; indice < userStakesAmount; indice++) {
-      console.log("indice:", indice);
-      console.log(userDepositsInfo[indice]);
-    }
+    console.log(userDepositsInfo);
 
     // Update state with the result.
     // Setear un valor en el contrato, que no reemplaza un nombre previo, logra apendear el nuevo
@@ -349,21 +351,32 @@ class App extends Component {
       my_stake_check = myStakeCheckInProgress;
     }
 
+    const elements = ["one", "two", "three"];
+
     var myStakes = (
       <React.Fragment>
-        <div className="stake1">
-          {my_stake_check}
-          <div className="stake-check-in-progress"></div>
-          <div className="stake-check-logo-in-progress"></div>
-          {/*<span className="dato8">83498 TT</span>*/}
-
-          <span className="total-profit-stake">
-            <div className="my-stakes-profit"></div>560%
-          </span>
-          <span className="date-to-start">
-            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
-          </span>
-        </div>
+        {this.state.userDepositsInfo
+          ? this.state.userDepositsInfo.map(function (data, index) {
+              return (
+                <div key={index}>
+                  <div className="stake1">
+                    {/*my_stake_check*/}
+                    <div className="stake-check-in-progress"></div>
+                    <div className="stake-check-logo-in-progress"></div>
+                    <span className="dato8">{data.amount} TT</span>
+                    <span className="total-profit-stake">
+                      <div className="my-stakes-profit"></div>
+                      {data.percent} %
+                    </span>
+                    <span className="date-to-start">
+                      <div className="my-stakes-calendar"></div>
+                      {data.start} -{data.finish}
+                    </span>
+                  </div>
+                </div>
+              );
+            })
+          : null}
       </React.Fragment>
     );
 
@@ -444,69 +457,29 @@ class App extends Component {
         <span className="idea">Agregado</span>
         <div className="stakes-block"></div>
         <span className="my-stakes">My stakes</span>
-        {/*<div className="stake1">
-          <div className="stake-check-in-progress"></div>
-          <div className="stake-check-logo-in-progress"></div>
-          <span className="dato8">83498 TT</span>
-          <span className="total-profit-stake">
-            <div className="my-stakes-profit"></div>560%
-          </span>
-          <span className="date-to-start">
-            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
-          </span>
-        </div>*/}
-        {this.state.userStakesAmount > 0 ? myStakes : null}
 
-        {/*<div className="stake2">
-          {my_stake_check}
-          <span className="dato8">83498 TT</span>
-          <span className="total-profit-stake">
-            <div className="my-stakes-profit"></div>560%
-          </span>
-          <span className="date-to-start">
-            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
-          </span>
-        </div>
-        <div className="stake3">
-          {my_stake_check}
-          <span className="dato8">83498 TT</span>
-          <span className="total-profit-stake">
-            <div className="my-stakes-profit"></div>560%
-          </span>
-          <span className="date-to-start">
-            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
-          </span>
-        </div>
-        <div className="stake4">
-          {my_stake_check}
-          <span className="dato8">83498 TT</span>
-          <span className="total-profit-stake">
-            <div className="my-stakes-profit"></div>560%
-          </span>
-          <span className="date-to-start">
-            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
-          </span>
-        </div>
-        <div className="stake5">
-          {my_stake_check}
-          <span className="dato8">83498 TT</span>
-          <span className="total-profit-stake">
-            <div className="my-stakes-profit"></div>560%
-          </span>
-          <span className="date-to-start">
-            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
-          </span>
-        </div>
-        <div className="stake6">
-          {my_stake_check}
-          <span className="dato8">83498 TT</span>
-          <span className="total-profit-stake">
-            <div className="my-stakes-profit"></div>560%
-          </span>
-          <span className="date-to-start">
-            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
-          </span>
-        </div>*/}
+        {this.state.userDepositsInfo
+          ? this.state.userDepositsInfo.map((data, index) => {
+              return (
+                <div key={index}>
+                  <div className={"stake" + (index + 1).toString()}>
+                    {my_stake_check}
+                    <div className="stake-check-in-progress"></div>
+                    <div className="stake-check-logo-in-progress"></div>
+                    <span className="dato8">{data.amount} TT</span>
+                    <span className="total-profit-stake">
+                      <div className="my-stakes-profit"></div>
+                      {data.percent} %
+                    </span>
+                    <span className="date-to-start">
+                      <div className="my-stakes-calendar"></div>
+                      {data.start} -{data.finish}
+                    </span>
+                  </div>
+                </div>
+              );
+            })
+          : null}
       </React.Fragment>
     );
     return (
