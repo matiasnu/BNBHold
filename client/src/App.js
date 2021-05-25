@@ -266,11 +266,11 @@ class App extends Component {
     console.log("userStakesAmount:", userStakesAmount);
 
     // Obtengo getUserTotalDeposits
-    // let getUserTotalDeposits = await thunderContract.methods
-    //   .getUserTotalDeposits(accounts[0])
-    //   .call();
-    // getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
-    // console.log("getUserTotalDeposits:", getUserTotalDeposits);
+    let getUserTotalDeposits = await thunderContract.methods
+      .getUserTotalDeposits(accounts[0])
+      .call();
+    getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
+    console.log("getUserTotalDeposits:", getUserTotalDeposits);
 
     // Obtengo todos los depositos del usuario y la informacion asociada
     let userDepositsInfo = [];
@@ -282,6 +282,34 @@ class App extends Component {
         userDepositsInfo[indice].amount = web3.utils.fromWei(
           userDepositsInfo[indice].amount
         );
+      }
+      if (userDepositsInfo[indice].start && userDepositsInfo[indice].finish) {
+        var startDate = new Date(userDepositsInfo[indice].start * 1000);
+        var finishDate = new Date(userDepositsInfo[indice].finish * 1000);
+        userDepositsInfo[indice].start =
+          startDate.getDate() +
+          "/" +
+          (startDate.getMonth() + 1) +
+          "/" +
+          startDate.getFullYear() +
+          " " +
+          startDate.getHours() +
+          ":" +
+          startDate.getMinutes() +
+          ":" +
+          startDate.getSeconds();
+        userDepositsInfo[indice].finish =
+          finishDate.getDate() +
+          "/" +
+          (finishDate.getMonth() + 1) +
+          "/" +
+          finishDate.getFullYear() +
+          " " +
+          finishDate.getHours() +
+          ":" +
+          finishDate.getMinutes() +
+          ":" +
+          finishDate.getSeconds();
       }
     }
 
