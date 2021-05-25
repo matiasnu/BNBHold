@@ -309,6 +309,23 @@ class App extends Component {
     // }
 
     // En este if se deberia sacar si la inversion termino o no para mostrarla en my stakes correctamente
+
+    var myStakes = (
+      <React.Fragment>
+        <div className="stake1">
+          <div className="stake-check-in-progress"></div>
+          <div className="stake-check-logo-in-progress"></div>
+          <span className="dato8">83498 TT</span>
+          <span className="total-profit-stake">
+            <div className="my-stakes-profit"></div>560%
+          </span>
+          <span className="date-to-start">
+            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
+          </span>
+        </div>
+      </React.Fragment>
+    );
+
     var myStakeCheckSuccess = (
       <React.Fragment>
         <div className="stake-check-success"></div>
@@ -405,7 +422,7 @@ class App extends Component {
         <span className="idea">Agregado</span>
         <div className="stakes-block"></div>
         <span className="my-stakes">My stakes</span>
-        <div className="stake1">
+        {/*<div className="stake1">
           <div className="stake-check-in-progress"></div>
           <div className="stake-check-logo-in-progress"></div>
           <span className="dato8">83498 TT</span>
@@ -415,7 +432,9 @@ class App extends Component {
           <span className="date-to-start">
             <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
           </span>
-        </div>
+        </div>*/}
+        {this.state.userStakesAmount > 0 ? myStakes : null}
+
         {/*<div className="stake2">
           {my_stake_check}
           <span className="dato8">83498 TT</span>
