@@ -254,14 +254,17 @@ class App extends Component {
     const totalRefBonus = await thunderContract.methods.totalRefBonus().call();
     const startUNIX = await thunderContract.methods.startUNIX().call();
 
-    /*
-      GET VARIABLES FROM THE RAW CONTRACT
-    */
     let contractBalance = await thunderContract.methods
       .getContractBalance()
       .call();
     contractBalance = web3.utils.fromWei(contractBalance);
     console.log("contractBalance:", contractBalance);
+
+    // Obtengo la cantidad de stakes o depositos del usuario
+    let userStakesAmount = await thunderContract.methods
+      .getUserAmountOfDeposits(accounts[0])
+      .call();
+    console.log("userStakesAmount:", userStakesAmount);
 
     // Update state with the result.
     // Setear un valor en el contrato, que no reemplaza un nombre previo, logra apendear el nuevo
@@ -270,6 +273,7 @@ class App extends Component {
       contractBalance: contractBalance,
       totalStaked: totalStaked,
       totalRefBonus: totalRefBonus,
+      userStakesAmount: userStakesAmount,
     });
   };
 
@@ -387,7 +391,8 @@ class App extends Component {
           {/*<span className="dato27">50000.1 TT</span>*/}
           <span className="dato27">{this.state.totalStaked} TT</span>
           <span className="total-deposits">Total deposits</span>
-          <span className="dato26">50000.1 TT</span>
+          <span className="dato26">{this.state.userStakesAmount}</span>
+          {/*<span className="dato26">50000.1 TT</span>*/}
         </div>
 
         <div className="withdraw-block"></div>
@@ -416,7 +421,7 @@ class App extends Component {
             <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
           </span>
         </div>
-        <div className="stake2">
+        {/*<div className="stake2">
           {my_stake_check}
           <span className="dato8">83498 TT</span>
           <span className="total-profit-stake">
@@ -465,7 +470,7 @@ class App extends Component {
           <span className="date-to-start">
             <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
           </span>
-        </div>
+        </div>*/}
       </React.Fragment>
     );
     return (
