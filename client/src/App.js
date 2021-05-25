@@ -238,39 +238,50 @@ class App extends Component {
        Aqui toda la interaccion con el contrato. Obtengo las estadisticas actuales del contrato
     */
     /*
-     GET USER CONSTANTS
+     GET CONTRACT CONSTANTS AND SETTINGS
     */
     const INVEST_MIN_AMOUNT = await thunderContract.methods
       .INVEST_MIN_AMOUNT()
       .call();
+    const INVEST_MAX_AMOUNT = await thunderContract.methods
+      .INVEST_MAX_AMOUNT()
+      .call();
+
+    const totalRefBonus = await thunderContract.methods.totalRefBonus().call();
+    const startUNIX = await thunderContract.methods.startUNIX().call();
 
     /*
       GET USER VARIABLES
     */
     let totalStaked = await thunderContract.methods.totalStaked().call();
-    totalStaked = web3.utils.fromWei(totalStaked);
-    console.log("totalStaked:", totalStaked);
-    const totalRefBonus = await thunderContract.methods.totalRefBonus().call();
-    const startUNIX = await thunderContract.methods.startUNIX().call();
-
+    if (totalStaked) {
+      totalStaked = web3.utils.fromWei(totalStaked);
+      console.log("totalStaked:", totalStaked);
+    }
     let contractBalance = await thunderContract.methods
       .getContractBalance()
       .call();
-    contractBalance = web3.utils.fromWei(contractBalance);
-    console.log("contractBalance:", contractBalance);
+    if (contractBalance) {
+      contractBalance = web3.utils.fromWei(contractBalance);
+      console.log("contractBalance:", contractBalance);
+    }
 
     // Obtengo la cantidad de stakes o depositos del usuario
     let userStakesAmount = await thunderContract.methods
       .getUserAmountOfDeposits(accounts[0])
       .call();
-    console.log("userStakesAmount:", userStakesAmount);
+    if (userStakesAmount) {
+      console.log("userStakesAmount:", userStakesAmount);
+    }
 
     // Obtengo getUserTotalDeposits
     let getUserTotalDeposits = await thunderContract.methods
       .getUserTotalDeposits(accounts[0])
       .call();
-    getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
-    console.log("getUserTotalDeposits:", getUserTotalDeposits);
+    if (getUserTotalDeposits) {
+      getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
+      console.log("getUserTotalDeposits:", getUserTotalDeposits);
+    }
 
     // Obtengo todos los depositos del usuario y la informacion asociada
     let userDepositsInfo = [];
@@ -311,14 +322,24 @@ class App extends Component {
           ":" +
           finishDate.getSeconds();
       }
+      if (userDepositsInfo[indice].percent) {
+        var percentFormated = (
+          Math.round(userDepositsInfo[indice].percent) / 100
+        ).toFixed(2);
+        console.log(percentFormated);
+        userDepositsInfo[indice].percent = percentFormated;
+      }
     }
 
+    // Imprimo lo que viene en el Array desde el contrato, que es un Array (Object) de Objects
     console.log(userDepositsInfo);
 
     // Update state with the result.
     // Setear un valor en el contrato, que no reemplaza un nombre previo, logra apendear el nuevo
     // valor a la lista de valores del estado sin cambiar datos anteriores
     this.setState({
+      INVEST_MIN_AMOUNT: INVEST_MIN_AMOUNT,
+      INVEST_MAX_AMOUNT: INVEST_MAX_AMOUNT,
       contractBalance: contractBalance,
       totalStaked: totalStaked,
       totalRefBonus: totalRefBonus,
@@ -378,8 +399,6 @@ class App extends Component {
     } else {
       my_stake_check = myStakeCheckInProgress;
     }
-
-    const elements = ["one", "two", "three"];
 
     var myStakes = (
       <React.Fragment>
