@@ -347,7 +347,6 @@ class App extends Component {
           <span className="dato1">{this.state.totalStaked} TT</span>
           {/*<span className="dato1">50000.1 TT</span>*/}
         </div>
-
         <div className="plan-block"></div>
         <span className="plan">Plan 1</span>
         <div className="plan1">
@@ -378,9 +377,8 @@ class App extends Component {
         <span className="dato5">In 20 days you will get</span>
         <span className="dato4">0,43893494</span>
         <button className="stake" type="button" onClick={this.investContract}>
-          <snap className="stake-snap">Stake TT</snap>
+          <span className="stake-snap">Stake TT</span>
         </button>
-
         <div className="data-block"></div>
         <div className="data1"></div>
         <div className="data2"></div>
@@ -394,7 +392,6 @@ class App extends Component {
           <span className="dato26">{this.state.userStakesAmount}</span>
           {/*<span className="dato26">50000.1 TT</span>*/}
         </div>
-
         <div className="withdraw-block"></div>
         <div className="data-withdraw-block">
           <span className="total-withdraw">Total withdrawn</span>
@@ -403,11 +400,9 @@ class App extends Component {
         <button className="withdraw-button">
           <span className="withdraw">Withdraw</span>
         </button>
-
         <div className="idea-block"></div>
         <div className="pinguino-logo"></div>
         <span className="idea">Agregado</span>
-
         <div className="stakes-block"></div>
         <span className="my-stakes">My stakes</span>
         <div className="stake1">
