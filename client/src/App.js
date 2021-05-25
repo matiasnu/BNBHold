@@ -400,33 +400,6 @@ class App extends Component {
       my_stake_check = myStakeCheckInProgress;
     }
 
-    var myStakes = (
-      <React.Fragment>
-        {this.state.userDepositsInfo
-          ? this.state.userDepositsInfo.map(function (data, index) {
-              return (
-                <div key={index}>
-                  <div className="stake1">
-                    {/*my_stake_check*/}
-                    <div className="stake-check-in-progress"></div>
-                    <div className="stake-check-logo-in-progress"></div>
-                    <span className="dato8">{data.amount} TT</span>
-                    <span className="total-profit-stake">
-                      <div className="my-stakes-profit"></div>
-                      {data.percent} %
-                    </span>
-                    <span className="date-to-start">
-                      <div className="my-stakes-calendar"></div>
-                      {data.start} -{data.finish}
-                    </span>
-                  </div>
-                </div>
-              );
-            })
-          : null}
-      </React.Fragment>
-    );
-
     var dashboardVisible = (
       <React.Fragment>
         <div className="address-block"></div>
