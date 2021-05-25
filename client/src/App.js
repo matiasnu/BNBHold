@@ -247,7 +247,6 @@ class App extends Component {
       .INVEST_MAX_AMOUNT()
       .call();
 
-    const totalRefBonus = await thunderContract.methods.totalRefBonus().call();
     const startUNIX = await thunderContract.methods.startUNIX().call();
 
     /*
@@ -334,6 +333,77 @@ class App extends Component {
     // Imprimo lo que viene en el Array desde el contrato, que es un Array (Object) de Objects
     console.log(userDepositsInfo);
 
+    // Obtengo getUserCheckpoint
+    let userCheckpoint = await thunderContract.methods
+      .getUserCheckpoint(accounts[0])
+      .call();
+    if (userCheckpoint) {
+      // getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
+      console.log("getUserCheckpoint:", userCheckpoint);
+    }
+
+    // Obtengo getUserReferrer
+    let userReferrer = await thunderContract.methods
+      .getUserReferrer(accounts[0])
+      .call();
+    if (userReferrer) {
+      // getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
+      console.log("getUserReferrer:", userReferrer);
+    }
+
+    // Obtengo getUserReferralBonus
+    let userReferralBonus = await thunderContract.methods
+      .getUserReferralBonus(accounts[0])
+      .call();
+    if (userReferralBonus) {
+      // getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
+      console.log("getUserReferralBonus:", userReferralBonus);
+    }
+
+    // Obtengo getUserReferralTotalBonus
+    let userReferralTotalBonus = await thunderContract.methods
+      .getUserReferralTotalBonus(accounts[0])
+      .call();
+    if (userReferralTotalBonus) {
+      // getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
+      console.log("getUserReferralTotalBonus:", userReferralTotalBonus);
+    }
+
+    // Obtengo getUserReinvestedAmount
+    let userReinvestedAmount = await thunderContract.methods
+      .getUserReinvestedAmount(accounts[0])
+      .call();
+    if (userReinvestedAmount) {
+      // getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
+      console.log("getUserReinvestedAmount:", userReinvestedAmount);
+    }
+
+    // Obtengo getUserDownlineCount
+    let userDownlineCount = await thunderContract.methods
+      .getUserDownlineCount(accounts[0])
+      .call();
+    if (userDownlineCount) {
+      // getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
+      console.log("getUserDownlineCount:", userDownlineCount);
+    }
+
+    // Obtengo getUserReferralWithdrawn
+    let userReferralWithdrawn = await thunderContract.methods
+      .getUserReferralWithdrawn(accounts[0])
+      .call();
+    if (userReferralWithdrawn) {
+      // getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
+      console.log("getUserReferralWithdrawn:", userReferralWithdrawn);
+    }
+
+    // Obtengo getUserAvailable
+    let userAvailable = await thunderContract.methods
+      .getUserAvailable(accounts[0])
+      .call();
+    if (userAvailable) {
+      // getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
+      console.log("getUserAvailable:", userAvailable);
+    }
     // Update state with the result.
     // Setear un valor en el contrato, que no reemplaza un nombre previo, logra apendear el nuevo
     // valor a la lista de valores del estado sin cambiar datos anteriores
@@ -342,9 +412,16 @@ class App extends Component {
       INVEST_MAX_AMOUNT: INVEST_MAX_AMOUNT,
       contractBalance: contractBalance,
       totalStaked: totalStaked,
-      totalRefBonus: totalRefBonus,
       userStakesAmount: userStakesAmount,
       userDepositsInfo: userDepositsInfo,
+      userCheckpoint: userCheckpoint,
+      userReferrer: userReferrer,
+      userReferralBonus: userReferralBonus,
+      userReferralTotalBonus: userReferralTotalBonus,
+      userReinvestedAmount: userReinvestedAmount,
+      userDownlineCount: userDownlineCount,
+      userReferralWithdrawn: userReferralWithdrawn,
+      userAvailable: userAvailable,
     });
   };
 
