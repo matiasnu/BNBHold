@@ -26,9 +26,6 @@ class App extends Component {
 
   componentDidMount = async () => {
     try {
-      // const web3EventReader = await Web3Modal();
-      // console.log("web3EventReader-->", web3EventReader);
-
       // Get network provider and web3 instance.
       const web3 = await getWeb3Modal();
       //console.log("web3-->", web3);
@@ -46,14 +43,6 @@ class App extends Component {
       const accounts = await web3.eth.getAccounts();
       console.log(accounts);
 
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      // this.setState({
-      //   web3,
-      //   accounts,
-      //   storageContract: storageInstance,
-      //   thunderContract: thunderInstance,
-      // });
       // Para poder utilizar una cuenta debo desbloquearla por un tiempo determinado
       // web3.eth.personal.unlockAccount(accounts[0], "", 300);
       // console.log("Wallet a utilizar: ", accounts[0]);
@@ -98,9 +87,6 @@ class App extends Component {
     }
   };
 
-  /*
-        setSuscriptions: Setea las suscripciones a eventos de contrato
-    */
   setSuscriptions = async () => {
     const { thunderContract } = this.state;
 
@@ -173,8 +159,8 @@ class App extends Component {
   };
 
   /*
-              getPastEvents: Obtiene la data de eventos que ya ocurrieron en el contrato
-          */
+                        getPastEvents: Obtiene la data de eventos que ya ocurrieron en el contrato
+                    */
   getPastEvents = async () => {
     const { accounts, thunderContract } = this.state;
 
@@ -354,7 +340,6 @@ class App extends Component {
         </div>
         <div className="address2">
           <span className="total-staked">Total TT staked</span>
-          {/*<span className="dato27">50000.1 TT</span>*/}
           <span className="dato1">{this.state.totalStaked} TT</span>
           {/*<span className="dato1">50000.1 TT</span>*/}
         </div>
