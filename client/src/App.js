@@ -20,6 +20,7 @@ class App extends Component {
     isLotteryVisible: false,
     isHomeVisible: false,
     parsedWallet: null, // wallet parseada para mostrar en la pantalla (lease truncada con puntos)
+    totalStaked: 0,
   };
 
   componentDidMount = async () => {
@@ -246,7 +247,7 @@ class App extends Component {
      getContractStatistics: Obtiene la data actualizada del estado del contrato
   */
   getContractStatistics = async () => {
-    const { accounts, thunderContract } = this.state;
+    const { accounts, thunderContract, web3 } = this.state;
 
     /*
        Aqui toda la interaccion con el contrato. Obtengo las estadisticas actuales del contrato
@@ -261,7 +262,9 @@ class App extends Component {
     /*
       GET USER VARIABLES
     */
-    const totalStaked = await thunderContract.methods.totalStaked().call();
+    let totalStaked = await thunderContract.methods.totalStaked().call();
+    totalStaked = web3.utils.fromWei(totalStaked);
+    console.log("totalStaked:", totalStaked);
     const totalRefBonus = await thunderContract.methods.totalRefBonus().call();
     const startUNIX = await thunderContract.methods.startUNIX().call();
 
@@ -319,6 +322,9 @@ class App extends Component {
         value: valueToWei,
         gas: 500000,
       });
+
+    // Actualizo el estado del contrato
+    this.getContractStatistics();
   };
 
   render() {
@@ -405,7 +411,8 @@ class App extends Component {
         <div className="total-deposits-logo"></div>
         <div className="data-numbers">
           <span className="your-total-staked">Your total staked</span>
-          <span className="dato27">50000.1 TT</span>
+          {/*<span className="dato27">50000.1 TT</span>*/}
+          <span className="dato27">{this.state.totalStaked}</span>
           <span className="total-deposits">Total deposits</span>
           <span className="dato26">50000.1 TT</span>
         </div>
