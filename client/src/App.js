@@ -368,7 +368,9 @@ class App extends Component {
         </div>
         <div className="address2">
           <span className="total-staked">Total TT staked</span>
-          <span className="dato1">50000.1 TT</span>
+          {/*<span className="dato27">50000.1 TT</span>*/}
+          <span className="dato27">{this.state.totalStaked} TT</span>
+          {/*<span className="dato1">50000.1 TT</span>*/}
         </div>
 
         <div className="plan-block"></div>
@@ -412,7 +414,7 @@ class App extends Component {
         <div className="data-numbers">
           <span className="your-total-staked">Your total staked</span>
           {/*<span className="dato27">50000.1 TT</span>*/}
-          <span className="dato27">{this.state.totalStaked}</span>
+          <span className="dato27">{this.state.totalStaked} TT</span>
           <span className="total-deposits">Total deposits</span>
           <span className="dato26">50000.1 TT</span>
         </div>
