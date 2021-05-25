@@ -355,7 +355,7 @@ class App extends Component {
         <div className="address2">
           <span className="total-staked">Total TT staked</span>
           {/*<span className="dato27">50000.1 TT</span>*/}
-          <span className="dato27">{this.state.totalStaked} TT</span>
+          <span className="dato1">{this.state.totalStaked} TT</span>
           {/*<span className="dato1">50000.1 TT</span>*/}
         </div>
 
