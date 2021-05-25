@@ -134,9 +134,8 @@ class App extends Component {
     thunderContract.events
       .RefBonus()
       .on("data", function (event) {
-        console.log("event RefBonus arrived");
-        console.log(event.returnValues);
-
+        // console.log("event RefBonus arrived");
+        // console.log(event.returnValues);
         //alert(event.returnValues.res);
       })
       .on("changed", function (event) {
@@ -266,6 +265,26 @@ class App extends Component {
       .call();
     console.log("userStakesAmount:", userStakesAmount);
 
+    // Obtengo getUserTotalDeposits
+    // let getUserTotalDeposits = await thunderContract.methods
+    //   .getUserTotalDeposits(accounts[0])
+    //   .call();
+    // getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
+    // console.log("getUserTotalDeposits:", getUserTotalDeposits);
+
+    // Obtengo todos los depositos del usuario y la informacion asociada
+    let userDepositsInfo = [];
+    for (var indice = 0; indice < userStakesAmount; indice++) {
+      userDepositsInfo[indice] = await thunderContract.methods
+        .getUserDepositInfo(accounts[0], parseInt(indice))
+        .call();
+    }
+
+    for (var indice = 0; indice < userStakesAmount; indice++) {
+      console.log("indice:", indice);
+      console.log(userDepositsInfo[indice]);
+    }
+
     // Update state with the result.
     // Setear un valor en el contrato, que no reemplaza un nombre previo, logra apendear el nuevo
     // valor a la lista de valores del estado sin cambiar datos anteriores
@@ -274,6 +293,7 @@ class App extends Component {
       totalStaked: totalStaked,
       totalRefBonus: totalRefBonus,
       userStakesAmount: userStakesAmount,
+      userDepositsInfo: userDepositsInfo,
     });
   };
 
@@ -310,22 +330,6 @@ class App extends Component {
 
     // En este if se deberia sacar si la inversion termino o no para mostrarla en my stakes correctamente
 
-    var myStakes = (
-      <React.Fragment>
-        <div className="stake1">
-          <div className="stake-check-in-progress"></div>
-          <div className="stake-check-logo-in-progress"></div>
-          <span className="dato8">83498 TT</span>
-          <span className="total-profit-stake">
-            <div className="my-stakes-profit"></div>560%
-          </span>
-          <span className="date-to-start">
-            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
-          </span>
-        </div>
-      </React.Fragment>
-    );
-
     var myStakeCheckSuccess = (
       <React.Fragment>
         <div className="stake-check-success"></div>
@@ -344,6 +348,24 @@ class App extends Component {
     } else {
       my_stake_check = myStakeCheckInProgress;
     }
+
+    var myStakes = (
+      <React.Fragment>
+        <div className="stake1">
+          {my_stake_check}
+          <div className="stake-check-in-progress"></div>
+          <div className="stake-check-logo-in-progress"></div>
+          {/*<span className="dato8">83498 TT</span>*/}
+
+          <span className="total-profit-stake">
+            <div className="my-stakes-profit"></div>560%
+          </span>
+          <span className="date-to-start">
+            <div className="my-stakes-calendar"></div>01/01/21 - 01/01/21
+          </span>
+        </div>
+      </React.Fragment>
+    );
 
     var dashboardVisible = (
       <React.Fragment>
