@@ -9,3 +9,6 @@
 - Se agrega diseño frontend del home con algunos cambios en otros componentes (sobre el diseño)
 - Fix del class por className en Rect
 - Se modifica diseño frontend
+- Se fixea valor a invertir en MMask/Contracto
+- Se fixea valor a invertir en el FE
+- Se parsea/trunca el valor de la direccion publica

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ThunderHold from "./contracts/ThunderHold.json";
-import getWeb3WS from "./getWeb3WS";
 import getWeb3Modal from "./getWeb3Modal";
 
 import { Button, Header, Input } from "semantic-ui-react";
@@ -20,6 +19,7 @@ class App extends Component {
     invest: 0,
     isLotteryVisible: false,
     isHomeVisible: false,
+    parsedWallet: null, // wallet parseada para mostrar en la pantalla (lease truncada con puntos)
   };
 
   componentDidMount = async () => {
@@ -74,6 +74,8 @@ class App extends Component {
         web3,
         accounts,
         thunderContract: thunderInstance,
+        parsedWallet:
+          accounts[0].substring(1, 18) + "..." + accounts[0].substring(36), // Ejemplo wallet: 0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0 (42 posiciones)
       });
 
       // Me suscribo a los eventos de interes
@@ -349,7 +351,7 @@ class App extends Component {
         <div className="address-block"></div>
         <span className="contract-address">Contract address</span>
         <div className="dato6-block">
-          <span className="dato6">0X6738D62FFD3436...E16E3</span>
+          <span className="dato6">{this.state.parsedWallet}</span>
           <div className="contract-address-logo"></div>
         </div>
         <div className="address1">
