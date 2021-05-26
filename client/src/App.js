@@ -11,18 +11,21 @@ import "./views/app.css";
 import coonectWalletLogo from "./views/images/connect-wallet-dashboard.png";
 
 class App extends Component {
-  state = {
-    web3: null,
-    accounts: null,
-    contract: null,
-    userWallet: "Connect wallet",
-    invest: 0,
-    isLotteryVisible: false,
-    isHomeVisible: false,
-    parsedWallet: null, // wallet parseada para mostrar en la pantalla (lease truncada con puntos)
-    totalStaked: 0,
-    contractBalance: 0,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      web3: null,
+      accounts: null,
+      contract: null,
+      userWallet: "Connect wallet",
+      invest: 0,
+      isLotteryVisible: false,
+      isHomeVisible: false,
+      parsedWallet: null, // wallet parseada para mostrar en la pantalla (lease truncada con puntos)
+      totalStaked: 0,
+      contractBalance: 0,
+    };
+  }
 
   componentDidMount = async () => {
     try {
