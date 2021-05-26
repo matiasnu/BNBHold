@@ -427,14 +427,70 @@
 }
 
 .lottery-awards1 {
-  left: 1450px;
-  top: 141px;
+  position: absolute;
+  top: 106px;
 }
 
 .lottery-awards-img {
+  position: absolute;
+  width: 25.67px;
+  height: 36.66px;
+  left: 40px;
+  border-radius: 0px;
+}
+
+.lottery-awards2-img {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  left: 35px;
+  border-radius: 0px;
 }
 
 .lottery-awards-span {
+  position: absolute;
+  width: 392px;
+  height: 16px;
+  left: 81px;
+  top: 9px;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.lottery-awards2 {
+  position: absolute;
+  top: 160px;
+}
+
+.lottery-awards3 {
+  position: absolute;
+  top: 214px;
+}
+
+.lottery-awards4 {
+  position: absolute;
+  top: 268px;
+}
+
+.lottery-awards5 {
+  position: absolute;
+  top: 322px;
+}
+
+.lottery-awards6 {
+  position: absolute;
+  top: 377px;
+}
+
+.lottery-awards7 {
+  position: absolute;
+  top: 431px;
 }
 
 .winners-block {

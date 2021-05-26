@@ -16,6 +16,8 @@ import lotteryAward2 from "../views/images/lottery-award2.png";
 import lotteryAward3 from "../views/images/lottery-award3.png";
 import lotteryAward4 from "../views/images/lottery-award4.png";
 import lotteryAward5 from "../views/images/lottery-award5.png";
+import lotteryAward6 from "../views/images/lottery-cumulative-pool.png";
+import lotteryAward7 from "../views/images/lottery-support.png";
 
 export class Lottery extends Component {
   state = {
@@ -112,6 +114,30 @@ export class Lottery extends Component {
             <div className="lottery-awards1">
                 <img className="lottery-awards-img" src={lotteryAward1}></img>
                 <span className="lottery-awards-span">First Prize 25%</span>
+            </div>
+            <div className="lottery-awards2">
+                <img className="lottery-awards-img" src={lotteryAward2}></img>
+                <span className="lottery-awards-span">Second Prize 15%</span>
+            </div>
+            <div className="lottery-awards3">
+                <img className="lottery-awards-img" src={lotteryAward3}></img>
+                <span className="lottery-awards-span">Third Prize 10%</span>
+            </div>
+            <div className="lottery-awards4">
+                <img className="lottery-awards-img" src={lotteryAward4}></img>
+                <span className="lottery-awards-span">Fourth Prize 5%</span>
+            </div>
+            <div className="lottery-awards5">
+                <img className="lottery-awards-img" src={lotteryAward5}></img>
+                <span className="lottery-awards-span">Fifth Prize 2%</span>
+            </div>
+            <div className="lottery-awards6">
+                <img className="lottery-awards2-img" src={lotteryAward6}></img>
+                <span className="lottery-awards-span">Cumulative pool: 12%</span>
+            </div>
+            <div className="lottery-awards7">
+                <img className="lottery-awards2-img" src={lotteryAward7}></img>
+                <span className="lottery-awards-span">Support to the balance sheet: 31%</span>
             </div>
         </div>
 
