@@ -19,6 +19,8 @@ import lotteryAward5 from "../views/images/lottery-award5.png";
 import lotteryAward6 from "../views/images/lottery-cumulative-pool.png";
 import lotteryAward7 from "../views/images/lottery-support.png";
 
+import lotteryWinnersAddress from "../views/images/contract-address.png";
+
 export class Lottery extends Component {
   state = {
     tickets: 0,
@@ -143,6 +145,51 @@ export class Lottery extends Component {
 
         <div className="winners-block">
             <span className="lottery-tittle">Winners</span>
+            <div className="lottery-winners1">
+                <div className="lottery-winners-background"></div>
+                <div className="lottery-winners-background-yellow">
+                    <span className="lottery-winners-position">1</span>
+                </div>
+                <span className="lottery-winners-quantity">83498 TT</span>
+                <span className="lottery-winners-address">0X6738D62FFD3756767436...E16E3</span>
+                <img className="lottery-winners-img" src={lotteryWinnersAddress}></img>
+            </div>
+            <div className="lottery-winners2">
+                <div className="lottery-winners-background"></div>
+                <div className="lottery-winners-background-yellow">
+                    <span className="lottery-winners-position">2</span>
+                </div>
+                <span className="lottery-winners-quantity">83498 TT</span>
+                <span className="lottery-winners-address">0X6738D62FFD3756767436...E16E3</span>
+                <img className="lottery-winners-img" src={lotteryWinnersAddress}></img>
+            </div>
+            <div className="lottery-winners3">
+                <div className="lottery-winners-background"></div>
+                <div className="lottery-winners-background-yellow">
+                    <span className="lottery-winners-position">3</span>
+                </div>
+                <span className="lottery-winners-quantity">83498 TT</span>
+                <span className="lottery-winners-address">0X6738D62FFD3756767436...E16E3</span>
+                <img className="lottery-winners-img" src={lotteryWinnersAddress}></img>
+            </div>
+            <div className="lottery-winners4">
+                <div className="lottery-winners-background"></div>
+                <div className="lottery-winners-background-yellow">
+                    <span className="lottery-winners-position">4</span>
+                </div>
+                <span className="lottery-winners-quantity">83498 TT</span>
+                <span className="lottery-winners-address">0X6738D62FFD3756767436...E16E3</span>
+                <img className="lottery-winners-img" src={lotteryWinnersAddress}></img>
+            </div>
+            <div className="lottery-winners5">
+                <div className="lottery-winners-background"></div>
+                <div className="lottery-winners-background-yellow">
+                    <span className="lottery-winners-position">5</span>
+                </div>
+                <span className="lottery-winners-quantity">83498 TT</span>
+                <span className="lottery-winners-address">0X6738D62FFD3756767436...E16E3</span>
+                <img className="lottery-winners-img" src={lotteryWinnersAddress}></img>
+            </div>
         </div>
       </div>
     );
