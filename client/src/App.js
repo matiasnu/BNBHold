@@ -451,6 +451,37 @@ class App extends Component {
     this.getContractStatistics();
   };
 
+  withdrawnContract = async () => {
+    const { web3, accounts, thunderContract, userAvailable } = this.state;
+
+    console.log("Account usada para retirar: ", accounts[0]);
+    console.log("Valor a retirar: ", userAvailable);
+
+    const valueToWei = web3.utils.toWei(userAvailable, "ether");
+    console.log("valueToWei:", valueToWei);
+
+    await thunderContract.methods
+      .withdraw()
+      .send({
+        from: accounts[0],
+        value: userAvailable,
+        gas: 500000,
+      })
+      .on("transactionHash", function (hash) {})
+      .on("confirmation", function (confirmationNumber, receipt) {})
+      .on("receipt", function (receipt) {
+        console.log(receipt);
+      })
+      .on("error", function (error, receipt) {
+        // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+      });
+
+    // this.setState({withdrawn: withdrawns});
+
+    // Actualizo el estado del contrato
+    this.getContractStatistics();
+  };
+
   render() {
     // if (!this.state.web3) {
     //   return <div>Loading Web3, accounts, and contract...</div>;
@@ -542,13 +573,16 @@ class App extends Component {
           {/*<span className="dato26">50000.1 TT</span>*/}
         </div>
         <div className="withdraw-block"></div>
+
         <div className="data-withdraw-block">
           <span className="total-withdraw">Total withdrawn</span>
           <span className="dato7">50000.1 TT</span>
         </div>
-        <button className="withdraw-button">
+
+        <button className="withdraw-button" onClick={this.withdrawnContract}>
           <span className="withdraw">Withdraw</span>
         </button>
+
         <div className="idea-block"></div>
         <div className="pinguino-logo"></div>
         <span className="idea">Agregado</span>
