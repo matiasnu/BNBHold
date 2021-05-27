@@ -21,7 +21,7 @@ class App extends Component {
       invest: 0,
       isLotteryVisible: false,
       isHomeVisible: false,
-      parsedWallet: null, // wallet parseada para mostrar en la pantalla (lease truncada con puntos)
+      parsedContractAddress: null, // wallet parseada para mostrar en la pantalla (lease truncada con puntos)
       totalStaked: 0,
       contractBalance: 0,
     };
@@ -64,12 +64,15 @@ class App extends Component {
       // example of interacting with the contract's methods.
       //this.setState({ web3, accounts, contract: antiWalletContract }, this.updateState);
       // Seteo como estado un objeto state y le agrego un metodo que se ejecuta..
+
       this.setState({
         web3,
         accounts,
         thunderContract: thunderInstance,
-        parsedWallet:
-          accounts[0].substring(1, 18) + "..." + accounts[0].substring(36), // Ejemplo wallet: 0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0 (42 posiciones)
+        parsedContractAddress:
+          thunderInstance._address.substring(1, 16) +
+          "..." +
+          thunderInstance._address.substring(36),
       });
 
       // Me suscribo a los eventos de interes
@@ -261,12 +264,22 @@ class App extends Component {
     if (totalStaked) {
       totalStaked = web3.utils.fromWei(totalStaked);
       console.log("totalStaked:", totalStaked);
+      totalStaked = parseFloat(totalStaked);
+      if (typeof totalStaked == "number") {
+        totalStaked = totalStaked.toPrecision(5);
+      }
     }
+
     let contractBalance = await thunderContract.methods
       .getContractBalance()
       .call();
     if (contractBalance) {
       contractBalance = web3.utils.fromWei(contractBalance);
+      contractBalance = parseFloat(contractBalance);
+      if (typeof contractBalance == "number") {
+        contractBalance = contractBalance.toPrecision(5);
+      }
+
       console.log("contractBalance:", contractBalance);
     }
 
@@ -519,7 +532,7 @@ class App extends Component {
         <div className="address-block"></div>
         <span className="contract-address">Contract address</span>
         <div className="dato6-block">
-          <span className="dato6">{this.state.parsedWallet}</span>
+          <span className="dato6">{this.state.parsedContractAddress}</span>
           <div className="contract-address-logo"></div>
         </div>
         <div className="address1">
