@@ -35,7 +35,6 @@ export class Lottery extends Component {
   render() {
     return (
       <div className="Lottery">
-
         <div className="buy-ticket-block">
           <span className="lottery-tittle">Buy a ticket</span>
           <div className="buy-ticket-data1">
@@ -66,130 +65,163 @@ export class Lottery extends Component {
             type="button"
             onClick={this.buyTicket}
           >
-            <snap className="buy-ticket-snap">Buy</snap>
+            <span className="buy-ticket-snap">Buy</span>
           </button>
         </div>
 
         <div className="lottery-bonus-block">
-            <img className="lottery-bonus-logo" src={lotteryBonusImg}></img>
-            <span className="lottery-bonus-span">Lottery bonus</span>
-            <span className="lottery-bonus-data">xxxx</span>
+          <img className="lottery-bonus-logo" src={lotteryBonusImg}></img>
+          <span className="lottery-bonus-span">Lottery bonus</span>
+          <span className="lottery-bonus-data">xxxx</span>
         </div>
 
         <div className="total-profits-block">
-            <img className="lottery-bonus-logo" src={totalProfitsImg}></img>
-            <span className="lottery-bonus-span">Total profits</span>
-            <span className="lottery-bonus-data">xxxx</span>
+          <img className="lottery-bonus-logo" src={totalProfitsImg}></img>
+          <span className="lottery-bonus-span">Total profits</span>
+          <span className="lottery-bonus-data">xxxx</span>
         </div>
 
         <div className="participations-block">
-            <img className="lottery-bonus-logo" src={participationsImg}></img>
-            <span className="lottery-bonus-span">Participations</span>
-            <span className="lottery-bonus-data">xxxx</span>
+          <img className="lottery-bonus-logo" src={participationsImg}></img>
+          <span className="lottery-bonus-span">Participations</span>
+          <span className="lottery-bonus-data">xxxx</span>
         </div>
 
         <div className="rules-block">
-            <span className="lottery-tittle">Rules</span>
-            <div>
-                <img className="lottery-rule1-img" src={rule1Img}></img>
-                <span className="lottery-rule1-span">Ticket value:</span>
-                <span className="lottery-rule1-data">100 TT</span>
-            </div>
-            <div>
-                <img className="lottery-rule2-img" src={rule2Img}></img>
-                <span className="lottery-rule2-span">One cycle is executed when 50 tickets sold are reached</span>
-            </div>
-            <div>
-                <img className="lottery-rule3-img" src={rule3Img}></img>
-                <span className="lottery-rule3-span">Maximun purchase per cycle</span>
-                <span className="lottery-rule3-data">100 Tickets</span>
-            </div>
-            <div>
-                <img className="lottery-rule4-img" src={rule4Img}></img>
-                <span className="lottery-rule4-span">Bonus lottery:</span>
-                <span className="lottery-rule4-data">+ 0.005% is credited to all plans for each ticket purchased</span>
-            </div>
+          <span className="lottery-tittle">Rules</span>
+          <div>
+            <img className="lottery-rule1-img" src={rule1Img}></img>
+            <span className="lottery-rule1-span">Ticket value:</span>
+            <span className="lottery-rule1-data">100 TT</span>
+          </div>
+          <div>
+            <img className="lottery-rule2-img" src={rule2Img}></img>
+            <span className="lottery-rule2-span">
+              One cycle is executed when 50 tickets sold are reached
+            </span>
+          </div>
+          <div>
+            <img className="lottery-rule3-img" src={rule3Img}></img>
+            <span className="lottery-rule3-span">
+              Maximun purchase per cycle
+            </span>
+            <span className="lottery-rule3-data">100 Tickets</span>
+          </div>
+          <div>
+            <img className="lottery-rule4-img" src={rule4Img}></img>
+            <span className="lottery-rule4-span">Bonus lottery:</span>
+            <span className="lottery-rule4-data">
+              + 0.005% is credited to all plans for each ticket purchased
+            </span>
+          </div>
         </div>
 
         <div className="awards-block">
-            <span className="lottery-tittle">Awards</span>
-            <div className="lottery-awards1">
-                <img className="lottery-awards-img" src={lotteryAward1}></img>
-                <span className="lottery-awards-span">First Prize 25%</span>
-            </div>
-            <div className="lottery-awards2">
-                <img className="lottery-awards-img" src={lotteryAward2}></img>
-                <span className="lottery-awards-span">Second Prize 15%</span>
-            </div>
-            <div className="lottery-awards3">
-                <img className="lottery-awards-img" src={lotteryAward3}></img>
-                <span className="lottery-awards-span">Third Prize 10%</span>
-            </div>
-            <div className="lottery-awards4">
-                <img className="lottery-awards-img" src={lotteryAward4}></img>
-                <span className="lottery-awards-span">Fourth Prize 5%</span>
-            </div>
-            <div className="lottery-awards5">
-                <img className="lottery-awards-img" src={lotteryAward5}></img>
-                <span className="lottery-awards-span">Fifth Prize 2%</span>
-            </div>
-            <div className="lottery-awards6">
-                <img className="lottery-awards2-img" src={lotteryAward6}></img>
-                <span className="lottery-awards-span">Cumulative pool: 12%</span>
-            </div>
-            <div className="lottery-awards7">
-                <img className="lottery-awards2-img" src={lotteryAward7}></img>
-                <span className="lottery-awards-span">Support to the balance sheet: 31%</span>
-            </div>
+          <span className="lottery-tittle">Awards</span>
+          <div className="lottery-awards1">
+            <img className="lottery-awards-img" src={lotteryAward1}></img>
+            <span className="lottery-awards-span">First Prize 25%</span>
+          </div>
+          <div className="lottery-awards2">
+            <img className="lottery-awards-img" src={lotteryAward2}></img>
+            <span className="lottery-awards-span">Second Prize 15%</span>
+          </div>
+          <div className="lottery-awards3">
+            <img className="lottery-awards-img" src={lotteryAward3}></img>
+            <span className="lottery-awards-span">Third Prize 10%</span>
+          </div>
+          <div className="lottery-awards4">
+            <img className="lottery-awards-img" src={lotteryAward4}></img>
+            <span className="lottery-awards-span">Fourth Prize 5%</span>
+          </div>
+          <div className="lottery-awards5">
+            <img className="lottery-awards-img" src={lotteryAward5}></img>
+            <span className="lottery-awards-span">Fifth Prize 2%</span>
+          </div>
+          <div className="lottery-awards6">
+            <img className="lottery-awards2-img" src={lotteryAward6}></img>
+            <span className="lottery-awards-span">Cumulative pool: 12%</span>
+          </div>
+          <div className="lottery-awards7">
+            <img className="lottery-awards2-img" src={lotteryAward7}></img>
+            <span className="lottery-awards-span">
+              Support to the balance sheet: 31%
+            </span>
+          </div>
         </div>
 
         <div className="winners-block">
-            <span className="lottery-tittle">Winners</span>
-            <div className="lottery-winners1">
-                <div className="lottery-winners-background"></div>
-                <div className="lottery-winners-background-yellow">
-                    <span className="lottery-winners-position">1</span>
-                </div>
-                <span className="lottery-winners-quantity">83498 TT</span>
-                <span className="lottery-winners-address">0X6738D62FFD3756767436...E16E3</span>
-                <img className="lottery-winners-img" src={lotteryWinnersAddress}></img>
+          <span className="lottery-tittle">Winners</span>
+          <div className="lottery-winners1">
+            <div className="lottery-winners-background"></div>
+            <div className="lottery-winners-background-yellow">
+              <span className="lottery-winners-position">1</span>
             </div>
-            <div className="lottery-winners2">
-                <div className="lottery-winners-background"></div>
-                <div className="lottery-winners-background-yellow">
-                    <span className="lottery-winners-position">2</span>
-                </div>
-                <span className="lottery-winners-quantity">83498 TT</span>
-                <span className="lottery-winners-address">0X6738D62FFD3756767436...E16E3</span>
-                <img className="lottery-winners-img" src={lotteryWinnersAddress}></img>
+            <span className="lottery-winners-quantity">83498 TT</span>
+            <span className="lottery-winners-address">
+              0X6738D62FFD3756767436...E16E3
+            </span>
+            <img
+              className="lottery-winners-img"
+              src={lotteryWinnersAddress}
+            ></img>
+          </div>
+          <div className="lottery-winners2">
+            <div className="lottery-winners-background"></div>
+            <div className="lottery-winners-background-yellow">
+              <span className="lottery-winners-position">2</span>
             </div>
-            <div className="lottery-winners3">
-                <div className="lottery-winners-background"></div>
-                <div className="lottery-winners-background-yellow">
-                    <span className="lottery-winners-position">3</span>
-                </div>
-                <span className="lottery-winners-quantity">83498 TT</span>
-                <span className="lottery-winners-address">0X6738D62FFD3756767436...E16E3</span>
-                <img className="lottery-winners-img" src={lotteryWinnersAddress}></img>
+            <span className="lottery-winners-quantity">83498 TT</span>
+            <span className="lottery-winners-address">
+              0X6738D62FFD3756767436...E16E3
+            </span>
+            <img
+              className="lottery-winners-img"
+              src={lotteryWinnersAddress}
+            ></img>
+          </div>
+          <div className="lottery-winners3">
+            <div className="lottery-winners-background"></div>
+            <div className="lottery-winners-background-yellow">
+              <span className="lottery-winners-position">3</span>
             </div>
-            <div className="lottery-winners4">
-                <div className="lottery-winners-background"></div>
-                <div className="lottery-winners-background-yellow">
-                    <span className="lottery-winners-position">4</span>
-                </div>
-                <span className="lottery-winners-quantity">83498 TT</span>
-                <span className="lottery-winners-address">0X6738D62FFD3756767436...E16E3</span>
-                <img className="lottery-winners-img" src={lotteryWinnersAddress}></img>
+            <span className="lottery-winners-quantity">83498 TT</span>
+            <span className="lottery-winners-address">
+              0X6738D62FFD3756767436...E16E3
+            </span>
+            <img
+              className="lottery-winners-img"
+              src={lotteryWinnersAddress}
+            ></img>
+          </div>
+          <div className="lottery-winners4">
+            <div className="lottery-winners-background"></div>
+            <div className="lottery-winners-background-yellow">
+              <span className="lottery-winners-position">4</span>
             </div>
-            <div className="lottery-winners5">
-                <div className="lottery-winners-background"></div>
-                <div className="lottery-winners-background-yellow">
-                    <span className="lottery-winners-position">5</span>
-                </div>
-                <span className="lottery-winners-quantity">83498 TT</span>
-                <span className="lottery-winners-address">0X6738D62FFD3756767436...E16E3</span>
-                <img className="lottery-winners-img" src={lotteryWinnersAddress}></img>
+            <span className="lottery-winners-quantity">83498 TT</span>
+            <span className="lottery-winners-address">
+              0X6738D62FFD3756767436...E16E3
+            </span>
+            <img
+              className="lottery-winners-img"
+              src={lotteryWinnersAddress}
+            ></img>
+          </div>
+          <div className="lottery-winners5">
+            <div className="lottery-winners-background"></div>
+            <div className="lottery-winners-background-yellow">
+              <span className="lottery-winners-position">5</span>
             </div>
+            <span className="lottery-winners-quantity">83498 TT</span>
+            <span className="lottery-winners-address">
+              0X6738D62FFD3756767436...E16E3
+            </span>
+            <img
+              className="lottery-winners-img"
+              src={lotteryWinnersAddress}
+            ></img>
+          </div>
         </div>
       </div>
     );
