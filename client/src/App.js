@@ -537,15 +537,15 @@ class App extends Component {
         <span className="plan">Plan 1</span>
         <div className="plan1">
           <span className="daily-profit">Daily profit</span>
-          <span className="profit-number">35.3%</span>
+          <span className="profit-number">20%</span>
         </div>
         <div className="plan2">
           <span className="total-return">Total return</span>
-          <span className="dato2">706%</span>
+          <span className="dato2">140%</span>
         </div>
         <div className="plan3">
           <span className="days">Days</span>
-          <span className="dato3">20</span>
+          <span className="dato3">7</span>
         </div>
         <div className="plan4">
           <span className="withdraw-time">Withdraw time</span>
@@ -564,7 +564,7 @@ class App extends Component {
         <span className="max-tt">
           Maximum {this.state.INVEST_MAX_AMOUNT} TT
         </span>
-        <span className="dato5">In 20 days you will get</span>
+        <span className="dato5">In 7 days you will get</span>
         <span className="dato4">{this.state.userAvailable} TT</span>
         <button className="stake" type="button" onClick={this.investContract}>
           <span className="stake-snap">Stake TT</span>
