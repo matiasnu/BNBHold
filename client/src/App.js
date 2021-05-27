@@ -243,12 +243,14 @@ class App extends Component {
     /*
      GET CONTRACT CONSTANTS AND SETTINGS
     */
-    const INVEST_MIN_AMOUNT = await thunderContract.methods
+    let INVEST_MIN_AMOUNT = await thunderContract.methods
       .INVEST_MIN_AMOUNT()
       .call();
-    const INVEST_MAX_AMOUNT = await thunderContract.methods
+    INVEST_MIN_AMOUNT = web3.utils.fromWei(INVEST_MIN_AMOUNT);
+    let INVEST_MAX_AMOUNT = await thunderContract.methods
       .INVEST_MAX_AMOUNT()
       .call();
+    INVEST_MAX_AMOUNT = web3.utils.fromWei(INVEST_MAX_AMOUNT);
 
     const startUNIX = await thunderContract.methods.startUNIX().call();
 
@@ -324,6 +326,7 @@ class App extends Component {
           ":" +
           finishDate.getSeconds();
       }
+
       if (userDepositsInfo[indice].percent) {
         var percentFormated = (
           Math.round(userDepositsInfo[indice].percent) / 100
@@ -345,7 +348,7 @@ class App extends Component {
       console.log("getUserCheckpoint:", userCheckpoint);
     }
 
-    // Obtengo getUserReferrer
+    // Obtengo getUserReferrer, que es la wallet de quien refiere
     let userReferrer = await thunderContract.methods
       .getUserReferrer(accounts[0])
       .call();
@@ -404,7 +407,7 @@ class App extends Component {
       .getUserAvailable(accounts[0])
       .call();
     if (userAvailable) {
-      // getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
+      userAvailable = web3.utils.fromWei(userAvailable);
       console.log("getUserAvailable:", userAvailable);
     }
     // Update state with the result.
@@ -467,7 +470,7 @@ class App extends Component {
       .withdraw()
       .send({
         from: accounts[0],
-        value: userAvailable,
+        value: valueToWei,
         gas: 500000,
       })
       .on("transactionHash", function (hash) {})
@@ -555,10 +558,14 @@ class App extends Component {
           value={this.state.invest}
           onChange={this.onChange}
         />
-        <span className="min-tt">Minimum 500 TT</span>
-        <span className="max-tt">Maximum 100000 TT</span>
+        <span className="min-tt">
+          Minimum {this.state.INVEST_MIN_AMOUNT} TT
+        </span>
+        <span className="max-tt">
+          Maximum {this.state.INVEST_MAX_AMOUNT} TT
+        </span>
         <span className="dato5">In 20 days you will get</span>
-        <span className="dato4">0,43893494</span>
+        <span className="dato4">{this.state.userAvailable} TT</span>
         <button className="stake" type="button" onClick={this.investContract}>
           <span className="stake-snap">Stake TT</span>
         </button>
