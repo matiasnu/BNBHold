@@ -5,7 +5,7 @@ import Portis from "@portis/web3";
 // Add new providers, https://www.npmjs.com/package/web3modal-provider-export
 // Or see https://github.com/Web3Modal/web3modal/tree/master/docs/providers
 
-//const WalletConnectProvider = window.WalletConnectProvider.default;
+const WalletConnectProvider = window.WalletConnectProvider.default;
 const providerOptions = {
   // injected: {
   //   display:{
@@ -17,13 +17,13 @@ const providerOptions = {
   //     return provider;
   //   }
   // },
-  // walletconnect: {
-  //   package: WalletConnectProvider,
-  //   options: {
-  //     // Mikko's test key - don't copy as your mileage may vary
-  //     infuraId: "8043bb2cf99347b1bfadfb233c5325c0",
-  //   },
-  // },
+  walletconnect: {
+    package: WalletConnectProvider,
+    options: {
+      // Mikko's test key - don't copy as your mileage may vary
+      infuraId: "8043bb2cf99347b1bfadfb233c5325c0",
+    },
+  },
 
   /*portis: {
     package: Portis, // required

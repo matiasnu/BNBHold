@@ -589,18 +589,19 @@ class App extends Component {
         <div className="idea-block"></div>
         <div className="pinguino-logo"></div>
         <span className="idea">Agregado</span>
-        <div className="stakes-block"></div>
+        <div className="stakes-block">
         <span className="my-stakes">My stakes</span>
 
         {this.state.userDepositsInfo
           ? this.state.userDepositsInfo.map((data, index) => {
               return (
                 <div key={index}>
-                  <div className={"stake" + (index + 1).toString()}>
+                  {/* <div className={"stake" + (index + 1).toString()}> */}
+                  <div className={"stake-gral"} style={{top: (130*(index+1)).toString() + "px"}}>
                     {my_stake_check}
                     <div className="stake-check-in-progress"></div>
                     <div className="stake-check-logo-in-progress"></div>
-                    <span className="dato8">{data.amount} TT</span>
+                    <span className="total-amount-stake">{data.amount} TT</span>
                     <span className="total-profit-stake">
                       <div className="my-stakes-profit"></div>
                       {data.percent} %
@@ -614,6 +615,7 @@ class App extends Component {
               );
             })
           : null}
+          </div>
       </React.Fragment>
     );
     return (
