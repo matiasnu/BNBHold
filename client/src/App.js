@@ -21,7 +21,7 @@ class App extends Component {
       invest: 0,
       isLotteryVisible: false,
       isHomeVisible: false,
-      parsedWallet: null, // wallet parseada para mostrar en la pantalla (lease truncada con puntos)
+      parsedContractAddress: null, // wallet parseada para mostrar en la pantalla (lease truncada con puntos)
       totalStaked: 0,
       contractBalance: 0,
     };
@@ -64,12 +64,15 @@ class App extends Component {
       // example of interacting with the contract's methods.
       //this.setState({ web3, accounts, contract: antiWalletContract }, this.updateState);
       // Seteo como estado un objeto state y le agrego un metodo que se ejecuta..
+
       this.setState({
         web3,
         accounts,
         thunderContract: thunderInstance,
-        parsedWallet:
-          accounts[0].substring(1, 18) + "..." + accounts[0].substring(36), // Ejemplo wallet: 0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0 (42 posiciones)
+        parsedContractAddress:
+          thunderInstance._address.substring(1, 16) +
+          "..." +
+          thunderInstance._address.substring(36),
       });
 
       // Me suscribo a los eventos de interes
@@ -243,12 +246,14 @@ class App extends Component {
     /*
      GET CONTRACT CONSTANTS AND SETTINGS
     */
-    const INVEST_MIN_AMOUNT = await thunderContract.methods
+    let INVEST_MIN_AMOUNT = await thunderContract.methods
       .INVEST_MIN_AMOUNT()
       .call();
-    const INVEST_MAX_AMOUNT = await thunderContract.methods
+    INVEST_MIN_AMOUNT = web3.utils.fromWei(INVEST_MIN_AMOUNT);
+    let INVEST_MAX_AMOUNT = await thunderContract.methods
       .INVEST_MAX_AMOUNT()
       .call();
+    INVEST_MAX_AMOUNT = web3.utils.fromWei(INVEST_MAX_AMOUNT);
 
     const startUNIX = await thunderContract.methods.startUNIX().call();
 
@@ -259,12 +264,22 @@ class App extends Component {
     if (totalStaked) {
       totalStaked = web3.utils.fromWei(totalStaked);
       console.log("totalStaked:", totalStaked);
+      totalStaked = parseFloat(totalStaked);
+      if (typeof totalStaked == "number") {
+        totalStaked = totalStaked.toPrecision(5);
+      }
     }
+
     let contractBalance = await thunderContract.methods
       .getContractBalance()
       .call();
     if (contractBalance) {
       contractBalance = web3.utils.fromWei(contractBalance);
+      contractBalance = parseFloat(contractBalance);
+      if (typeof contractBalance == "number") {
+        contractBalance = contractBalance.toPrecision(5);
+      }
+
       console.log("contractBalance:", contractBalance);
     }
 
@@ -324,6 +339,7 @@ class App extends Component {
           ":" +
           finishDate.getSeconds();
       }
+
       if (userDepositsInfo[indice].percent) {
         var percentFormated = (
           Math.round(userDepositsInfo[indice].percent) / 100
@@ -345,7 +361,7 @@ class App extends Component {
       console.log("getUserCheckpoint:", userCheckpoint);
     }
 
-    // Obtengo getUserReferrer
+    // Obtengo getUserReferrer, que es la wallet de quien refiere
     let userReferrer = await thunderContract.methods
       .getUserReferrer(accounts[0])
       .call();
@@ -404,7 +420,7 @@ class App extends Component {
       .getUserAvailable(accounts[0])
       .call();
     if (userAvailable) {
-      // getUserTotalDeposits = web3.utils.fromWei(getUserTotalDeposits);
+      userAvailable = web3.utils.fromWei(userAvailable);
       console.log("getUserAvailable:", userAvailable);
     }
     // Update state with the result.
@@ -467,7 +483,7 @@ class App extends Component {
       .withdraw()
       .send({
         from: accounts[0],
-        value: userAvailable,
+        value: valueToWei,
         gas: 500000,
       })
       .on("transactionHash", function (hash) {})
@@ -516,7 +532,7 @@ class App extends Component {
         <div className="address-block"></div>
         <span className="contract-address">Contract address</span>
         <div className="dato6-block">
-          <span className="dato6">{this.state.parsedWallet}</span>
+          <span className="dato6">{this.state.parsedContractAddress}</span>
           <div className="contract-address-logo"></div>
         </div>
         <div className="address1">
@@ -534,15 +550,15 @@ class App extends Component {
         <span className="plan">Plan 1</span>
         <div className="plan1">
           <span className="daily-profit">Daily profit</span>
-          <span className="profit-number">35.3%</span>
+          <span className="profit-number">20%</span>
         </div>
         <div className="plan2">
           <span className="total-return">Total return</span>
-          <span className="dato2">706%</span>
+          <span className="dato2">140%</span>
         </div>
         <div className="plan3">
           <span className="days">Days</span>
-          <span className="dato3">20</span>
+          <span className="dato3">7</span>
         </div>
         <div className="plan4">
           <span className="withdraw-time">Withdraw time</span>
@@ -555,10 +571,14 @@ class App extends Component {
           value={this.state.invest}
           onChange={this.onChange}
         />
-        <span className="min-tt">Minimum 500 TT</span>
-        <span className="max-tt">Maximum 100000 TT</span>
-        <span className="dato5">In 20 days you will get</span>
-        <span className="dato4">0,43893494</span>
+        <span className="min-tt">
+          Minimum {this.state.INVEST_MIN_AMOUNT} TT
+        </span>
+        <span className="max-tt">
+          Maximum {this.state.INVEST_MAX_AMOUNT} TT
+        </span>
+        <span className="dato5">In 7 days you will get</span>
+        <span className="dato4">{this.state.userAvailable} TT</span>
         <button className="stake" type="button" onClick={this.investContract}>
           <span className="stake-snap">Stake TT</span>
         </button>
