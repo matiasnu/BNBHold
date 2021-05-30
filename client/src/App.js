@@ -578,7 +578,7 @@ class App extends Component {
           Maximum {this.state.INVEST_MAX_AMOUNT} TT
         </span>
         <span className="dato5">In 7 days you will get</span>
-        <span className="dato4">{this.state.userAvailable} TT</span>
+        <span className="dato4">{Number(this.state.userAvailable).toFixed(5)} TT</span>
         <button className="stake" type="button" onClick={this.investContract}>
           <span className="stake-snap">Stake TT</span>
         </button>

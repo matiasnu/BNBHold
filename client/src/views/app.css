@@ -984,16 +984,6 @@
   border-radius: 30px;
 }
 
-.stake1 {
-  position: absolute;
-  width: 405px;
-  height: 100px;
-  left: 35px;
-  top: 126px;
-  background: #7c7c7c;
-  border-radius: 30px;
-}
-
 .total-amount-stake {
   width: 137px;
   position: absolute;
@@ -1046,56 +1036,6 @@
   height: 35px;
   left: -35px;
   top: 3px;
-  border-radius: 30px;
-}
-
-.stake2 {
-  position: absolute;
-  width: 405px;
-  height: 100px;
-  left: 35px;
-  top: 256px;
-  background: #7c7c7c;
-  border-radius: 30px;
-}
-
-.stake3 {
-  position: absolute;
-  width: 405px;
-  height: 100px;
-  left: 35px;
-  top: 386px;
-  background: #7c7c7c;
-  border-radius: 30px;
-}
-
-.stake4 {
-  position: absolute;
-  width: 405px;
-  height: 100px;
-  left: 35px;
-  top: 516px;
-  background: #7c7c7c;
-  border-radius: 30px;
-}
-
-.stake5 {
-  position: absolute;
-  width: 405px;
-  height: 100px;
-  left: 35px;
-  top: 646px;
-  background: #7c7c7c;
-  border-radius: 30px;
-}
-
-.stake6 {
-  position: absolute;
-  width: 405px;
-  height: 100px;
-  left: 35px;
-  top: 776px;
-  background: #7c7c7c;
   border-radius: 30px;
 }
 
