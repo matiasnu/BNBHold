@@ -24,12 +24,62 @@ import lotteryWinnersAddress from "../views/images/contract-address.png";
 export class Lottery extends Component {
   state = {
     tickets: 0,
+    web3: this.props.web3,
+    thunderContract: this.props.thunderContract,
+    accounts: this.props.accounts,
   };
 
-  buyTicket = async () => {
-    const { tickets } = this.state;
+  componentDidMount = async () => {
+    try {
+      this.onChange = this.onChange.bind(this);
+      this.getLotteryStatistics();
+    } catch (error) {
+      alert(
+        `Failed to load web3, accounts, or contract. Check console for details.`
+      );
+      console.error(error);
+    }
+  }
 
+  buyTicket = async () => {
+    const { web3, thunderContract, accounts, tickets } = this.state;
+
+    console.log("Account usada para comprar tickets: ", accounts[0]);
     console.log("Tickets comprados ", tickets);
+
+    const valueToWei = web3.utils.toWei(tickets, "ether");
+    console.log("valueToWei:", valueToWei);
+
+    await thunderContract.methods
+      .lottoDeposit(tickets)
+      .send({
+        from: accounts[0],
+        value: valueToWei,
+        gas: 500000,
+      });
+
+    // Actualizo state de la lotery
+    this.getLotteryStatistics();
+  };
+
+  getLotteryStatistics = async () => {
+    const { accounts, thunderContract, web3 } = this.state;
+
+    let userLottoStats = await thunderContract.methods
+      .getUserlottoStats(accounts[0])
+      .call();
+    let userLottoBonus = userLottoStats[0];
+    let userLottoParticipations = userLottoStats[1];
+    let userLottoLimit = userLottoStats[2];
+    if (userLottoStats) {
+        console.log("getUserlottoStats:", userLottoStats);
+    }
+
+    this.setState({
+      userLottoBonus: userLottoBonus,
+      userLottoParticipations: userLottoParticipations,
+      userLottoLimit: userLottoLimit,
+    });
   };
 
   render() {
@@ -53,7 +103,7 @@ export class Lottery extends Component {
             <span className="estadistic">Remaining tickets</span>
             <span className="estadistic-data">10</span>
           </div>
-          <span className="buy-ticket-amount">Enter amount</span>
+          <span className="buy-ticket-amount">Tickets to buy</span>
           <input
             className="input-value-buy"
             type="number"
@@ -72,7 +122,7 @@ export class Lottery extends Component {
         <div className="lottery-bonus-block">
           <img className="lottery-bonus-logo" src={lotteryBonusImg}></img>
           <span className="lottery-bonus-span">Lottery bonus</span>
-          <span className="lottery-bonus-data">xxxx</span>
+          <span className="lottery-bonus-data">{this.state.userLottoBonus}</span>
         </div>
 
         <div className="total-profits-block">
@@ -84,7 +134,7 @@ export class Lottery extends Component {
         <div className="participations-block">
           <img className="lottery-bonus-logo" src={participationsImg}></img>
           <span className="lottery-bonus-span">Participations</span>
-          <span className="lottery-bonus-data">xxxx</span>
+          <span className="lottery-bonus-data">{this.state.userLottoParticipations}</span>
         </div>
 
         <div className="rules-block">

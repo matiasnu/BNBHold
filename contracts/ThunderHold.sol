@@ -275,17 +275,17 @@ contract ThunderHold {
     }
 
     function lottoDeposit(uint256 ticketsQuantity) external payable {
-        require(!isContract(msg.sender) && msg.sender == tx.origin);
+        //require(!isContract(msg.sender) && msg.sender == tx.origin);
         User storage user = users[msg.sender];
-        require(user.deposits.length > 0, "Deposit is require first");
-        require(ticketsQuantity >= 1, "Minimum number of tickets is 1");
-        require(
+        //require(user.deposits.length > 0, "Deposit is require first");
+        //require(ticketsQuantity >= 1, "Minimum number of tickets is 1");
+        /*require(
             LOTTO_TICKET_LIMIT >=
                 ticketsQuantity.add(lottoCurrentTicketsCount) &&
                 LOTTO_USER_LIMIT >= ticketsQuantity.add(user.lottolimit),
             "Maximum number of tickets exceed"
-        );
-        require(msg.value >= ticketsQuantity.mul(LOTTOTICKET), "Wrong Amount");
+        );*/
+        //require(msg.value >= ticketsQuantity.mul(LOTTOTICKET), "Wrong Amount");
         nLotto storage nlotto = nlottos[lottoCycles];
 
         lottoTotalTicketsCount = lottoTotalTicketsCount.add(ticketsQuantity);

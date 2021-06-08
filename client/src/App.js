@@ -501,6 +501,14 @@ class App extends Component {
     this.getContractStatistics();
   };
 
+  timeContract = async () => {
+    const { web3, accounts, thunderContract, userAvailable } = this.state;
+
+    let advancement = 86400 * 1; // 1 Days
+    this.advanceTimeAndBlock(advancement);
+  };
+
+
   render() {
     // if (!this.state.web3) {
     //   return <div>Loading Web3, accounts, and contract...</div>;
@@ -582,6 +590,9 @@ class App extends Component {
         <button className="stake" type="button" onClick={this.investContract}>
           <span className="stake-snap">Stake TT</span>
         </button>
+        {/* <button type="button" onClick={this.timeContract}>
+          <span className="stake-snap">TEst TT</span>
+        </button> */}
         <div className="data-block"></div>
         <div className="data1"></div>
         <div className="data2"></div>
@@ -688,7 +699,7 @@ class App extends Component {
         </div>
         <span className="input-group-btn"></span>
 
-        {this.state.isLotteryVisible ? <Lottery></Lottery> : dashboardVisible}
+        {this.state.isLotteryVisible ? <Lottery web3={this.state.web3} thunderContract={this.state.thunderContract} accounts={this.state.accounts} /> : dashboardVisible}
         {this.state.isHomeVisible ? dashboardVisible : null}
       </div>
     );
@@ -702,6 +713,58 @@ class App extends Component {
   onChange(event) {
     this.setState({ invest: event.target.value });
   }
+
+  /* Avanza time and block number */
+  advanceTimeAndBlock = async (time) => {
+    const { web3 } = this.state;
+    await this.advanceTime(time);
+    await this.advanceBlock();
+    return Promise.resolve(web3.eth.getBlock("latest"));
+  };
+  /* Test function used to advance time and thus simulate the pasing of time required to test contract funtionality
+    https://medium.com/fluidity/standing-the-time-of-test-b906fcc374a9
+  */
+  advanceTime = (time) => {
+    const { web3 } = this.state;
+    return new Promise((resolve, reject) => {
+      web3.currentProvider.send(
+        {
+          jsonrpc: "2.0",
+          method: "evm_increaseTime",
+          params: [time],
+          id: new Date().getTime(),
+        },
+        (err, result) => {
+          if (err) {
+            return reject(err);
+          }
+          return resolve(result);
+        }
+      );
+    });
+  };
+  /* Test function used to advance blocknumber
+    https://medium.com/fluidity/standing-the-time-of-test-b906fcc374a9
+  */
+  advanceBlock = () => {
+    const { web3 } = this.state;
+    return new Promise((resolve, reject) => {
+      web3.currentProvider.send(
+        {
+          jsonrpc: "2.0",
+          method: "evm_mine",
+          id: new Date().getTime(),
+        },
+        (err, result) => {
+          if (err) {
+            return reject(err);
+          }
+          const newBlockHash = web3.eth.getBlock("latest").hash;
+          return resolve(newBlockHash);
+        }
+      );
+    });
+  };
 }
 
 export default App;

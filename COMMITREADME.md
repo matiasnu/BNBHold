@@ -15,3 +15,4 @@
 - Actualixo el state (yourTotalStake) de algunos valores luego de invertir para que se reflejen los nuevos valores
 - Se inserta diseño en la Lottery
 - Se hace scrolleable los stakes
+- Se pasa el state a la lottery y se interactua con el buy ticket
