@@ -20,6 +20,7 @@ import lotteryAward6 from "../views/images/lottery-cumulative-pool.png";
 import lotteryAward7 from "../views/images/lottery-support.png";
 
 import lotteryWinnersAddress from "../views/images/contract-address.png";
+import swal from 'sweetalert'
 
 export class Lottery extends Component {
   state = {
@@ -44,22 +45,32 @@ export class Lottery extends Component {
   buyTicket = async () => {
     const { web3, thunderContract, accounts, tickets } = this.state;
 
-    console.log("Account usada para comprar tickets: ", accounts[0]);
-    console.log("Tickets comprados ", tickets);
+    try{
+      console.log("Account usada para comprar tickets: ", accounts[0]);
+      console.log("Tickets comprados ", tickets);
 
-    const valueToWei = web3.utils.toWei(tickets, "ether");
-    console.log("valueToWei:", valueToWei);
+      if(tickets <= 0){
+        const e = "The number of tickets must be positive and greater than zero";
+        throw e;
+        //window.location.reload(false);
+      }
 
-    await thunderContract.methods
-      .lottoDeposit(tickets)
-      .send({
-        from: accounts[0],
-        value: valueToWei,
-        gas: 500000,
-      });
+      const valueToWei = web3.utils.toWei(tickets, "ether");
+      console.log("valueToWei:", valueToWei);
 
-    // Actualizo state de la lotery
-    this.getLotteryStatistics();
+      await thunderContract.methods
+        .lottoDeposit(tickets)
+        .send({
+          from: accounts[0],
+          value: valueToWei,
+          gas: 500000,
+        });
+
+      // Actualizo state de la lotery
+      this.getLotteryStatistics();
+    } catch (error) {
+      swal("Oops!",error,"error");
+    }
   };
 
   getLotteryStatistics = async () => {
@@ -75,12 +86,36 @@ export class Lottery extends Component {
         console.log("getUserlottoStats:", userLottoStats);
     }
 
+    let getLotttoStats = await thunderContract.methods
+      .getlottoStats()
+      .call();
+    if (getLotttoStats) {
+       console.log("getLotttoStats:", getLotttoStats);
+    }
+
     this.setState({
       userLottoBonus: userLottoBonus,
       userLottoParticipations: userLottoParticipations,
       userLottoLimit: userLottoLimit,
+      lottoLastWin1a: this.parsedAddress(getLotttoStats[0]),
+      lottoLastWin2a: this.parsedAddress(getLotttoStats[1]),
+      lottoLastWin3a: this.parsedAddress(getLotttoStats[2]),
+      lottoLastWin4a: this.parsedAddress(getLotttoStats[3]),
+      lottoLastWin5a: this.parsedAddress(getLotttoStats[4]),
+      lottoCycles: getLotttoStats[5],
+      lottoCurrentTicketsCount: getLotttoStats[6],
+      lottoTotalTicketsCount: getLotttoStats[7],
+      LOTTO_TICKET_LIMIT: getLotttoStats[8],
+      LOTTOTICKET: getLotttoStats[9],
+      lottoCurrentPot: getLotttoStats[10],
+      lottoBag: getLotttoStats[11],
+      remainingTickets: getLotttoStats[8] - getLotttoStats[6] 
     });
   };
+
+  parsedAddress = (address) =>{
+    return (address.substring(-1, 20) + "..." + address.substring(34));
+  }
 
   render() {
     return (
@@ -89,7 +124,7 @@ export class Lottery extends Component {
           <span className="lottery-tittle">Buy a ticket</span>
           <div className="buy-ticket-data1">
             <span className="estadistic">Lotto cycles</span>
-            <span className="estadistic-data">100</span>
+            <span className="estadistic-data">{this.state.lottoCycles}</span>
           </div>
           <div className="buy-ticket-data2">
             <span className="estadistic">Accumulated pool</span>
@@ -101,7 +136,7 @@ export class Lottery extends Component {
           </div>
           <div className="buy-ticket-data4">
             <span className="estadistic">Remaining tickets</span>
-            <span className="estadistic-data">10</span>
+            <span className="estadistic-data">{this.state.remainingTickets}</span>
           </div>
           <span className="buy-ticket-amount">Tickets to buy</span>
           <input
@@ -209,7 +244,7 @@ export class Lottery extends Component {
             </div>
             <span className="lottery-winners-quantity">83498 TT</span>
             <span className="lottery-winners-address">
-              0X6738D62FFD3756767436...E16E3
+              {this.state.lottoLastWin1a}
             </span>
             <img
               className="lottery-winners-img"
@@ -223,7 +258,7 @@ export class Lottery extends Component {
             </div>
             <span className="lottery-winners-quantity">83498 TT</span>
             <span className="lottery-winners-address">
-              0X6738D62FFD3756767436...E16E3
+              {this.state.lottoLastWin2a}
             </span>
             <img
               className="lottery-winners-img"
@@ -237,7 +272,7 @@ export class Lottery extends Component {
             </div>
             <span className="lottery-winners-quantity">83498 TT</span>
             <span className="lottery-winners-address">
-              0X6738D62FFD3756767436...E16E3
+              {this.state.lottoLastWin3a}
             </span>
             <img
               className="lottery-winners-img"
@@ -251,7 +286,7 @@ export class Lottery extends Component {
             </div>
             <span className="lottery-winners-quantity">83498 TT</span>
             <span className="lottery-winners-address">
-              0X6738D62FFD3756767436...E16E3
+              {this.state.lottoLastWin4a}
             </span>
             <img
               className="lottery-winners-img"
@@ -265,7 +300,7 @@ export class Lottery extends Component {
             </div>
             <span className="lottery-winners-quantity">83498 TT</span>
             <span className="lottery-winners-address">
-              0X6738D62FFD3756767436...E16E3
+              {this.state.lottoLastWin5a}
             </span>
             <img
               className="lottery-winners-img"
