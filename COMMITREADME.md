@@ -16,3 +16,4 @@
 - Se inserta diseño en la Lottery
 - Se hace scrolleable los stakes
 - Se pasa el state a la lottery y se interactua con el buy ticket
+- Se agrega bot de soporte a la pagina

@@ -132,7 +132,7 @@ export class Lottery extends Component {
           </div>
           <div className="buy-ticket-data3">
             <span className="estadistic">Current accumulated</span>
-            <span className="estadistic-data">38989 TT</span>
+            <span className="estadistic-data">{this.state.lottoCurrentPot}</span>
           </div>
           <div className="buy-ticket-data4">
             <span className="estadistic">Remaining tickets</span>
