@@ -21,13 +21,11 @@ jobs:
         node-version: [v16.0.0]
     name: Ejecutando sobre Node ${{ matrix.java }}
 
-    name: Ejecutando JavaScript app
-
     steps:
     - name: Checkout repo code
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version}}
-    - uses: actions/setup-node@v2
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version}}
     - name: Install packages
