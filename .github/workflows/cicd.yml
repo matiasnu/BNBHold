@@ -29,9 +29,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version}}
     - name: Install packages
-      run: npm install --save-dev
+      run: npm install -g --save-dev --loglevel verbose
+
     - name: Build page
-      run: npm run build
+      run: npm run build --loglevel verbose
 
     - name: Deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3
