@@ -15,7 +15,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: BNBHold/BNBHold/client
+        working-directory: ./BNBHold/BNBHold/client
 
     #runs-on: self-hosted-runner
     runs-on: [self-hosted, linux]
