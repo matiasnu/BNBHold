@@ -8,7 +8,7 @@ on:
     branches: [ v0.1 ]
   pull_request:
     branches: [ v0.1 ]
-  workflow-dispatch: # Allow manual execution  
+#  workflow-dispatch: # Allow manual execution  
 
 jobs:
 
