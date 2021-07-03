@@ -32,7 +32,6 @@ jobs:
       run: cd client
     - name: Install packages
       run: npm install --save-dev --loglevel verbose
-
     - name: Build page
       run: npm run build --loglevel verbose
 
