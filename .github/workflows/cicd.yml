@@ -15,7 +15,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: BNBHold/BNBHold
+        working-directory: BNBHold/BNBHold/client
 
     #runs-on: self-hosted-runner
     runs-on: [self-hosted, linux]
@@ -32,8 +32,8 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version}}
-    - name: Run command ti change path
-      run: cd client
+#    - name: Run command ti change path
+#      run: cd client
     - name: Install packages
       run: npm install --save-dev --loglevel verbose
     - name: Install create-react-app
