@@ -13,10 +13,6 @@ jobs:
 
   build:
 
-    defaults:
-      run:
-        working-directory: ./BNBHold/client
-
     #runs-on: self-hosted-runner
     runs-on: [self-hosted, linux]
 
@@ -28,8 +24,6 @@ jobs:
     steps:
     - name: Checkout repo code
       uses: actions/checkout@v2
-    - name: list directory
-      run: ls -l
     - name: Use Node.js ${{ matrix.node-version}}
       uses: actions/setup-node@v2
       with:
@@ -37,10 +31,12 @@ jobs:
 #    - name: Run command ti change path
 #      run: cd client
     - name: Install packages
+      working-directory: ./BNBHold/client
       run: npm install --save-dev --loglevel verbose
-    - name: Install create-react-app
-      run: npm install -g create-react-app
+#    - name: Install create-react-app
+#      run: npm install -g create-react-app
     - name: Build page
+      working-directory: ./BNBHold/client
       run: npm run build --loglevel verbose
 
     - name: Deploy to gh-pages
