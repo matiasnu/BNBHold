@@ -11,11 +11,11 @@ on:
 
 jobs:
 
-  defaults:
-    run:
-      working-directory: BNBHold
-
   build:
+    
+    defaults:
+      run:
+        working-directory: BNBHold
 
     #runs-on: self-hosted-runner
     runs-on: [self-hosted, linux]
