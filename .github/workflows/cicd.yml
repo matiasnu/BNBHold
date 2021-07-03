@@ -28,6 +28,8 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version}}
+    - name: Run command ti change path
+      run: cd client
     - name: Install packages
       run: npm install -g --save-dev --loglevel verbose
 
