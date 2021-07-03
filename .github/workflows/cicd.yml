@@ -8,6 +8,7 @@ on:
     branches: [ v0.1 ]
   pull_request:
     branches: [ v0.1 ]
+  workflow-dispatch: # Allow manual execution  
 
 jobs:
 
@@ -28,16 +29,10 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version}}
-#    - name: Run command ti change path
-#      run: cd client
-    - name: Install packages
-      working-directory: ./BNBHold/client
-      run: npm install --save-dev --loglevel verbose
-#    - name: Install create-react-app
-#      run: npm install -g create-react-app
+      run: cd client && npm install --save-dev --loglevel verbose
     - name: Build page
-      working-directory: ./BNBHold/client
-      run: npm run build --loglevel verbose
+      working-directory: ./BNBHold/BNBHold/client
+      run: cd client && npm run build --loglevel verbose
 
     - name: Deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3
