@@ -36,7 +36,7 @@ jobs:
       #&& npm run build --loglevel verbose
 
     - name: Build page
-      run: cd client && npm run build --loglevel verbose
+      run: cd client && CI=false npm run build --loglevel verbose
 
     - name: Deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3
