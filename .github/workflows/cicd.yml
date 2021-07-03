@@ -31,7 +31,7 @@ jobs:
     - name: Run command ti change path
       run: cd client
     - name: Install packages
-      run: npm install -g --save-dev --loglevel verbose
+      run: npm install --save-dev --loglevel verbose
 
     - name: Build page
       run: npm run build --loglevel verbose
