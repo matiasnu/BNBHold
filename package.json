@@ -1,6 +1,6 @@
 {
-  "homepage": ".",
-  "name": "client",
+  "homepage": "https://mariano-dim.github.io/bnbhold",
+  "name": "bnbholdui",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
