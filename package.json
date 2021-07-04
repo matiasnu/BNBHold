@@ -1,5 +1,5 @@
 {
-  "homepage": "mariano-dim.github.io/bnbhold",
+  "homepage": ".",
   "name": "client",
   "version": "0.1.0",
   "private": true,
@@ -28,7 +28,7 @@
     "web3modal": "^1.9.3"
   },
   "scripts": {
-    "predeploy": "npm run build", 
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
