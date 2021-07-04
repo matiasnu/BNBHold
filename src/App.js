@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ThunderHold from "contracts/ThunderHold.json";
+import ThunderHold from "./contracts/ThunderHold.json";
 import getWeb3Modal from "./getWeb3Modal";
 
 import { Button, Header, Input } from "semantic-ui-react";
