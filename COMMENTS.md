@@ -13,3 +13,7 @@ mostrar
 1.8119
 Ejemplo
 contractBalance = contractBalance.toPrecision(5);
+
+
+Buen site para ver errores comunes de npm
+https://docs.npmjs.com/common-errors
