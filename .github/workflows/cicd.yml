@@ -1,7 +1,7 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Javascript CD to GH Pages
+name: Javascript CI (CD lo manejamos a traves de Netlify)
 
 on:
   push:
@@ -33,13 +33,17 @@ jobs:
     - name: Install Packages    
       run: npm install --save-dev --loglevel verbose 
 
+    # CI=false es para que no cancele el building si encuentra un warning
     - name: Build page
       run: CI=false npm run build --loglevel verbose
 
-    - name: Deploy to gh-pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build
+# Comento esta seccion de gh-pages porque no funciona el despliegue, hay un problema cuando se define
+# el atributo homepage en el package.json, da un error de formato
+
+#    - name: Deploy to gh-pages
+#      uses: peaceiris/actions-gh-pages@v3
+#      with:
+#        github_token: ${{ secrets.GITHUB_TOKEN }}
+#        publish_dir: ./build
 
 
