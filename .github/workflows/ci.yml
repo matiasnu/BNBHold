@@ -31,11 +31,11 @@ jobs:
         node-version: ${{ matrix.node-version}}
         
     - name: Install Packages    
-      run: npm install --save-dev --loglevel verbose 
+      run: yarn install --save-dev --loglevel verbose 
 
     # CI=false es para que no cancele el building si encuentra un warning
     - name: Build page
-      run: CI=false npm run build --loglevel verbose
+      run: CI=false yarn run build --loglevel verbose
 
 # Comento esta seccion de gh-pages porque no funciona el despliegue, hay un problema cuando se define
 # el atributo homepage en el package.json, da un error de formato
