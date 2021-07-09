@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@portis/web3": "^4.0.0",
+    "@truffle/hdwallet-provider": "^1.4.0",
     "@web3-react/portis-connector": "^6.1.9",
     "express": "^4.17.1",
     "firebase": "^7.24.0",

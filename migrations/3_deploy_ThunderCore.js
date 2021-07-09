@@ -3,6 +3,6 @@ var ThunderHold = artifacts.require("./ThunderHold.sol");
 module.exports = function(deployer) {
   deployer.deploy(
     ThunderHold,
-    "0x51c701bc0266ef77288AfF46b465F8c6f8463b12",
+    "0x22d491Bde2303f2f43325b2108D26f1eAbA1e32b",
     Math.round((new Date()).getTime() / 1000));
 };
