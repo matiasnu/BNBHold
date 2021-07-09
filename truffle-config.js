@@ -19,9 +19,9 @@ module.exports = {
           "wss://rinkeby.infura.io/ws/v3/776e2e5b48554e709e4727937add828c",          
           0
         ),
-      network_id: "*",
-      gas: 29970705,
-      gasPrice: 29970705,
+      network_id: "4",
+      gas: 6000000,
+//      gasPrice: 29970705,
       confirmations: 1,
     },
   },
