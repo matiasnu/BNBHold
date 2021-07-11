@@ -15,3 +15,7 @@ code {
 body{
   color: #f5f5f5;
 }
+
+.ui.container {
+  margin-left: initial!important;
+}
