@@ -1,4 +1,8 @@
 const path = require("path");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+
+// TODO por favor trabajar con variables de entorno para el pasaje de parametros de seguridad
+// como los usados en HDWalletProvider
 
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
@@ -10,6 +14,18 @@ module.exports = {
       port: 8545,
       network_id: "*",
       websockets: true,
+    },
+    rinkeby: {
+      provider: () =>
+        new HDWalletProvider(
+          "under smart shiver card hurt tourist true crater flee quiz group sad",
+          "wss://rinkeby.infura.io/ws/v3/776e2e5b48554e709e4727937add828c",          
+          0
+        ),
+      network_id: "4",
+      gas: 6000000,
+//      gasPrice: 29970705,
+      confirmations: 1,
     },
   },
 
