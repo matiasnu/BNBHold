@@ -83,14 +83,21 @@ export class Lottery extends Component {
     let userLottoParticipations = userLottoStats[1];
     let userLottoLimit = userLottoStats[2];
     if (userLottoStats) {
-        console.log("getUserlottoStats:", userLottoStats);
+        console.log("getUserlottoStats: ", userLottoStats);
     }
 
     let getLotttoStats = await thunderContract.methods
       .getlottoStats()
       .call();
     if (getLotttoStats) {
-       console.log("getLotttoStats:", getLotttoStats);
+       console.log("getLotttoStats: ", getLotttoStats);
+    }
+
+    let getLottoLastPrizes = await thunderContract.methods
+      .getlottoLastPrizes()
+      .call();
+    if(getLottoLastPrizes) {
+      console.log("getLottoLastPrizes: ", getLottoLastPrizes)
     }
 
     this.setState({
@@ -109,7 +116,12 @@ export class Lottery extends Component {
       LOTTOTICKET: getLotttoStats[9],
       lottoCurrentPot: getLotttoStats[10],
       lottoBag: getLotttoStats[11],
-      remainingTickets: getLotttoStats[8] - getLotttoStats[6] 
+      remainingTickets: getLotttoStats[8] - getLotttoStats[6],
+      prizeLastWin1a: getLottoLastPrizes[0],
+      prizeLastWin2a: getLottoLastPrizes[1],
+      prizeLastWin3a: getLottoLastPrizes[2],
+      prizeLastWin4a: getLottoLastPrizes[3],
+      prizeLastWin5a: getLottoLastPrizes[4]
     });
   };
 
@@ -242,7 +254,7 @@ export class Lottery extends Component {
             <div className="lottery-winners-background-yellow">
               <span className="lottery-winners-position">1</span>
             </div>
-            <span className="lottery-winners-quantity">83498 TT</span>
+            <span className="lottery-winners-quantity">{this.state.prizeLastWin1a} TT</span>
             <span className="lottery-winners-address">
               {this.state.lottoLastWin1a}
             </span>
@@ -256,7 +268,7 @@ export class Lottery extends Component {
             <div className="lottery-winners-background-yellow">
               <span className="lottery-winners-position">2</span>
             </div>
-            <span className="lottery-winners-quantity">83498 TT</span>
+            <span className="lottery-winners-quantity">{this.state.prizeLastWin2a}  TT</span>
             <span className="lottery-winners-address">
               {this.state.lottoLastWin2a}
             </span>
@@ -270,7 +282,7 @@ export class Lottery extends Component {
             <div className="lottery-winners-background-yellow">
               <span className="lottery-winners-position">3</span>
             </div>
-            <span className="lottery-winners-quantity">83498 TT</span>
+            <span className="lottery-winners-quantity">{this.state.prizeLastWin3a}  TT</span>
             <span className="lottery-winners-address">
               {this.state.lottoLastWin3a}
             </span>
@@ -284,7 +296,7 @@ export class Lottery extends Component {
             <div className="lottery-winners-background-yellow">
               <span className="lottery-winners-position">4</span>
             </div>
-            <span className="lottery-winners-quantity">83498 TT</span>
+            <span className="lottery-winners-quantity">{this.state.prizeLastWin4a}  TT</span>
             <span className="lottery-winners-address">
               {this.state.lottoLastWin4a}
             </span>
@@ -298,7 +310,7 @@ export class Lottery extends Component {
             <div className="lottery-winners-background-yellow">
               <span className="lottery-winners-position">5</span>
             </div>
-            <span className="lottery-winners-quantity">83498 TT</span>
+            <span className="lottery-winners-quantity">{this.state.prizeLastWin5a}  TT</span>
             <span className="lottery-winners-address">
               {this.state.lottoLastWin5a}
             </span>
