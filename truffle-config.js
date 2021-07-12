@@ -1,6 +1,9 @@
 const path = require("path");
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 
+// TODO por favor trabajar con variables de entorno para el pasaje de parametros de seguridad
+// como los usados en HDWalletProvider
+
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
