@@ -10,6 +10,13 @@ on:
     branches: [ v0.1 ]
 #  workflow-dispatch: # Allow manual execution  
 
+
+env:
+  # TODO: remember to update version on new tag
+  LATEST_TAG: v0.1
+  DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
+  DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
+
 jobs:
 
   build:
@@ -18,18 +25,49 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [v16.0.0]
-    name: Ejecutando sobre Node ${{ matrix.java }}
+#        node-version: [v16.0.0]
+        # FIXME: is it possible to automatic parse refs?
+        # TODO: remember to add new tags to schedule
+        ref:
+          - v0.1    
 
     steps:
     - name: Checkout repo code
       uses: actions/checkout@v2
-
-    - name: Use Node.js ${{ matrix.node-version}}
-      uses: actions/setup-node@v2
       with:
-        node-version: ${{ matrix.node-version}}
+        ref: ${{ matrix.ref }}
 
+    - run: echo $DOCKER_HUB_PASS | docker login docker.io -u $DOCKER_HUB_USER --password-stdin
+
+    # La imagen de docker principal es la web y esa es la que vamos a publicar
+    # Si es un snapshot le ponemos dev como tag
+    # Si es una version le ponemos el tag de la vesion que definio el developer
+    - run: |
+      export VERSION=${{ matrix.ref }}
+      [ "$VERSION" == "v0.1" ] && export VERSION=dev
+      echo VERSION=$VERSION
+      docker-compose -f docker-compose.yml --build -e VERSION_TAG_ENV=$VERSION web
+      docker-compose -f docker-compose.yml --push marianodim/cryptohold:$VERSION
+      docker-compose -f docker-compose.yml up -d 
+      # tag and push versions X.X and X and latest
+#      if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
+#        for VERSION in $(echo $VERSION | cut -d. -f1,2) $(echo $VERSION | cut -d. -f1) latest; do
+#          export VERSION
+#          echo VERSION=$VERSION
+#          docker-compose build
+#          docker-compose push
+#        done
+#      fi
+
+#    - name: Use Node.js ${{ matrix.node-version}}
+#      uses: actions/setup-node@v2
+#      with:
+#        node-version: ${{ matrix.node-version}}
+
+
+
+#    Esta seccion de codigo es para buildear y pushear una imagen a dockerhub,pero no 
+#    para trabajar con docker-compose        
 #    - uses: mr-smithers-excellent/docker-build-push@v5
 #      name: Build & push Docker image
 #      with:

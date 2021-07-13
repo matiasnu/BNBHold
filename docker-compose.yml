@@ -1,10 +1,11 @@
 version: "3.2"
 
 services:
-  nginx:
+  web:
     build:
       context: .
       dockerfile: Dockerfile.frontend.ci
+    image: marianodim/cryptohold:${VERSION_TAG_ENV}
     logging:
       driver: "json-file"
       options:
