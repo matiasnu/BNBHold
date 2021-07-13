@@ -1,10 +1,10 @@
-version: "2.3"
+version: "3.2"
 
 services:
   nginx-service:
     build:
       context: .
-      dockerfile: Dockerfile.prod.ci
+      dockerfile: Dockerfile.frontend.ci
     logging:
       driver: "json-file"
       options:
@@ -12,17 +12,18 @@ services:
         max-file: "1"
     ports:
       - "1337:80"
-  #    TODO resolver el tema del healthcheck ya que no funciona      
+
+  #    TODO resolver el tema del healthcheck ya que no funciona
   #    healthcheck:
   #      test: ["CMD-SHELL", "wget -q --method=HEAD localhost/system-status.txt"]
   #      interval: 20s
   #      timeout: 10s
   #      retries: 20
 
-  ethereum-local:
+  ganache:
     image: trufflesuite/ganache-cli:latest
     ports:
-      - "85:8545"
+      - "8545:8545"
     volumes:
       - ./ganache_data:/ganache_data
     entrypoint:
@@ -36,8 +37,19 @@ services:
       - --networkId
       - "5777"
       - --hostname
-      - "0.0.0.0"
+      - "ganache"
       - --debug
-# ENTRYPOINT ["node", "./build/cli.node.js"]
-# ENTRYPOINT ["node", "/app/ganache-core.docker.cli.js"]
-# https://github.com/digitaldonkey/ganache-cli-docker-compose/blob/master/docker-compose.yml
+
+  # ENTRYPOINT ["node", "./build/cli.node.js"]
+  # ENTRYPOINT ["node", "/app/ganache-core.docker.cli.js"]
+  # https://github.com/digitaldonkey/ganache-cli-docker-compose/blob/master/docker-compose.yml
+
+  truffle:
+    build:
+      context: .
+      dockerfile: Dockerfile.truffle.ci
+    depends_on:
+      - ganache
+    environment:
+      TRUFFLE_VERSION: "5.3.14"
+

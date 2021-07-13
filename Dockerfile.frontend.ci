@@ -5,7 +5,7 @@ WORKDIR /app
 
 ENV PATH /app/node_modules/.bin:$PATH
 
-RUN apk --no-cache add git curl
+RUN apk --no-cache add git curl bash
 
 # Install dependencies
 COPY package*.json ./
