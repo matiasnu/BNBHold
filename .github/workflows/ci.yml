@@ -43,12 +43,13 @@ jobs:
     # Si es un snapshot le ponemos dev como tag
     # Si es una version le ponemos el tag de la vesion que definio el developer
     - run: |
-      export VERSION=${{ matrix.ref }}
-      [ "$VERSION" == "v0.1" ] && export VERSION=dev
-      echo VERSION=$VERSION
-      docker-compose -f docker-compose.yml --build -e VERSION_TAG_ENV=$VERSION web
-      docker-compose -f docker-compose.yml --push marianodim/cryptohold:$VERSION
-      docker-compose -f docker-compose.yml up -d 
+        export VERSION=${{ matrix.ref }}
+        [ "$VERSION" == "v0.1" ] && export VERSION=dev
+        echo VERSION=$VERSION
+        docker-compose -f docker-compose.yml --build -e VERSION_TAG_ENV=$VERSION web
+        docker-compose -f docker-compose.yml --push marianodim/cryptohold:$VERSION
+        docker-compose -f docker-compose.yml up -d
+
       # tag and push versions X.X and X and latest
 #      if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
 #        for VERSION in $(echo $VERSION | cut -d. -f1,2) $(echo $VERSION | cut -d. -f1) latest; do
