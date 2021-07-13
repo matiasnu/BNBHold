@@ -1,7 +1,7 @@
 version: "3.2"
 
 services:
-  nginx-service:
+  nginx:
     build:
       context: .
       dockerfile: Dockerfile.frontend.ci
@@ -12,13 +12,11 @@ services:
         max-file: "1"
     ports:
       - "1337:80"
-
-  #    TODO resolver el tema del healthcheck ya que no funciona
-  #    healthcheck:
-  #      test: ["CMD-SHELL", "wget -q --method=HEAD localhost/system-status.txt"]
-  #      interval: 20s
-  #      timeout: 10s
-  #      retries: 20
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --method=HEAD localhost/system-status.txt"]
+      interval: 20s
+      timeout: 10s
+      retries: 20
 
   ganache:
     image: trufflesuite/ganache-cli:latest

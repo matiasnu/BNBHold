@@ -20,15 +20,20 @@ RUN yarn run build
 # con truffle desde el path principal de la app
 
 # -----------------------------------------------------------------------------
+FROM nginx:1.20.1
 
-# Serving Image
-FROM fitiavana07/nginx-react
+RUN apt-get update && apt-get install -y wget curl
 
 # Copy built files
 COPY --from=build-stage /app/build /usr/share/nginx/html
 
+#HEALTHCHECK CMD wget -q --method=HEAD localhost/system-status.txt
+
 # 80 for HTTP
 EXPOSE 80
+
+# Serving Image
+#FROM fitiavana07/nginx-react
 
 # Run nginx
 CMD nginx -g 'daemon off;'
