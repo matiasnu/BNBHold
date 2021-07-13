@@ -2,6 +2,8 @@
 
 node_modules
 build
+bin
+dockerfiles
 .dockerignore
 Dockerfile
 Dockerfile.prod

@@ -1,5 +1,7 @@
 const path = require("path");
-const HDWalletProvider = require("@truffle/hdwallet-provider");
+
+// Solo para Rinkeby/Produccion
+//const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 // TODO por favor trabajar con variables de entorno para el pasaje de parametros de seguridad
 // como los usados en HDWalletProvider
@@ -9,24 +11,33 @@ module.exports = {
   // to customize your Truffle configuration!
   contracts_build_directory: path.join(__dirname, "src/contracts"),
   networks: {
+    // Development
     development: {
       host: "127.0.0.1",
       port: 8545,
       network_id: "*",
       websockets: true,
     },
-    rinkeby: {
-      provider: () =>
-        new HDWalletProvider(
-          "under smart shiver card hurt tourist true crater flee quiz group sad",
-          "wss://rinkeby.infura.io/ws/v3/776e2e5b48554e709e4727937add828c",          
-          0
-        ),
-      network_id: "4",
-      gas: 6000000,
-//      gasPrice: 29970705,
-      confirmations: 1,
+    // CI
+    docker: {
+      host: "ganache",
+      port: 8545,
+      network_id: "*",
+      websockets: true,
     },
+    // CD on Rinkeby
+//    rinkeby: {
+//      provider: () =>
+//        new HDWalletProvider(
+//          "under smart shiver card hurt tourist true crater flee quiz group sad",
+//          "wss://rinkeby.infura.io/ws/v3/776e2e5b48554e709e4727937add828c",          
+//          0
+//        ),
+//      network_id: "4",
+//      gas: 6000000,
+////      gasPrice: 29970705,
+//      confirmations: 1,
+//    },
   },
 
   // MAD Esto es para forzar a truffle a que compile con la vesion definida en el pragma
