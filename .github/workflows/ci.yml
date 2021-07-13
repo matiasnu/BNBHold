@@ -44,9 +44,11 @@ jobs:
     # Si es una version le ponemos el tag de la vesion que definio el developer
     - run: |
         export VERSION=${{ matrix.ref }}
-        [ "$VERSION" == "v0.1" ] && export VERSION=dev
+        [ "$VERSION" == "v0.1" ] && export VERSION=snapshot
         echo VERSION=$VERSION
-        docker-compose -f docker-compose.yml build web
+        export VERSION_TAG_ENV=$VERSION
+        echo VERSION_TAG_ENV=$VERSION_TAG_ENV
+        docker-compose -f docker-compose.yml build --build-arg VERSION_TAG_ENV web
         docker-compose -f docker-compose.yml push web
         docker-compose -f docker-compose.yml up -d
 

@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.frontend.ci
-    image: marianodim/cryptohold
+    image: marianodim/cryptohold:${VERSION_TAG_ENV}
     logging:
       driver: "json-file"
       options:
