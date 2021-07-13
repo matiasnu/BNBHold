@@ -46,8 +46,8 @@ jobs:
         export VERSION=${{ matrix.ref }}
         [ "$VERSION" == "v0.1" ] && export VERSION=dev
         echo VERSION=$VERSION
-        docker-compose -f docker-compose.yml --build -e VERSION_TAG_ENV=$VERSION web
-        docker-compose -f docker-compose.yml --push marianodim/cryptohold:$VERSION
+        docker-compose -f docker-compose.yml build web
+        docker-compose -f docker-compose.yml push web
         docker-compose -f docker-compose.yml up -d
 
       # tag and push versions X.X and X and latest
