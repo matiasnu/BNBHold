@@ -30,7 +30,8 @@ jobs:
         # TODO: remember to add new tags to schedule
         # refs can be local or remote branches, or tags 
         ref:
-          - v0.1   
+          - v0.1 
+          - v1.0.0  
 
     steps:
     - name: Checkout repo code
@@ -44,6 +45,7 @@ jobs:
     # Si es un snapshot le ponemos dev como tag
     # Si es una version le ponemos el tag de la vesion que definio el developer
     - run: |
+        echo 'Generando imagenes de docker'
         export VERSION=${{ matrix.ref }}
         [ "$VERSION" == "v0.1" ] && export VERSION=snapshot
         echo VERSION=$VERSION
