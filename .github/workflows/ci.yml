@@ -1,7 +1,7 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Javascript CI (CD lo manejamos a traves de Netlify)
+name: Javascript CI dockerizado
 
 on:
   push:
@@ -28,8 +28,9 @@ jobs:
 #        node-version: [v16.0.0]
         # FIXME: is it possible to automatic parse refs?
         # TODO: remember to add new tags to schedule
+        # refs can be local or remote branches, or tags 
         ref:
-          - v0.1    
+          - v0.1   
 
     steps:
     - name: Checkout repo code
