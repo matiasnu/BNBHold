@@ -47,23 +47,23 @@ jobs:
     - run: |
         echo 'Generando imagenes de docker'
         export VERSION=${{ matrix.ref }}
+        # Asumo que v0.1 es Master
         [ "$VERSION" == "v0.1" ] && export VERSION=snapshot
         echo VERSION=$VERSION
-        export VERSION_TAG_ENV=$VERSION
-        echo VERSION_TAG_ENV=$VERSION_TAG_ENV
-        docker-compose -f docker-compose.yml build --build-arg VERSION_TAG_ENV web
+
+        docker-compose -f docker-compose.yml build web
         docker-compose -f docker-compose.yml push web
         docker-compose -f docker-compose.yml up -d
 
       # tag and push versions X.X and X and latest
-#      if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
-#        for VERSION in $(echo $VERSION | cut -d. -f1,2) $(echo $VERSION | cut -d. -f1) latest; do
-#          export VERSION
-#          echo VERSION=$VERSION
-#          docker-compose build
-#          docker-compose push
-#        done
-#      fi
+      if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
+        for VERSION in latest; do
+          export VERSION
+          echo VERSION=$VERSION
+        docker-compose -f docker-compose.yml build web
+        docker-compose -f docker-compose.yml push web
+        done
+      fi
 
 #    - name: Use Node.js ${{ matrix.node-version}}
 #      uses: actions/setup-node@v2
