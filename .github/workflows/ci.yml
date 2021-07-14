@@ -5,9 +5,9 @@ name: Javascript CI dockerizado
 
 on:
   push:
-    branches: [ v0.1 ]
+    branches: [ master ]
   pull_request:
-    branches: [ v0.1 ]
+    branches: [ master ]
 #  workflow-dispatch: # Allow manual execution  
 
 
@@ -16,6 +16,7 @@ env:
   # Si se quiere generar una release
   # default dev
   #LATEST_TAG: v1.0.0
+  #LATEST_TAG: v1.1.0
   LATEST_TAG: dev
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
@@ -33,8 +34,8 @@ jobs:
         # TODO: remember to add new tags to schedule
         # refs can be local or remote branches, or tags 
         ref:
-          - v0.1 
-          - v1.0.0  
+          - master 
+          - v1.1.0  
 
     steps:
     - name: Checkout repo code
@@ -50,8 +51,7 @@ jobs:
     - run: |
         echo 'Generando imagenes de docker'
         export VERSION=${{ matrix.ref }}
-        # Asumo que v0.1 es Master
-        [ "$VERSION" == "v0.1" ] && export VERSION=snapshot
+        [ "$VERSION" == "master" ] && export VERSION=snapshot
         echo VERSION=$VERSION
 
         docker-compose -f docker-compose.yml build web
