@@ -30,7 +30,6 @@ jobs:
         # TODO: remember to add new tags to schedule
         # refs can be local or remote branches, or tags 
         ref:
-          - v0.1 
           - v1.0.0  
 
     steps:
