@@ -1,0 +1,44 @@
+# pull official node base image
+FROM node:16-alpine3.14 as build-stage
+
+WORKDIR /app
+
+ENV PATH /app/node_modules/.bin:$PATH
+
+RUN apk --no-cache add git curl bash
+
+# Install dependencies
+COPY package*.json ./
+RUN yarn install --frozen-lockfile
+
+# Build
+COPY . .
+RUN yarn run build
+
+# TODO
+# Se debe buscar la forma de que no se elimine el contenido del primer stage, asi podemos alimentar a la red ethereum
+# con truffle desde el path principal de la app
+
+# -----------------------------------------------------------------------------
+FROM nginx:1.20.1
+
+# Default value for version tag variable. It also could by dev or latest or others
+ARG VERSION_TAG_ENV=snapshot
+
+RUN apt-get update && apt-get install -y wget curl
+
+# Copy built files
+COPY --from=build-stage /app/build /usr/share/nginx/html
+
+#HEALTHCHECK CMD wget -q --method=HEAD localhost/system-status.txt
+
+# 80 for HTTP
+EXPOSE 80
+
+# Serving Image
+#FROM fitiavana07/nginx-react
+
+# Run nginx
+CMD nginx -g 'daemon off;'
+
+

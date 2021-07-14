@@ -1,0 +1,107 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Javascript CI dockerizado
+
+on:
+  push:
+    branches: [ v0.1 ]
+  pull_request:
+    branches: [ v0.1 ]
+#  workflow-dispatch: # Allow manual execution  
+
+
+env:
+  # TODO: remember to update version on new tag
+  # Si se quiere generar una release
+  # default dev
+  #LATEST_TAG: v1.0.0
+  LATEST_TAG: dev
+  DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
+  DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
+
+jobs:
+
+  build:
+
+    runs-on: [self-hosted, linux]
+
+    strategy:
+      matrix:
+#        node-version: [v16.0.0]
+        # FIXME: is it possible to automatic parse refs?
+        # TODO: remember to add new tags to schedule
+        # refs can be local or remote branches, or tags 
+        ref:
+          - v0.1 
+          - v1.0.0  
+
+    steps:
+    - name: Checkout repo code
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ matrix.ref }}
+
+    - run: echo $DOCKER_HUB_PASS | docker login docker.io -u $DOCKER_HUB_USER --password-stdin
+
+    # La imagen de docker principal es la web y esa es la que vamos a publicar
+    # Si es un snapshot le ponemos dev como tag
+    # Si es una version le ponemos el tag de la vesion que definio el developer
+    - run: |
+        echo 'Generando imagenes de docker'
+        export VERSION=${{ matrix.ref }}
+        # Asumo que v0.1 es Master
+        [ "$VERSION" == "v0.1" ] && export VERSION=snapshot
+        echo VERSION=$VERSION
+
+        docker-compose -f docker-compose.yml build web
+        docker-compose -f docker-compose.yml push web
+        docker-compose -f docker-compose.yml up -d
+
+        # tag and push version latest, only when VERSION is a well formatted one
+        # and LATEST_TAG matches VERSION, otherwise it is not generated
+        if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
+          for VERSION in latest; do
+            export VERSION
+            echo VERSION=$VERSION
+          docker-compose -f docker-compose.yml build web
+          docker-compose -f docker-compose.yml push web
+          done
+        fi
+
+#    - name: Use Node.js ${{ matrix.node-version}}
+#      uses: actions/setup-node@v2
+#      with:
+#        node-version: ${{ matrix.node-version}}
+
+
+
+#    Esta seccion de codigo es para buildear y pushear una imagen a dockerhub,pero no 
+#    para trabajar con docker-compose        
+#    - uses: mr-smithers-excellent/docker-build-push@v5
+#      name: Build & push Docker image
+#      with:
+#        image: marianodim/cryptohold
+#        tags: v1, latest
+#        registry: registry-url.io
+#        dockerfile: Dockerfile.ci
+#        username: ${{ secrets.DOCKER_USERNAME }}
+#        password: ${{ secrets.DOCKER_PASSWORD }}        
+
+#     Estos comandos deben ejecutarse dentro del container
+#    - name: Install Packages    
+#      run: yarn install --save-dev --loglevel verbose 
+    # CI=false es para que no cancele el building si encuentra un warning
+#    - name: Build page
+#      run: CI=false yarn run build --loglevel verbose
+
+# Comento esta seccion de gh-pages porque no funciona el despliegue, hay un problema cuando se define
+# el atributo homepage en el package.json, da un error de formato
+
+#    - name: Deploy to gh-pages
+#      uses: peaceiris/actions-gh-pages@v3
+#      with:
+#        github_token: ${{ secrets.GITHUB_TOKEN }}
+#        publish_dir: ./build
+
+

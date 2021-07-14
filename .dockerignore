@@ -1,0 +1,10 @@
+# This will speed up the Docker build process as our local dependencies inside the “node_modules” directory will not be sent to the Docker daemon
+
+node_modules
+build
+bin
+dockerfiles
+.dockerignore
+Dockerfile
+Dockerfile.prod
+

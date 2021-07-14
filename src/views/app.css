@@ -1,0 +1,1051 @@
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  background: #2c2c2c;
+}
+
+/* Barra lateral Izquierda (Dashboard General)*/
+.dashboard {
+  position: absolute;
+  width: 365px;
+  height: 1080px;
+  left: 0px;
+  top: 1px;
+
+  /* Gris Thunder Caja */
+  background: linear-gradient(151.17deg, #636363 -7.23%, #3e3e3e 107.43%);
+
+  /* Thunder Caja */
+  box-shadow: -15px -15px 100px rgba(88, 88, 88, 0.25),
+    15px 15px 50px rgba(11, 11, 11, 0.25);
+}
+
+.logo-dashboard {
+  background-image: url(./images/logo.png);
+  position: absolute;
+  height: 71px;
+  width: 306.98px;
+  left: 35px;
+  right: 82.19%;
+  top: 100px;
+}
+
+.logos-dashboard {
+  position: absolute;
+  width: 36px;
+  height: 283px;
+  left: 34px;
+  top: 237px;
+}
+
+.home-logo {
+  background-image: url(./images/home-dashboard.png);
+  position: absolute;
+  width: 27px;
+  height: 28px;
+}
+
+.home {
+  width: 245px;
+  height: 35px;
+  position: absolute;
+  top: 237px;
+  left: 78px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 37px;
+  display: flex;
+  align-items: center;
+}
+
+.lottery-logo {
+  background-image: url(./images/lottery-dashboard.png);
+  position: absolute;
+  width: 31px;
+  height: 31px;
+  top: 50px;
+}
+
+.lottery {
+  width: 245px;
+  height: 35px;
+  position: absolute;
+  top: 287px;
+  left: 78px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 37px;
+  display: flex;
+  align-items: center;
+}
+
+.audit-logo {
+  background-image: url(./images/audit-dashboard.png);
+  position: absolute;
+  width: 21px;
+  height: 29px;
+  top: 100px;
+}
+
+.audit {
+  position: absolute;
+  width: 245px;
+  height: 35px;
+  left: 78px;
+  top: 337px;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 37px;
+  display: flex;
+  align-items: center;
+}
+
+.support-logo {
+  background-image: url(./images/support-dashboard.png);
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  top: 150px;
+}
+
+.support {
+  width: 245px;
+  height: 35px;
+  position: absolute;
+  top: 387px;
+  left: 78px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 37px;
+  display: flex;
+  align-items: center;
+}
+
+.presentation-logo {
+  background-image: url(./images/presentation-dashboard.png);
+  position: absolute;
+  width: 24px;
+  height: 30px;
+  top: 200px;
+}
+
+.presentation {
+  width: 245px;
+  height: 35px;
+  position: absolute;
+  top: 437px;
+  left: 78px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 37px;
+  display: flex;
+  align-items: center;
+}
+
+.chat-logo {
+  background-image: url(./images/chat-dashboard.png);
+  position: absolute;
+  width: 29px;
+  height: 29px;
+  top: 250px;
+}
+
+.chat-dashboard {
+  position: absolute;
+  width: 245px;
+  height: 35px;
+  left: 78px;
+  top: 487px;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 37px;
+  display: flex;
+  align-items: center;
+}
+
+.chat-link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.connect-wallet-block {
+  position: absolute;
+  width: 295px;
+  height: 90px;
+  left: 35px;
+  top: 918px;
+
+  /* Botón Thunder */
+  background: linear-gradient(
+    96.38deg,
+    #ffca1c -9.44%,
+    rgba(226, 176, 12, 0.994792) 110.91%
+  );
+  /* Thunder Caja */
+  box-shadow: -15px -15px 100px rgba(88, 88, 88, 0.25),
+    15px 15px 50px rgba(11, 11, 11, 0.25);
+  border-radius: 30px;
+}
+
+.connect-wallet-logo {
+  position: absolute;
+  width: 38px;
+  height: 25px;
+  left: 30px;
+  top: 32px;
+}
+
+.primary {
+  background-color: Transparent;
+}
+
+.connect-wallet-state {
+  position: absolute;
+  width: 183px;
+  height: 90px;
+  left: 87px;
+  top: 2px;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  color: #2e2e2e;
+}
+
+.input-group-btn {
+  padding-left: 1800px;
+}
+
+/* Contract address style */
+
+.address-block {
+  position: absolute;
+  width: 975px;
+  height: 202px;
+  left: 400px;
+  top: 35px;
+
+  /* Gris Thunder Caja */
+
+  background: linear-gradient(151.17deg, #636363 -7.23%, #3e3e3e 107.43%);
+  /* Thunder Caja */
+
+  box-shadow: -15px -15px 100px rgba(88, 88, 88, 0.25),
+    15px 15px 50px rgba(11, 11, 11, 0.25);
+  border-radius: 30px;
+}
+
+.contract-address {
+  position: absolute;
+  width: 268px;
+  height: 45px;
+  left: 435px;
+  top: 68px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 45px;
+  /* identical to box height */
+  display: flex;
+  align-items: center;
+}
+
+.dato6-block {
+  position: absolute;
+  width: 405px;
+  height: 68px;
+  left: 435px;
+  top: 129px;
+  border: 4px solid #ffca1c;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.dato6 {
+  position: absolute;
+  width: 315px;
+  height: 33px;
+  left: 15px;
+  top: 16px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 33px;
+  /* identical to box height */
+  display: flex;
+  align-items: center;
+}
+
+.contract-address-logo {
+  background-image: url(./images/contract-address.png);
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 345px;
+  top: 11px;
+}
+
+.address1 {
+  position: absolute;
+  width: 405px;
+  height: 18px;
+  left: 910px;
+  top: 80px;
+}
+
+.total-balance {
+  width: 276px;
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.contract-balance {
+  width: 185px;
+  position: absolute;
+  top: 0px;
+  left: 220px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: right;
+}
+
+.address2 {
+  position: absolute;
+  width: 405px;
+  height: 18px;
+  left: 910px;
+  top: 152px;
+}
+
+.total-staked {
+  width: 187px;
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato1 {
+  width: 185px;
+  position: absolute;
+  top: 0px;
+  left: 220px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: right;
+}
+
+/* Plan styles */
+.plan-block {
+  position: absolute;
+  width: 475px;
+  height: 771px;
+  left: 400px;
+  top: 272px;
+
+  /* Gris Thunder Caja */
+
+  background: linear-gradient(151.17deg, #636363 -7.23%, #3e3e3e 107.43%);
+  /* Thunder Caja */
+
+  box-shadow: -15px -15px 100px rgba(88, 88, 88, 0.25),
+    15px 15px 50px rgba(11, 11, 11, 0.25);
+  border-radius: 30px;
+}
+
+.plan {
+  width: 200px;
+  position: absolute;
+  top: 293px;
+  left: 435px;
+  font-family: Poppins;
+  font-weight: SemiBold;
+  font-size: 50px;
+  opacity: 1;
+  text-align: left;
+}
+
+.plan1 {
+  position: absolute;
+  width: 405px;
+  height: 18px;
+  left: 435px;
+  top: 397px;
+}
+
+.daily-profit {
+  width: 163px;
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.profit-number {
+  width: 97px;
+  position: absolute;
+  top: 0px;
+  left: 308px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: right;
+}
+
+.plan2 {
+  position: absolute;
+  width: 405px;
+  height: 18px;
+  left: 435px;
+  top: 444px;
+}
+
+.total-return {
+  width: 163px;
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato2 {
+  width: 97px;
+  position: absolute;
+  top: 0px;
+  left: 308px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: right;
+}
+
+.plan3 {
+  position: absolute;
+  width: 405px;
+  height: 18px;
+  left: 435px;
+  top: 491px;
+}
+
+.days {
+  width: 163px;
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.dato3 {
+  width: 97px;
+  position: absolute;
+  top: 0px;
+  left: 308px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: right;
+}
+
+.plan4 {
+  position: absolute;
+  width: 405px;
+  height: 18px;
+  left: 435px;
+  top: 538px;
+}
+
+.withdraw-time {
+  width: 178px;
+  position: absolute;
+  top: 3px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.every-time {
+  width: 183px;
+  position: absolute;
+  top: 0px;
+  left: 222px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: right;
+}
+
+.enter-ammount {
+  width: 316px;
+  position: absolute;
+  top: 612px;
+  left: 475px;
+  font-family: Poppins;
+  font-weight: SemiBold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.input-value {
+  position: absolute;
+  width: 316px;
+  height: 78px;
+  left: 475px;
+  top: 668px;
+  border: 4px solid #ffca1c;
+  box-sizing: border-box;
+  border-radius: 20px;
+
+  text-align: center;
+  background-color: Transparent;
+}
+
+.min-tt {
+  width: 403px;
+  position: absolute;
+  top: 760px;
+  left: 437px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.max-tt {
+  width: 403px;
+  position: absolute;
+  top: 790px;
+  left: 437px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.dato5 {
+  width: 405px;
+  position: absolute;
+  top: 846px;
+  left: 435px;
+  font-family: Poppins;
+  font-weight: SemiBold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.dato4 {
+  width: 205px;
+  position: absolute;
+  top: 872px;
+  left: 535px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 32px;
+  opacity: 1;
+  text-align: center;
+}
+
+.stake {
+  position: absolute;
+  width: 194px;
+  height: 55px;
+  left: 541px;
+  top: 952px;
+
+  /* Botón Thunder */
+
+  background: linear-gradient(
+    96.38deg,
+    #ffca1c -9.44%,
+    rgba(226, 176, 12, 0.994792) 110.91%
+  );
+  /* Thunder Caja */
+
+  box-shadow: -15px -15px 100px rgba(88, 88, 88, 0.25),
+    15px 15px 50px rgba(11, 11, 11, 0.25);
+  border-radius: 40px;
+}
+
+.stake-snap {
+  /* Stake TT */
+  position: absolute;
+  width: 102px;
+  height: 55px;
+  left: 46px;
+  top: 1px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  color: #2e2e2e;
+}
+
+/* Data for total staked and total deposits */
+
+.data-block {
+  position: absolute;
+  width: 465px;
+  height: 192px;
+  left: 910px;
+  top: 272px;
+
+  /* Thunder Caja */
+
+  filter: drop-shadow(-15px -15px 100px rgba(88, 88, 88, 0.25)),
+    drop-shadow(15px 15px 50px rgba(11, 11, 11, 0.25));
+}
+
+.data1 {
+  position: absolute;
+  width: 220px;
+  height: 192px;
+  left: 910px;
+  top: 272px;
+
+  /* Gris Thunder Caja */
+
+  background: linear-gradient(151.17deg, #636363 -7.23%, #3e3e3e 107.43%);
+  border-radius: 30px;
+}
+
+.data2 {
+  position: absolute;
+  width: 220px;
+  height: 192px;
+  left: 1155px;
+  top: 272px;
+
+  /* Gris Thunder Caja */
+
+  background: linear-gradient(151.17deg, #636363 -7.23%, #3e3e3e 107.43%);
+  border-radius: 30px;
+}
+
+.your-total-stake-logo {
+  background-image: url(./images/your-total-stakes.png);
+  position: absolute;
+  left: 51.62%;
+  right: 32.4%;
+  top: 27.78%;
+  bottom: 66.11%;
+  width: 57px;
+  height: 59px;
+}
+
+.total-deposits-logo {
+  background-image: url(./images/total-deposits.png);
+  position: absolute;
+  left: 64.17%;
+  right: 32.4%;
+  top: 27.78%;
+  bottom: 66.11%;
+}
+
+.data-numbers {
+  position: absolute;
+  width: 465px;
+  height: 49px;
+  left: 910px;
+  top: 375px;
+}
+
+.your-total-staked {
+  width: 220px;
+  position: relative;
+  top: 0px;
+  left: 9px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.dato27 {
+  width: 220px;
+  position: absolute;
+  top: 32px;
+  left: 0px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.total-deposits {
+  width: 220px;
+  position: absolute;
+  top: 0px;
+  left: 245px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.dato26 {
+  width: 220px;
+  position: absolute;
+  top: 32px;
+  left: 245px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+/* Data withdraw */
+
+.withdraw-block {
+  position: absolute;
+  width: 465px;
+  height: 121px;
+  left: 910px;
+  top: 499px;
+
+  background: linear-gradient(151.17deg, #636363 -7.23%, #3e3e3e 107.43%);
+  /* Thunder Caja */
+
+  box-shadow: -15px -15px 100px rgba(88, 88, 88, 0.25),
+    15px 15px 50px rgba(11, 11, 11, 0.25);
+  border-radius: 30px;
+}
+
+.data-withdraw-block {
+  position: absolute;
+  width: 218px;
+  height: 57px;
+  left: 930px;
+  top: 522px;
+}
+
+.total-withdraw {
+  width: 218px;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.dato7 {
+  width: 218px;
+  position: absolute;
+  top: 41px;
+  left: 0px;
+  font-family: Open Sans;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.withdraw-button {
+  position: absolute;
+  width: 194px;
+  height: 55px;
+  left: 1161px;
+  top: 534px;
+
+  /* Botón Thunder */
+
+  background: linear-gradient(
+    96.38deg,
+    #ffca1c -9.44%,
+    rgba(226, 176, 12, 0.994792) 110.91%
+  );
+  border-radius: 40px;
+}
+
+.withdraw {
+  width: 118px;
+  position: absolute;
+  top: 10px;
+  left: 38px;
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+  color: rgba(0, 0, 0, 1);
+}
+
+/* Agregado Idea Friendly, mascota*/
+
+.idea-block {
+  position: absolute;
+  width: 465px;
+  height: 388px;
+  left: 910px;
+  top: 655px;
+
+  /* Gris Thunder Caja */
+
+  background: linear-gradient(151.17deg, #636363 -7.23%, #3e3e3e 107.43%);
+  /* Thunder Caja */
+
+  box-shadow: -15px -15px 100px rgba(88, 88, 88, 0.25),
+    15px 15px 50px rgba(11, 11, 11, 0.25);
+  border-radius: 30px;
+}
+
+.pinguino-logo {
+  background-image: url(./images/pinguino-logo.png);
+  position: absolute;
+  width: 293px;
+  height: 419px;
+  left: 1130px;
+  top: 693px;
+}
+
+.idea {
+  width: 364px;
+  position: absolute;
+  top: 816px;
+  left: 963px;
+  font-family: Poppins;
+  font-weight: SemiBold;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}
+
+/* My stakes styles*/
+
+.stakes-block {
+  position: absolute;
+  width: 475px;
+  height: 1010px;
+  left: 1410px;
+  top: 35px;
+
+  /* Gris Thunder Caja */
+
+  background: linear-gradient(151.17deg, #636363 -7.23%, #3e3e3e 107.43%);
+  /* Thunder Caja */
+
+  box-shadow: -15px -15px 100px rgba(88, 88, 88, 0.25),
+    15px 15px 50px rgba(11, 11, 11, 0.25);
+  border-radius: 30px;
+  overflow-y: scroll;
+}
+
+.stakes-block::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 100px;
+	background-color: linear-gradient(151.17deg, #636363 -7.23%, #3e3e3e 107.43%);
+}
+
+.stakes-block::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: linear-gradient(151.17deg, #636363 -7.23%, #3e3e3e 107.43%);
+}
+
+.stakes-block::-webkit-scrollbar-thumb
+{
+	border-radius: 100px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: linear-gradient(151.17deg, #636363 -7.23%, #3e3e3e 107.43%);
+}
+
+.my-stakes {
+  width: 255px;
+  position: absolute;
+  top: 37px;
+  left: 35px;
+  font-family: Poppins;
+  font-weight: SemiBold;
+  font-size: 50px;
+  opacity: 1;
+  text-align: left;
+}
+
+.stake-check {
+  width: 80px;
+  height: 80px;
+  background: #d2d2d2;
+  margin-top: 10px;
+  margin-left: 8px;
+  border-radius: 30px;
+}
+
+.stake-check-success {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  margin-top: 10px;
+  margin-left: 8px;
+  background: linear-gradient(136.74deg, #27ff57 -9.03%, #199334 104.51%);
+  border-radius: 30px;
+}
+
+.stake-check-in-progress {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  margin-top: 10px;
+  margin-left: 8px;
+
+  background: linear-gradient(136.74deg, #ff9c27 -9.03%, #be7621 104.51%);
+  border-radius: 30px;
+}
+
+.stake-check-logo-success {
+  background-image: url(./images/my-stakes-success.png);
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 23px;
+  top: 26px;
+
+  border-radius: 30px;
+}
+
+.stake-check-logo-in-progress {
+  background-image: url(./images/my-stakes-in-progress.png);
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 23px;
+  top: 26px;
+
+  border-radius: 30px;
+}
+
+.total-amount-stake {
+  width: 137px;
+  position: absolute;
+  top: 10px;
+  left: 101px;
+  font-family: Poppins;
+  font-weight: Medium;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}
+
+.total-profit-stake {
+  width: 65px;
+  position: absolute;
+  top: 65px;
+  left: 130px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: left;
+}
+
+.my-stakes-profit {
+  background-image: url(./images/my-stakes-estadistic.png);
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  left: -35px;
+  top: -7px;
+}
+
+.date-to-start {
+  width: 140px;
+  position: absolute;
+  top: 55px;
+  left: 233px;
+  font-family: Open Sans;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: center;
+}
+
+.my-stakes-calendar {
+  background-image: url(./images/my-stakes-calendar.png);
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  left: -35px;
+  top: 3px;
+  border-radius: 30px;
+}
+
+.stake-gral {
+  position: absolute;
+  width: 405px;
+  height: 100px;
+  left: 35px;
+  background: #7c7c7c;
+  border-radius: 30px;
+}
+
+/* Cada top sube 130px mas*/
