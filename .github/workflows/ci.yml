@@ -55,15 +55,15 @@ jobs:
         docker-compose -f docker-compose.yml push web
         docker-compose -f docker-compose.yml up -d
 
-      # tag and push versions X.X and X and latest
-      if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
-        for VERSION in latest; do
-          export VERSION
-          echo VERSION=$VERSION
-        docker-compose -f docker-compose.yml build web
-        docker-compose -f docker-compose.yml push web
-        done
-      fi
+        # tag and push versions X.X and X and latest
+        if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
+          for VERSION in latest; do
+            export VERSION
+            echo VERSION=$VERSION
+          docker-compose -f docker-compose.yml build web
+          docker-compose -f docker-compose.yml push web
+          done
+        fi
 
 #    - name: Use Node.js ${{ matrix.node-version}}
 #      uses: actions/setup-node@v2
