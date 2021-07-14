@@ -13,7 +13,10 @@ on:
 
 env:
   # TODO: remember to update version on new tag
-  LATEST_TAG: v1.0.0
+  # Si se quiere generar una release
+  # default dev
+  #LATEST_TAG: v1.0.0
+  LATEST_TAG: dev
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
 
@@ -30,6 +33,7 @@ jobs:
         # TODO: remember to add new tags to schedule
         # refs can be local or remote branches, or tags 
         ref:
+          - v0.1 
           - v1.0.0  
 
     steps:
@@ -54,7 +58,8 @@ jobs:
         docker-compose -f docker-compose.yml push web
         docker-compose -f docker-compose.yml up -d
 
-        # tag and push versions X.X and X and latest
+        # tag and push version latest, only when VERSION is a well formatted one
+        # and LATEST_TAG matches VERSION, otherwise it is not generated
         if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
           for VERSION in latest; do
             export VERSION
