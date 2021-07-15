@@ -17,7 +17,7 @@ ReactDOM.render(
     <Container>
       <Switch>
         <Route exact path="/" component={App}></Route>
-        <Route exact path="/lottery" component={Lottery}></Route>
+        {/* <Route exact path="/lottery" component={Lottery}></Route>  Ya se añade la lottery como component en el Home*/}
         <Route exact path="/chat" component={getChat}></Route>
         <Route exact path="/stats" component={Stats}></Route>
         <Route component={NotFound} />
