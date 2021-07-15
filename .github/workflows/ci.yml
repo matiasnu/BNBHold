@@ -10,9 +10,9 @@
 # git commit -a -m "release"
 # 4) Se tagea la version en el repo local, por ejemplo
 # git tag -a v1.0.3
-# 5) Se pushean los tags a origin, por ejemplo
+# 5) Se pushean los tags a origin (este evento no ejecuta el pipeline), por ejemplo
 # git push origin --tags
-# 6) Se pushean los cambios, lo cual generara la release o snapshot
+# 6) Se pushean los cambios (este push ejecuta el pipeline), lo cual generara la release o snapshot
 # git push
 
 # Si por alguna razon se genero mal la release, se debe eliminar el TAG y generar de nuevo la release
@@ -41,7 +41,7 @@ env:
   # TODO: remember to update version on new tag
   # Si se quiere generar una release
   # LATEST_TAG default snapshot
-  LATEST_TAG: v1.0.2
+  LATEST_TAG: v1.0.1
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
 
@@ -55,7 +55,7 @@ jobs:
       matrix:
         # TODO: remember to add new tags to schedule
         # La referencia al tag debe existir, ya que se tiene que generar una imagen de docker con la version del codigo fuente asociado
-        ref: [ v1.0.2]
+        ref: [ v1.0.1 ] 
         # Por ahora no la usamos, pero es util para testear en distintas versiones de node nuestra ui
         # nodeversion: [ v16.3.0 ]
 
