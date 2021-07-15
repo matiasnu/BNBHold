@@ -16,7 +16,7 @@
 # git push
 # Si por alguna razon se genero mal la release, se debe eliminar el TAG y generar de nuevo la release
 # Para eliminar un Tag remoto, se debe ejecutar
-# git push --delete origin TAGNAME
+# git push --delete origin v1.0.3
 # Y luego para eliminar el TAG local, ejecutar por ejemplo
 # git tag -d v1.0.3
 # Debe existir una numeracion completa de TAGS v1.0.0 / v1.0.3 / v1.0.3 / etc.
@@ -105,7 +105,6 @@ jobs:
           echo VERSION=$VERSION
           docker-compose -f docker-compose.yml build web
           docker-compose -f docker-compose.yml push web
-          done
         fi
 
     - name: Publishing docker images version
