@@ -43,12 +43,13 @@ jobs:
       with:
         ref: ${{ matrix.ref }}
 
-    - run: |
+    - name: Printing some git values 
+      run: |
       echo "About repo ${{ github.event.inputs.name }}!"
       echo "- in ${{ github.event.inputs.home }}!"
 
-
-    - run: echo $DOCKER_HUB_PASS | docker login docker.io -u $DOCKER_HUB_USER --password-stdin
+    - name: Logging into github
+      run: echo $DOCKER_HUB_PASS | docker login docker.io -u $DOCKER_HUB_USER --password-stdin
 
     # NOTAS
     # Solo se publica una nueva imagen si el pipeline se ejecuto satisfactoriamente, en caso de error no 
@@ -67,7 +68,8 @@ jobs:
     # La imagen de docker principal es la web y esa es la que vamos a publicar
     # Si es un snapshot le ponemos dev como tag
     # Si es una version le ponemos el tag de la vesion que definio el developer
-    - run: |
+    - name: Deploying dockerized environment
+      run: |
         echo 'Ejecutando entorno dockerizado'
         export VERSION=${{ matrix.ref }}
         [ "$VERSION" == "master" ] && export VERSION=snapshot
@@ -75,15 +77,18 @@ jobs:
 
         docker-compose -f docker-compose.yml up --build -d
         
-    - run: |
+    - name: Testing over environment        
+      run: |
         echo 'Generando Tests sobre el entorno'
 
-    - run: |
+    - name: Stoping environment
+      run: |
         echo 'Deteniendo/eliminando el entorno
         docker-compose -f docker-compose.yml down
 
-    - run: |
-        echo 'Generando imagenes de docker sdnapshot si aplica'
+    - name: Publishing docker images snapshot
+      run: |
+        echo 'Generando imagenes de docker snapshot si aplica'
         export VERSION=${{ matrix.ref }}
         ([ "$VERSION" == "master" ] ||  [ "$LATEST_TAG" == "snapshot" ]) && export VERSION=snapshot
         echo VERSION=$VERSION
@@ -91,7 +96,8 @@ jobs:
         docker-compose -f docker-compose.yml build web
         docker-compose -f docker-compose.yml push web
 
-    - run: |
+    - name: Publishing docker images version
+      run: |
         echo 'Generando imagenes de docker sdnapshot si aplica'
         export VERSION=${{ matrix.ref }}
 
