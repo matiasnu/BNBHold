@@ -75,7 +75,7 @@ jobs:
         [ "$VERSION" == "master" ] && export VERSION=snapshot
         echo VERSION=$VERSION
 
-        docker-compose -f docker-compose.yml up --build -d
+        docker-compose -f docker-compose.yml up --build -d --remove-orphans
         
     - name: Testing over environment        
       run: |
