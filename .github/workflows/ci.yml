@@ -25,7 +25,7 @@
 # Si es un snapshot -- por defecto-- le ponemos snapshot como tag, para que sobreescriba a las snapshots anteriores
 # Si es una version le ponemos el tag de la vesion que definio el developer, respetando la secuencia y la semantica
 
-name: Entorno CI dockerizado
+name: Entorno CI dockerizado pipeline
 
 on:
 # Solo master tiene CI/CD
