@@ -1,24 +1,26 @@
 # NOTAS
 # Solo se publica una nueva imagen si el pipeline se ejecuto satisfactoriamente, en caso de error no 
 # Para generar una imagen tagueada de docker es necesario que exista un tag con el mismo nombre de version en el repo, para esto se usa LATEST_TAG y se compara con la ref del repo
-# Procedimiento
-# 1) Se agrega el tag de la version en el repo, por ejemplo
-# git tag -a v1.0.3
-# 2) Se pushean los tags a origin, por ejemplo
-# git push origin --tags
-# 3) Se agrega el tag en LATEST_TAG. por ejemplo
+# Procedimiento para una release con Version Tags o snapshot
+# 1) Se agrega el tag que se quiere crear en LATEST_TAG del archivo ci.yml. por ejemplo
 # LATEST_TAG: v1.0.3
-# 4) Se agrega el tag en ref, por ejemplo
+# 2) Se agrega el tag que se quiere crear en ref del archivo ci.yml, por ejemplo
 # ref: [ v1.0.3]
-# 5) Se comitean los archivos, por ejemplo
-# git commit -a -m "fix syntax error"
+# 3) Se comitea en el repo local (no pushear)
+# git commit -a -m "release"
+# 4) Se tagea la version en el repo local, por ejemplo
+# git tag -a v1.0.3
+# 5) Se pushean los tags a origin, por ejemplo
+# git push origin --tags
 # 6) Se pushean los cambios, lo cual generara la release o snapshot
 # git push
+
 # Si por alguna razon se genero mal la release, se debe eliminar el TAG y generar de nuevo la release
 # Para eliminar un Tag remoto, se debe ejecutar
 # git push --delete origin v1.0.3
 # Y luego para eliminar el TAG local, ejecutar por ejemplo
 # git tag -d v1.0.3
+# Luego volver a realizar todo el proceso, ya que para que se dispare el webhook es necesario un push
 # Debe existir una numeracion completa de TAGS v1.0.0 / v1.0.3 / v1.0.3 / etc.
 
 # La imagen de docker principal es la web y esa es la que vamos a publicar
@@ -39,7 +41,7 @@ env:
   # TODO: remember to update version on new tag
   # Si se quiere generar una release
   # LATEST_TAG default snapshot
-  LATEST_TAG: v1.0.1
+  LATEST_TAG: v1.0.2
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
 
@@ -53,7 +55,7 @@ jobs:
       matrix:
         # TODO: remember to add new tags to schedule
         # La referencia al tag debe existir, ya que se tiene que generar una imagen de docker con la version del codigo fuente asociado
-        ref: [ v1.0.1]
+        ref: [ v1.0.2]
         # Por ahora no la usamos, pero es util para testear en distintas versiones de node nuestra ui
         # nodeversion: [ v16.3.0 ]
 
