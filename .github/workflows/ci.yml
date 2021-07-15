@@ -12,7 +12,7 @@ env:
   # TODO: remember to update version on new tag
   # Si se quiere generar una release
   # LATEST_TAG default snapshot
-  LATEST_TAG: v1.0.0
+  LATEST_TAG: v1.0.2
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
 
@@ -26,7 +26,7 @@ jobs:
       matrix:
         # TODO: remember to add new tags to schedule
         # La referencia al tag debe existir
-        ref: [ v1.0.0]
+        ref: [ v1.0.2]
         # Por ahora no la usamos, pero es util para testear en distintas versiones de node nuestra ui
         # nodeversion: [ v16.3.0 ]
 
