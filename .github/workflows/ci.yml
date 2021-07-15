@@ -1,3 +1,30 @@
+# NOTAS
+# Solo se publica una nueva imagen si el pipeline se ejecuto satisfactoriamente, en caso de error no 
+# Para generar una imagen tagueada de docker es necesario que exista un tag con el mismo nombre de version en el repo, para esto se usa LATEST_TAG y se compara con la ref del repo
+# Procedimiento
+# 1) Se agrega el tag de la version en el repo, por ejemplo
+# git tag -a v1.0.3
+# 2) Se pushean los tags a origin, por ejemplo
+# git push origin --tags
+# 3) Se agrega el tag en LATEST_TAG. por ejemplo
+# LATEST_TAG: v1.0.3
+# 4) Se agrega el tag en ref, por ejemplo
+# ref: [ v1.0.3]
+# 5) Se comitean los archivos, por ejemplo
+# git commit -a -m "fix syntax error"
+# 6) Se pushean los cambios, lo cual generara la release o snapshot
+# git push
+# Si por alguna razon se genero mal la release, se debe eliminar el TAG y generar de nuevo la release
+# Para eliminar un Tag remoto, se debe ejecutar
+# git push --delete origin TAGNAME
+# Y luego para eliminar el TAG local, ejecutar por ejemplo
+# git tag -d v1.0.3
+# Debe existir una numeracion completa de TAGS v1.0.0 / v1.0.3 / v1.0.3 / etc.
+
+# La imagen de docker principal es la web y esa es la que vamos a publicar
+# Si es un snapshot -- por defecto-- le ponemos snapshot como tag, para que sobreescriba a las snapshots anteriores
+# Si es una version le ponemos el tag de la vesion que definio el developer, respetando la secuencia y la semantica
+
 name: Entorno CI dockerizado
 
 on:
@@ -12,7 +39,7 @@ env:
   # TODO: remember to update version on new tag
   # Si se quiere generar una release
   # LATEST_TAG default snapshot
-  LATEST_TAG: v1.0.3
+  LATEST_TAG: v1.0.1
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
 
@@ -26,7 +53,7 @@ jobs:
       matrix:
         # TODO: remember to add new tags to schedule
         # La referencia al tag debe existir
-        ref: [ v1.0.3]
+        ref: [ v1.0.1]
         # Por ahora no la usamos, pero es util para testear en distintas versiones de node nuestra ui
         # nodeversion: [ v16.3.0 ]
 
@@ -51,23 +78,6 @@ jobs:
     - name: Logging into github
       run: echo $DOCKER_HUB_PASS | docker login docker.io -u $DOCKER_HUB_USER --password-stdin
 
-    # NOTAS
-    # Solo se publica una nueva imagen si el pipeline se ejecuto satisfactoriamente, en caso de error no 
-    # Para generar una imagen tagueada de docker es necesario que exista un tag con el mismo nombre de version en el repo, para esto se usa LATEST_TAG y se compara con la ref del repo
-    # Procedimiento
-    # 1) Se agrega el tag de la version en el repo
-    # git tag -a v1.0.0
-    # 2) Se pushean los tags a origin
-    # git push origin --tags
-    # 3) Se agrega el tag en LATEST_TAG. por ejemplo
-    # LATEST_TAG: v1.0.0
-    #
-    #
-    #
-    
-    # La imagen de docker principal es la web y esa es la que vamos a publicar
-    # Si es un snapshot le ponemos dev como tag
-    # Si es una version le ponemos el tag de la vesion que definio el developer
     - name: Deploying dockerized environment
       run: |
         echo 'Ejecutando entorno dockerizado'
@@ -90,11 +100,13 @@ jobs:
       run: |
         echo 'Generando imagenes de docker snapshot si aplica'
         export VERSION=${{ matrix.ref }}
-        ([ "$VERSION" == "master" ] ||  [ "$LATEST_TAG" == "snapshot" ]) && export VERSION=snapshot
-        echo VERSION=$VERSION
-
-        docker-compose -f docker-compose.yml build web
-        docker-compose -f docker-compose.yml push web
+        if [ "$VERSION" == "master" ] ||  [ "$LATEST_TAG" == "snapshot" ]; then
+          export VERSION=snapshot
+          echo VERSION=$VERSION
+          docker-compose -f docker-compose.yml build web
+          docker-compose -f docker-compose.yml push web
+          done
+        fi
 
     - name: Publishing docker images version
       run: |
