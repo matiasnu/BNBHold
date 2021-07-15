@@ -45,8 +45,8 @@ jobs:
 
     - name: Printing some git values 
       run: |
-      echo "About repo ${{ github.event.inputs.name }}!"
-      echo "- in ${{ github.event.inputs.home }}!"
+        echo "About repo ${{ github.event.inputs.name }}!"
+        echo "- in ${{ github.event.inputs.home }}!"
 
     - name: Logging into github
       run: echo $DOCKER_HUB_PASS | docker login docker.io -u $DOCKER_HUB_USER --password-stdin
