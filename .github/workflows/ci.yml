@@ -2,25 +2,36 @@
 # Solo se publica una nueva imagen si el pipeline se ejecuto satisfactoriamente, en caso de error no 
 # Para generar una imagen tagueada de docker es necesario que exista un tag con el mismo nombre de version en el repo, para esto se usa LATEST_TAG y se compara con la ref del repo
 # Procedimiento para una release con Version Tags o snapshot
-# 1) Se agrega el tag que se quiere crear en LATEST_TAG del archivo ci.yml. por ejemplo
+
+# 1) Se agrega el tag que se quiere crear en la variable de entorno LATEST_TAG del archivo ci.yml. por ejemplo
 # LATEST_TAG: v1.0.3
-# 2) Se agrega el tag que se quiere crear en ref del archivo ci.yml, por ejemplo
+
+# 2) Se agrega el tag que se quiere crear en jobs.schedule-push.strategy.matrix.ref del archivo ci.yml, por ejemplo
 # ref: [ v1.0.3]
-# 3) Se comitea en el repo local (no pushear)
+
+# 3) Se comitea en el repo local, sea cual sea el branch
 # git commit -a -m "release"
-# 4) Se tagea la version en el repo local, por ejemplo
-# git tag -a v1.0.3
-# 5) Se pushean los tags a origin (este evento no ejecuta el pipeline), por ejemplo
-# git push origin --tags
+
+# 4) En el caso de requerir un merge contra master se hace el merge
 # 6) Se pushean los cambios (este push ejecuta el pipeline), lo cual generara la release o snapshot
 # git push
+
+# 4) En el caso de estar parado en un repo que no es master
+# git checkout master
+# git pull
+# git tag -a 1.0.1 -m "release..."
+# git push --tags
+
+# 5) En el caso de estar parado en master
+# git tag -a 1.0.1 -m "release..."
+# git push --tags
+
 
 # Si por alguna razon se genero mal la release, se debe eliminar el TAG y generar de nuevo la release
 # Para eliminar un Tag remoto, se debe ejecutar
 # git push --delete origin v1.0.3
 # Y luego para eliminar el TAG local, ejecutar por ejemplo
 # git tag -d v1.0.3
-# Luego volver a realizar todo el proceso, ya que para que se dispare el webhook es necesario un push
 # Debe existir una numeracion completa de TAGS v1.0.0 / v1.0.3 / v1.0.3 / etc.
 
 # La imagen de docker principal es la web y esa es la que vamos a publicar
@@ -31,11 +42,18 @@ name: Entorno CI dockerizado pipeline
 
 on:
 # Solo master tiene CI/CD
+# always run tests on merge except on document and ci changes
   push:
     branches: [ master ]
+    paths-ignore:
+      - '**.md'
+      - '.github/workflows/*yml'    
   pull_request:
     branches: [ master ]
-#  workflow-dispatch: # Allow manual execution  
+#  workflow-dispatch: # Allow manual execution
+    paths-ignore:
+      - '**.md'
+      - '.github/workflows/*yml'  
 
 env:
   # TODO: remember to update version on new tag
