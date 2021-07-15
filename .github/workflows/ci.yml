@@ -1,23 +1,18 @@
-# This workflow will build a Java project with Gradle
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
-
-name: Javascript CI dockerizado
+name: Entorno CI dockerizado
 
 on:
+# Solo master tiene CI/CD
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
 #  workflow-dispatch: # Allow manual execution  
 
-
 env:
   # TODO: remember to update version on new tag
   # Si se quiere generar una release
-  # default dev
-  #LATEST_TAG: v1.0.0
-  #LATEST_TAG: v1.1.0
-  LATEST_TAG: dev
+  # LATEST_TAG default snapshot
+  LATEST_TAG: v1.0.0
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
 
@@ -29,37 +24,77 @@ jobs:
 
     strategy:
       matrix:
-#        node-version: [v16.0.0]
-        # FIXME: is it possible to automatic parse refs?
         # TODO: remember to add new tags to schedule
-        # refs can be local or remote branches, or tags 
-        ref:
-          - master 
-          - v1.1.0  
+        # La referencia al tag debe existir
+        ref: [ master, v1.0.0]
+        # Por ahora no la usamos, pero es util para testear en distintas versiones de node nuestra ui
+        # nodeversion: [ v16.3.0 ]
 
     steps:
+    
+    - name: Output Run ID
+      run: echo ${{ github.run_id }}
+
+    - name: Output Run Number
+      run: echo ${{ github.run_number }}
+
     - name: Checkout repo code
       uses: actions/checkout@v2
       with:
         ref: ${{ matrix.ref }}
 
+    - run: |
+      echo "About repo ${{ github.event.inputs.name }}!"
+      echo "- in ${{ github.event.inputs.home }}!"
+
+
     - run: echo $DOCKER_HUB_PASS | docker login docker.io -u $DOCKER_HUB_USER --password-stdin
 
+    # NOTAS
+    # Solo se publica una nueva imagen si el pipeline se ejecuto satisfactoriamente, en caso de error no 
+    # Para generar una imagen tagueada de docker es necesario que exista un tag con el mismo nombre de version en el repo, para esto se usa LATEST_TAG y se compara con la ref del repo
+    # Procedimiento
+    # 1) Se agrega el tag de la version en el repo
+    # git tag -a v1.0.0
+    # 2) Se pushean los tags a origin
+    # git push origin --tags
+    # 3) Se agrega el tag en LATEST_TAG. por ejemplo
+    # LATEST_TAG: v1.0.0
+    #
+    #
+    #
+    
     # La imagen de docker principal es la web y esa es la que vamos a publicar
     # Si es un snapshot le ponemos dev como tag
     # Si es una version le ponemos el tag de la vesion que definio el developer
     - run: |
-        echo 'Generando imagenes de docker'
+        echo 'Ejecutando entorno dockerizado'
         export VERSION=${{ matrix.ref }}
         [ "$VERSION" == "master" ] && export VERSION=snapshot
         echo VERSION=$VERSION
 
+        docker-compose -f docker-compose.yml up --build -d
+        
+    - run: |
+        echo 'Generando Tests sobre el entorno'
+
+    - run: |
+        echo 'Deteniendo/eliminando el entorno
+        docker-compose -f docker-compose.yml down
+
+    - run: |
+        echo 'Generando imagenes de docker sdnapshot si aplica'
+        export VERSION=${{ matrix.ref }}
+        ([ "$VERSION" == "master" ] ||  [ "$LATEST_TAG" == "snapshot" ]) && export VERSION=snapshot
+        echo VERSION=$VERSION
+
         docker-compose -f docker-compose.yml build web
         docker-compose -f docker-compose.yml push web
-        docker-compose -f docker-compose.yml up -d
 
-        # tag and push version latest, only when VERSION is a well formatted one
-        # and LATEST_TAG matches VERSION, otherwise it is not generated
+    - run: |
+        echo 'Generando imagenes de docker sdnapshot si aplica'
+        export VERSION=${{ matrix.ref }}
+
         if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
           for VERSION in latest; do
             export VERSION
@@ -68,6 +103,7 @@ jobs:
           docker-compose -f docker-compose.yml push web
           done
         fi
+
 
 #    - name: Use Node.js ${{ matrix.node-version}}
 #      uses: actions/setup-node@v2
@@ -105,3 +141,11 @@ jobs:
 #        publish_dir: ./build
 
 
+# Interesamte para generar una version automaticamente
+#      - run: |
+#         date > generated.txt
+#         git config user.name github-actions
+#         git config user.email github-actions@github.com
+#         git add .
+#         git commit -m "generated"
+#         git push
