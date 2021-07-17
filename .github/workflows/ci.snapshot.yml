@@ -87,7 +87,7 @@ jobs:
         run: echo $DOCKER_HUB_PASS | docker login docker.io -u $DOCKER_HUB_USER --password-stdin
       
       - name: Build docker images and publish to Dockehub
-      - run: |
+        run: |
           export VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && export VERSION=$VERSION
           [ "$VERSION" == "master" ] && export VERSION=dev
