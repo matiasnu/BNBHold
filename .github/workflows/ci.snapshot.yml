@@ -49,9 +49,9 @@ on:
       - master
     tags:
       - '*'
-    paths-ignore:
-      - '**.md'
-      - '.github/workflows/*yml'
+#    paths-ignore:
+#      - '**.md'
+#      - '.github/workflows/*yml'
 
 env:
   # TODO: remember to update version on new tag
