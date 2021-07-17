@@ -8,11 +8,11 @@ ENV PATH /app/node_modules/.bin:$PATH
 RUN apk --no-cache add git curl bash
 
 # Install dependencies
-COPY package*.json ./
-RUN yarn install --frozen-lockfile
-
+# COPY package*.json ./
 # Build
 COPY . .
+RUN yarn install --frozen-lockfile
+
 RUN yarn run build
 
 # TODO

@@ -1,22 +1,65 @@
-# This workflow will build a Java project with Gradle
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+# NOTAS
+# Solo se publica una nueva imagen si el pipeline se ejecuto satisfactoriamente, en caso de error no 
+# Para generar una imagen tagueada de docker es necesario que exista un tag con el mismo nombre de version en el repo, para esto se usa LATEST_TAG y se compara con la ref del repo
+# Procedimiento para una release con Version Tags o snapshot
 
-name: Javascript CI dockerizado
+# 1) Se agrega el tag que se quiere crear en la variable de entorno LATEST_TAG del archivo ci.yml. por ejemplo
+# LATEST_TAG: v1.0.3
+
+# 2) Se agrega el tag que se quiere crear en jobs.schedule-push.strategy.matrix.ref del archivo ci.yml, por ejemplo
+# ref: [ v1.0.3]
+
+# 3) Se comitea en el repo local, sea cual sea el branch
+# git commit -a -m "release"
+
+# 4) En el caso de requerir un merge contra master se hace el merge
+# 6) Se pushean los cambios (este push ejecuta el pipeline), lo cual generara la release o snapshot
+# git push
+
+# 4) En el caso de estar parado en un repo que no es master
+# git checkout master
+# git pull
+# git tag -a 1.0.1 -m "release..."
+# git push --tags
+
+# 5) En el caso de estar parado en master
+# git tag -a 1.0.1 -m "release..."
+# git push --tags
+
+
+# Si por alguna razon se genero mal la release, se debe eliminar el TAG y generar de nuevo la release
+# Para eliminar un Tag remoto, se debe ejecutar
+# git push --delete origin v1.0.3
+# Y luego para eliminar el TAG local, ejecutar por ejemplo
+# git tag -d v1.0.3
+# Debe existir una numeracion completa de TAGS v1.0.0 / v1.0.3 / v1.0.3 / etc.
+
+# La imagen de docker principal es la web y esa es la que vamos a publicar
+# Si es un snapshot -- por defecto-- le ponemos snapshot como tag, para que sobreescriba a las snapshots anteriores
+# Si es una version le ponemos el tag de la vesion que definio el developer, respetando la secuencia y la semantica
+
+name: Entorno CI dockerizado pipeline
 
 on:
+# Solo master tiene CI/CD
+# always run tests on merge except on document and ci changes
   push:
-    branches: [ v0.1 ]
+    branches: [ master ]
+    paths-ignore:
+      - '**.md'
+      - '.github/workflows/*yml'    
   pull_request:
-    branches: [ v0.1 ]
-#  workflow-dispatch: # Allow manual execution  
-
+    branches: [ master ]
+#  workflow-dispatch: # Allow manual execution
+    paths-ignore:
+      - '**.md'
+      - '.github/workflows/*yml'  
 
 env:
   # TODO: remember to update version on new tag
   # Si se quiere generar una release
-  # default dev
-  #LATEST_TAG: v1.0.0
-  LATEST_TAG: dev
+  # LATEST_TAG default snapshot
+  LATEST_TAG: v1.0.1
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
 
@@ -28,46 +71,79 @@ jobs:
 
     strategy:
       matrix:
-#        node-version: [v16.0.0]
-        # FIXME: is it possible to automatic parse refs?
         # TODO: remember to add new tags to schedule
-        # refs can be local or remote branches, or tags 
-        ref:
-          - v0.1 
-          - v1.0.0  
+        # La referencia al tag debe existir, ya que se tiene que generar una imagen de docker con la version del codigo fuente asociado
+        ref: [ v1.0.1 ] 
+        # Por ahora no la usamos, pero es util para testear en distintas versiones de node nuestra ui
+        # nodeversion: [ v16.3.0 ]
 
     steps:
+    
+    - name: Output Run ID
+      run: echo ${{ github.run_id }}
+
+    - name: Output Run Number
+      run: echo ${{ github.run_number }}
+
     - name: Checkout repo code
       uses: actions/checkout@v2
       with:
         ref: ${{ matrix.ref }}
 
-    - run: echo $DOCKER_HUB_PASS | docker login docker.io -u $DOCKER_HUB_USER --password-stdin
+    - name: Printing some git values 
+      run: |
+        echo "About repo ${{ github.event.inputs.name }}!"
+        echo "- in ${{ github.event.inputs.home }}!"
 
-    # La imagen de docker principal es la web y esa es la que vamos a publicar
-    # Si es un snapshot le ponemos dev como tag
-    # Si es una version le ponemos el tag de la vesion que definio el developer
-    - run: |
-        echo 'Generando imagenes de docker'
+    - name: Logging into github
+      run: echo $DOCKER_HUB_PASS | docker login docker.io -u $DOCKER_HUB_USER --password-stdin
+
+    - name: Deploying dockerized environment
+      run: |
+        echo 'Ejecutando entorno dockerizado'
         export VERSION=${{ matrix.ref }}
-        # Asumo que v0.1 es Master
-        [ "$VERSION" == "v0.1" ] && export VERSION=snapshot
+        [ "$VERSION" == "master" ] && export VERSION=snapshot
         echo VERSION=$VERSION
 
-        docker-compose -f docker-compose.yml build web
-        docker-compose -f docker-compose.yml push web
-        docker-compose -f docker-compose.yml up -d
+        docker-compose -f docker-compose.yml up --build -d --remove-orphans
+        
+    - name: Testing over environment        
+      run: |
+        echo 'Generando Tests sobre el entorno'
 
-        # tag and push version latest, only when VERSION is a well formatted one
-        # and LATEST_TAG matches VERSION, otherwise it is not generated
+    - name: Stoping environment
+      run: |
+        echo 'Deteniendo/eliminando el entorno'
+        docker-compose -f docker-compose.yml down
+
+    - name: Publishing docker images snapshot tag
+      run: |
+        echo 'Generando imagenes de docker snapshot si aplica'
+        export VERSION=${{ matrix.ref }}
+        echo $VERSION
+
+        if  [ "$VERSION"  == "master" ] || [ "$LATEST_TAG" == "snapshot" ]; then
+          export VERSION=snapshot
+          echo VERSION=$VERSION
+          docker-compose -f docker-compose.yml build web
+          docker-compose -f docker-compose.yml push web
+        fi
+
+    - name: Publishing docker images for version tags
+      run: |
+        echo 'Generando imagenes de docker correspondientes a releases'
+        export VERSION=${{ matrix.ref }}
+        echo $VERSION
+
         if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
           for VERSION in latest; do
             export VERSION
             echo VERSION=$VERSION
-          docker-compose -f docker-compose.yml build web
-          docker-compose -f docker-compose.yml push web
+            docker-compose -f docker-compose.yml build web
+            docker-compose -f docker-compose.yml push web
           done
         fi
+
 
 #    - name: Use Node.js ${{ matrix.node-version}}
 #      uses: actions/setup-node@v2
@@ -105,3 +181,11 @@ jobs:
 #        publish_dir: ./build
 
 
+# Interesamte para generar una version automaticamente
+#      - run: |
+#         date > generated.txt
+#         git config user.name github-actions
+#         git config user.email github-actions@github.com
+#         git add .
+#         git commit -m "generated"
+#         git push
