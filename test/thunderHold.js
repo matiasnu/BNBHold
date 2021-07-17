@@ -1,11 +1,11 @@
-// const Web3 = require('web3');
 const ThunderHold = artifacts.require("./ThunderHold.sol");
 let thunderHold;
-// const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+// Mock constants
+const marketingWallet = "0x22d491Bde2303f2f43325b2108D26f1eAbA1e32b";
 
 before( async () => {
     thunderHold = await ThunderHold.new(
-        "0x22d491Bde2303f2f43325b2108D26f1eAbA1e32b",
+        marketingWallet,
         Math.round(new Date().getTime() / 1000));
     });
 
@@ -13,7 +13,6 @@ contract('ThunderHold Tests', function(accounts){
 
     it("is the marketingWallet deployed correctly", async() => {
         var marketingWalletContract = await thunderHold.marketingWallet.call();
-        var marketingWallet = "0x22d491Bde2303f2f43325b2108D26f1eAbA1e32b";
 
         assert.equal(marketingWalletContract, marketingWallet, "deploy error in marketing wallet");
     });
@@ -40,6 +39,26 @@ contract('ThunderHold Tests', function(accounts){
         var actualBalance = await web3.eth.getBalance(thunderHold.address);
         var expectedBalance = await web3.utils.toWei('0.09', 'ether'); // Me queda 0.9 ETH ya descontamos el 10%
         assert.deepEqual(actualBalance, expectedBalance, "Balance incorrect!");
+    });
+
+    it("has a referral user", async () => {
+        var contract_refferral = await thunderHold.getUserReferrer(accounts[0]);
+        var referral = "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1";
+        assert.equal(contract_refferral, referral, "referrals not working");
+    });
+
+    it("new buy lottery ticket", async () => {
+        var new_user = accounts[1];
+        var ticketsQuantity = 1;
+        var valueToWei = web3.utils.toWei(ticketsQuantity.toString(), "ether");
+        
+        await thunderHold.lottoDeposit(
+            ticketsQuantity,
+            {from: new_user, value: valueToWei, gas: 500000}
+        );
+        var lottoStats = await thunderHold.getlottoStats();
+        var lottoParticipations = lottoStats[6];
+        assert.equal(lottoParticipations, 1, "lottery failed!");
     });
 
     });
