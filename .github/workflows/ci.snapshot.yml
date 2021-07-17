@@ -39,11 +39,11 @@
 # Si es un snapshot -- por defecto-- le ponemos snapshot como tag, para que sobreescriba a las snapshots anteriores
 # Si es una version le ponemos el tag de la vesion que definio el developer, respetando la secuencia y la semantica
 
-name: Entorno CI snapshot vesions
+name: Entorno CI 'snapshot' vesions
 
 on:
   push:
-    # publish image as master=dev or on new tag
+    # publish image as master=snapshot or on new tag
     # except on document and ci changes
     branches:
       - master
@@ -64,7 +64,7 @@ env:
 jobs:
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux]
     if: github.event_name != 'schedule'
     steps:
       - uses: actions/checkout@v2
@@ -90,7 +90,7 @@ jobs:
         run: |
           export VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && export VERSION=$VERSION
-          [ "$VERSION" == "master" ] && export VERSION=dev
+          [ "$VERSION" == "master" ] && export VERSION=snapshot
 
           echo VERSION=$VERSION
           docker-compose -f docker-compose.yml build web
