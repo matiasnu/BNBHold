@@ -73,7 +73,9 @@ jobs:
       matrix:
         # TODO: remember to add new tags to schedule
         # La referencia al tag debe existir, ya que se tiene que generar una imagen de docker con la version del codigo fuente asociado
-        ref: [ v1.0.0 ] 
+        ref: 
+          - master 
+          - v1.0.0 
         # Por ahora no la usamos, pero es util para testear en distintas versiones de node nuestra ui
         # nodeversion: [ v16.3.0 ]
 
