@@ -57,7 +57,7 @@ env:
   # TODO: remember to update version on new tag
   # Si se quiere generar una release
   # LATEST_TAG default snapshot
-  LATEST_TAG: v1.0.0
+  LATEST_TAG: v1.0.1
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
 
@@ -98,10 +98,8 @@ jobs:
 
           # tag and push versions X.X and latest
           if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
-            for VERSION in $(echo $VERSION | cut -d. -f1,2)  latest; do
-              export VERSION
+              export VERSION="latest"
               echo VERSION=$VERSION
               docker-compose -f docker-compose.yml build web
               docker-compose -f docker-compose.yml push web
-            done
           fi
