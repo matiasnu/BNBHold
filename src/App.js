@@ -521,12 +521,11 @@ class App extends Component {
       </React.Fragment>
     );
 
+    var my_stake_check = myStakeCheckInProgress;
     if (true) {
-      var my_stake_check = myStakeCheckSuccess;
-    } else {
-      my_stake_check = myStakeCheckInProgress;
+      my_stake_check = myStakeCheckSuccess;
     }
-
+    
     var dashboardVisible = (
       <React.Fragment>
         <div className="address-block"></div>

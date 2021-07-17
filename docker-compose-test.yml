@@ -4,7 +4,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.frontend.ci
     image: marianodim/cryptohold:${VERSION:-dev}
     logging:
       driver: "json-file"
@@ -53,7 +53,12 @@ services:
       TRUFFLE_VERSION: "5.3.14"
 
 
-#  testcases:
-#    build:
-#      context: .
-#    command: echo Start test script here e.g. ./run_tests.sh
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.test.ci
+    depends_on:
+      - ganache
+    environment:
+      TRUFFLE_VERSION: "5.3.14"
+          
