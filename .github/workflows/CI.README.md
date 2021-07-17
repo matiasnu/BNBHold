@@ -4,7 +4,7 @@
 
 Solo se publica una nueva imagen si el pipeline se ejecuto satisfactoriamente.  
 Para generar una imagen tagueada de docker es necesario que exista un tag con el mismo nombre de version en el repo, para esto se usa LATEST_TAG y se compara con la ref/tags del repo.  
-Es importante que primero se pushee el tag del repo que luego se intentara publicar
+Es importante que primero se pushee el tag del repo que luego se intentara publicar.  
 
 ## Procedimiento para una release como "VERSION RELEASE TAG"
 
