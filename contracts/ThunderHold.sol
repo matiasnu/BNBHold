@@ -97,7 +97,7 @@ contract ThunderHold {
     mapping(uint256 => nLotto) internal nlottos;
 
     uint256 public startUNIX;
-    address payable private marketingWallet;
+    address payable public marketingWallet; //TODO Tuve que ponerla public para que se puedan realizar los tests
     address payable private developerWallet;
 
     event Newbie(address user);
