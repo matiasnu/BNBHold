@@ -27,11 +27,12 @@ jobs:
     if: github.event_name != 'schedule'
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          echo "Buildeamos todos las imagenes requeridas"
+      
+      - name: Buildeamos todos las imagenes requeridas
+        run: |
           docker-compose --file docker-compose-test.yml build
-      - run: |
-          echo "Levantamos el entorno"
+      - name: Levantamos el entorno
+        run: |
           docker-compose --file docker-compose-test.yml up -d --remove-orphans 
   
   build:
