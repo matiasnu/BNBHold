@@ -6,8 +6,8 @@ on:
     # except on document and ci changes
     branches:
       - master
-#    tags:
-#      - '*'
+    tags:
+      - '*'
 #    paths-ignore:
 #      - '**.md'
 #      - '.github/workflows/*yml'
