@@ -27,13 +27,17 @@ jobs:
     if: github.event_name != 'schedule'
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Buildeamos todos las imagenes requeridas
         run: |
           docker-compose --file docker-compose-test.yml build
-      - name: Levantamos el entorno
+      - name: Levantamos el entorno de test y ejecutamos los tests
         run: |
           docker-compose --file docker-compose-test.yml up -d --remove-orphans 
+      - name: Bajamos el entorno de test
+        run: |
+          docker-compose --file docker-compose-test.yml down
+
   
   build:
     needs: test
