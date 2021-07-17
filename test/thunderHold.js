@@ -23,4 +23,15 @@ contract('ThunderHold Tests', function(accounts){
         assert.notEqual(marketingWalletContract, deployWallet, "marketing wallet is deployWallet");
     });
 
+    it("new deposit in the contract", async () => {
+        var new_user = accounts[1];
+        await thunderHold.invest(
+            "0x94B50Ad34FD502831471B6f5583316820C77B94E", 0,
+            {from: new_user, value: String(11e16)}
+        );
+
+        var new_user_deposits = await thunderHold.getUserAmountOfDeposits(new_user);
+        assert.equal(new_user_deposits, 1 , "deposit failed");
+    });
+
     });
