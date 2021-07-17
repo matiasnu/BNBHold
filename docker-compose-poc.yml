@@ -1,0 +1,8 @@
+version: "3.2"
+
+services:
+
+  testcases:
+    build:
+      context: .
+    command: echo Start test script here e.g. ./run.sh

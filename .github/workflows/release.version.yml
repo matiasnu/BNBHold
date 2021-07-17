@@ -4,10 +4,10 @@
 # Procedimiento para una release con Version Tags o snapshot
 
 # 1) Se agrega el tag que se quiere crear en la variable de entorno LATEST_TAG del archivo ci.yml. por ejemplo
-# LATEST_TAG: v1.0.3
+# LATEST_TAG: v1.0.0
 
 # 2) Se agrega el tag que se quiere crear en jobs.schedule-push.strategy.matrix.ref del archivo ci.yml, por ejemplo
-# ref: [ v1.0.3]
+# ref: [ v1.0.0]
 
 # 3) Se comitea en el repo local, sea cual sea el branch
 # git commit -a -m "release"
@@ -19,19 +19,21 @@
 # 4) En el caso de estar parado en un repo que no es master
 # git checkout master
 # git pull
-# git tag -a 1.0.1 -m "release..."
+# git tag -a v1.0.0 -m "release..."
 # git push --tags
 
 # 5) En el caso de estar parado en master
-# git tag -a 1.0.1 -m "release..."
+# git tag -a v1.0.0 -m "release..."
 # git push --tags
+# Anlternativamente  se puede usar
+# git push origin v1.0.0
 
 
 # Si por alguna razon se genero mal la release, se debe eliminar el TAG y generar de nuevo la release
 # Para eliminar un Tag remoto, se debe ejecutar
-# git push --delete origin v1.0.3
+# git push --delete origin v1.0.0
 # Y luego para eliminar el TAG local, ejecutar por ejemplo
-# git tag -d v1.0.3
+# git tag -d v1.0.0
 # Debe existir una numeracion completa de TAGS v1.0.0 / v1.0.3 / v1.0.3 / etc.
 
 # La imagen de docker principal es la web y esa es la que vamos a publicar
@@ -44,22 +46,16 @@ on:
 # Solo master tiene CI/CD
 # always run tests on merge except on document and ci changes
   push:
-    branches: [ master ]
-    paths-ignore:
-      - '**.md'
-      - '.github/workflows/*yml'    
-  pull_request:
-    branches: [ master ]
-#  workflow-dispatch: # Allow manual execution
-    paths-ignore:
-      - '**.md'
-      - '.github/workflows/*yml'  
+    branches: [ omitir ]
+#    paths-ignore:
+#      - '**.md'
+#      - '.github/workflows/*yml'    
 
 env:
   # TODO: remember to update version on new tag
   # Si se quiere generar una release
   # LATEST_TAG default snapshot
-  LATEST_TAG: v1.0.1
+  LATEST_TAG: v1.0.0
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
 
@@ -73,12 +69,14 @@ jobs:
       matrix:
         # TODO: remember to add new tags to schedule
         # La referencia al tag debe existir, ya que se tiene que generar una imagen de docker con la version del codigo fuente asociado
-        ref: [ v1.0.1 ] 
+        ref: 
+          - master 
+          - v1.0.0 
         # Por ahora no la usamos, pero es util para testear en distintas versiones de node nuestra ui
         # nodeversion: [ v16.3.0 ]
 
     steps:
-    
+
     - name: Output Run ID
       run: echo ${{ github.run_id }}
 
@@ -87,8 +85,8 @@ jobs:
 
     - name: Checkout repo code
       uses: actions/checkout@v2
-      with:
-        ref: ${{ matrix.ref }}
+#        with:
+#        ref: ${{ matrix.ref }}
 
     - name: Printing some git values 
       run: |
@@ -110,6 +108,10 @@ jobs:
     - name: Testing over environment        
       run: |
         echo 'Generando Tests sobre el entorno'
+
+#    - name: Test using docker run
+#      run: |
+#        docker run --network container:webapp-frontend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:5000/        
 
     - name: Stoping environment
       run: |
@@ -136,56 +138,10 @@ jobs:
         echo $VERSION
 
         if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
-          for VERSION in latest; do
+          for VERSION in latest $(echo $VERSION); do
             export VERSION
             echo VERSION=$VERSION
             docker-compose -f docker-compose.yml build web
             docker-compose -f docker-compose.yml push web
           done
         fi
-
-
-#    - name: Use Node.js ${{ matrix.node-version}}
-#      uses: actions/setup-node@v2
-#      with:
-#        node-version: ${{ matrix.node-version}}
-
-
-
-#    Esta seccion de codigo es para buildear y pushear una imagen a dockerhub,pero no 
-#    para trabajar con docker-compose        
-#    - uses: mr-smithers-excellent/docker-build-push@v5
-#      name: Build & push Docker image
-#      with:
-#        image: marianodim/cryptohold
-#        tags: v1, latest
-#        registry: registry-url.io
-#        dockerfile: Dockerfile.ci
-#        username: ${{ secrets.DOCKER_USERNAME }}
-#        password: ${{ secrets.DOCKER_PASSWORD }}        
-
-#     Estos comandos deben ejecutarse dentro del container
-#    - name: Install Packages    
-#      run: yarn install --save-dev --loglevel verbose 
-    # CI=false es para que no cancele el building si encuentra un warning
-#    - name: Build page
-#      run: CI=false yarn run build --loglevel verbose
-
-# Comento esta seccion de gh-pages porque no funciona el despliegue, hay un problema cuando se define
-# el atributo homepage en el package.json, da un error de formato
-
-#    - name: Deploy to gh-pages
-#      uses: peaceiris/actions-gh-pages@v3
-#      with:
-#        github_token: ${{ secrets.GITHUB_TOKEN }}
-#        publish_dir: ./build
-
-
-# Interesamte para generar una version automaticamente
-#      - run: |
-#         date > generated.txt
-#         git config user.name github-actions
-#         git config user.email github-actions@github.com
-#         git add .
-#         git commit -m "generated"
-#         git push
