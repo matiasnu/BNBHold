@@ -46,9 +46,9 @@ jobs:
 #        run: |
 #          docker-compose --file docker-compose-test.yml logs
 
-      - name: Bajamos el entorno de test
-        run: |
-          docker-compose --file docker-compose-test.yml down
+#      - name: Bajamos el entorno de test
+#        run: |
+#          docker-compose --file docker-compose-test.yml down
 
   
   build:
