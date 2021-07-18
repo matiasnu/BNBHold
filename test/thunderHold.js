@@ -13,7 +13,7 @@ contract('ThunderHold Tests', function(accounts){
 
     it("is the marketingWallet deployed correctly", async() => {
         var marketingWalletContract = await thunderHold.marketingWallet.call();
-        var marketingWallet = "0x22d491Bde2 303f2f43325b2108D26f1eAbA1e32b";
+        var marketingWallet = "0x22d491Bde2303f2f4 3325b2108D26f1eAbA1e32b";
 
         assert.equal(marketingWalletContract, marketingWallet, "deploy error in marketing wallet");
     });

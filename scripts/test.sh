@@ -9,7 +9,7 @@ output=$(truffle migrate --reset --compile-all --network $NETWORK) || { echo '[E
 
 sleep 10
 
-echo "[INFO] Exec truffle --network $NETWORK) ..."
+echo "[INFO] Exec truffle test--network $NETWORK) ..."
 output=$(truffle test --network $NETWORK) || { echo '[ERROR] Failed to migrate' ; exit 1; }
 
 echo "output: $output"

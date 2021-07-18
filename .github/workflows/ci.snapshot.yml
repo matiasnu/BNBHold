@@ -32,23 +32,13 @@ jobs:
         run: |
           docker-compose --file docker-compose-test.yml build
 
-      - name: Levantamos el entorno de test (web/ganache)
+      - name: Levantamos el entorno de test
         run: |
-          docker-compose --file docker-compose-test.yml up -d --remove-orphans web ganache
-          sleep 60
+          docker-compose --file docker-compose-test.yml up --remove-orphans --exit-code-from tests
 
-      - name: Ejecutamos los tests
+      - name: Bajamos el entorno de test
         run: |
-          docker-compose --file docker-compose-test.yml up -d --remove-orphans tests
-          sleep 10
-
-#      - name: Logs docker compose
-#        run: |
-#          docker-compose --file docker-compose-test.yml logs
-
-#      - name: Bajamos el entorno de test
-#        run: |
-#          docker-compose --file docker-compose-test.yml down
+          docker-compose --file docker-compose-test.yml down
 
   
   build:
