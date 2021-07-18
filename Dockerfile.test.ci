@@ -11,29 +11,15 @@ ENV TRUFFLE_VERSION "5.3.14"
 RUN apk --no-cache add bash
 
 # Copio unicamente lo necesario para ejecutar truffle
-COPY /scripts/run.sh /app/run.sh
+COPY /scripts/test.sh /app/test.sh
 COPY migrations /app/migrations
 COPY contracts /app/contracts
-#COPY test /app/test
+COPY test /app/test
 COPY truffle-config.js /app/truffle-config.js
 
 # Install
 RUN npm install -g truffle@$TRUFFLE_VERSION && npm config set bin-links false
 
-# Solo es necesario para ejecutar en Ribkeby, pero no para el entorno de CI
-# && npm install @truffle/hdwallet-provider
+RUN chmod +x /app/test.sh
 
-RUN chmod +x /app/run.sh
-
-CMD ["/app/run.sh"]
-
-
-# Otra opcion
-#ENTRYPOINT ["truffle"]
-#CMD ["test", "--show-events", "--compile-all"]
-
-
-
-
-
-
+CMD ["/app/test.sh"]

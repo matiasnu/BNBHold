@@ -4,7 +4,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.frontend.ci
     image: marianodim/cryptohold:${VERSION:-dev}
     logging:
       driver: "json-file"
@@ -18,42 +18,3 @@ services:
       interval: 20s
       timeout: 10s
       retries: 20
-
-  ganache:
-    image: trufflesuite/ganache-cli:latest
-    ports:
-      - "8545:8545"
-    volumes:
-      - ./ganache_data:/ganache_data
-    entrypoint:
-      - node
-      - /app/ganache-core.docker.cli.js
-      - --deterministic
-      - --db=/tmp/db
-      - --accounts=20
-      - --mnemonic
-      - "myth like bonus scare over problem client lizard pioneer submit female collect"
-      - --networkId
-      - "5777"
-      - --hostname
-      - "ganache"
-      - --debug
-
-  # ENTRYPOINT ["node", "./build/cli.node.js"]
-  # ENTRYPOINT ["node", "/app/ganache-core.docker.cli.js"]
-  # https://github.com/digitaldonkey/ganache-cli-docker-compose/blob/master/docker-compose.yml
-
-  truffle:
-    build:
-      context: .
-      dockerfile: Dockerfile.truffle.ci
-    depends_on:
-      - ganache
-    environment:
-      TRUFFLE_VERSION: "5.3.14"
-
-
-  testcases:
-    build:
-      context: .
-    command: echo Start test script here e.g. ./run.sh

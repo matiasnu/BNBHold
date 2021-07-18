@@ -37,7 +37,7 @@ services:
       - "5777"
       - --hostname
       - "ganache"
-#      - --debug
+      - --debug
 
   # ENTRYPOINT ["node", "./build/cli.node.js"]
   # ENTRYPOINT ["node", "/app/ganache-core.docker.cli.js"]

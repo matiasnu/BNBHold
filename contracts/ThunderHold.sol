@@ -145,6 +145,7 @@ contract ThunderHold {
         //require(plan < 1, "Invalid plan");
 
         Feepayout(msg.value); // Cobran devs
+        
 
         User storage user = users[msg.sender];
         if (user.referrer == address(0)) {

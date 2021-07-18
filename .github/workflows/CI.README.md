@@ -8,7 +8,8 @@ Es importante que primero se pushee el tag del repo que luego se intentara publi
 
 ## Procedimiento para una release como "VERSION RELEASE TAG"
 
-Una vez realizados todos los cambios en el codigo que se quieren introducir en la version, se deben se seguir estos pasos
+Una vez realizados todos los cambios en el codigo que se quieren introducir en la version.
+Para que se genere una release lo importante es que se genere el evento push de un TAG y que ese TAG coincida con la ref/tag de git.
 
 1. Se agrega el TAG que en la variable de entorno LATEST_TAG del archivo ci.snashot.yml por ejemplo
    LATEST_TAG: v1.0.0
