@@ -14,4 +14,4 @@ output=$(truffle test --network $NETWORK) || { echo '[ERROR] Failed to migrate' 
 
 echo "output: $output"
 
-echo "::set-output name=TESTRESULT::$output"
+#echo "::set-output name=TESTRESULT::$output"
