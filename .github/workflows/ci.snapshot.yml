@@ -26,7 +26,8 @@ jobs:
     runs-on: [self-hosted, linux]
     if: github.event_name != 'schedule'
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repo code for testing
+        uses: actions/checkout@v2
 
       - name: Buildeamos todos las imagenes requeridas
         run: |
