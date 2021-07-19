@@ -2,7 +2,7 @@
   "name": "bnbhold",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
+    "dependencies": {
     "@portis/web3": "^4.0.0",
     "@truffle/hdwallet-provider": "^1.4.0",
     "@web3-react/portis-connector": "^6.1.9",
@@ -34,7 +34,7 @@
   "scripts": {
     "deploy": "yarn serve -s build/",
     "predeploy": "yarn run build",
-    "deplo-pages": "gh-pages -d build",
+    "deploy-pages": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
