@@ -10,6 +10,7 @@ before(async () => {
 });
 
 contract('ThunderHold Tests', function (accounts) {
+    const new_user = accounts[1];
 
     it("is the marketingWallet deployed correctly", async () => {
         var marketingWalletContract = await thunderHold.marketingWallet.call();
@@ -25,7 +26,6 @@ contract('ThunderHold Tests', function (accounts) {
     });
 
     it("new deposit in the contract", async () => {
-        var new_user = accounts[1];
         await thunderHold.invest(
             "0x94B50Ad34FD502831471B6f5583316820C77B94E", 0,
             { from: new_user, value: String(10e16), gas: 500000 } //Deposito 1 ETH
@@ -48,7 +48,6 @@ contract('ThunderHold Tests', function (accounts) {
     });
 
     it("new buy lottery ticket", async () => {
-        var new_user = accounts[1];
         var ticketsQuantity = 1;
         var valueToWei = web3.utils.toWei(ticketsQuantity.toString(), "ether");
 
@@ -58,7 +57,13 @@ contract('ThunderHold Tests', function (accounts) {
         );
         var lottoStats = await thunderHold.getlottoStats();
         var lottoParticipations = lottoStats[6];
-        assert.equal(lottoParticipations, 1, "lottery failed!");
+        assert.equal(lottoParticipations, ticketsQuantity, "lottery failed!");
+    });
+
+    it("user has a lottery ticket", async () => {
+        userLottoStats = await thunderHold.getUserlottoStats(new_user);
+        var userParticipations = userLottoStats[1];
+        assert.equal(userParticipations, 1, "user hasn't lottery ticket");
     });
 
 });
