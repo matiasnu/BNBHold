@@ -73,3 +73,14 @@ jobs:
               docker-compose -f docker-compose.yml build web
               docker-compose -f docker-compose.yml push web
           fi
+
+  deploy:
+    needs: build
+    runs-on: [self-hosted, linux]
+    if: github.event_name != 'schedule'
+    steps:
+      - name: Run npm build
+        run: npm run build
+
+      - name: Deply web page to gh-pages
+        run: npm run deploy-pages
