@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/BNBHold/static/css/main.ca2a323d.chunk.css",
-    "main.js": "/BNBHold/static/js/main.67e92612.chunk.js",
-    "main.js.map": "/BNBHold/static/js/main.67e92612.chunk.js.map",
+    "main.js": "/BNBHold/static/js/main.2c2163cf.chunk.js",
+    "main.js.map": "/BNBHold/static/js/main.2c2163cf.chunk.js.map",
     "runtime-main.js": "/BNBHold/static/js/runtime-main.c82a0ade.js",
     "runtime-main.js.map": "/BNBHold/static/js/runtime-main.c82a0ade.js.map",
     "static/js/2.74137530.chunk.js": "/BNBHold/static/js/2.74137530.chunk.js",
     "static/js/2.74137530.chunk.js.map": "/BNBHold/static/js/2.74137530.chunk.js.map",
     "index.html": "/BNBHold/index.html",
-    "precache-manifest.5af96986853600fc5fcd6e2455c67f1f.js": "/BNBHold/precache-manifest.5af96986853600fc5fcd6e2455c67f1f.js",
+    "precache-manifest.2282286614d90b17e18bba7e5315408e.js": "/BNBHold/precache-manifest.2282286614d90b17e18bba7e5315408e.js",
     "service-worker.js": "/BNBHold/service-worker.js",
     "static/css/main.ca2a323d.chunk.css.map": "/BNBHold/static/css/main.ca2a323d.chunk.css.map",
     "static/media/chatIcon.png": "/BNBHold/static/media/chatIcon.bddf4e24.png",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.c82a0ade.js",
     "static/js/2.74137530.chunk.js",
     "static/css/main.ca2a323d.chunk.css",
-    "static/js/main.67e92612.chunk.js"
+    "static/js/main.2c2163cf.chunk.js"
   ]
 }
