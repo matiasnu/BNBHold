@@ -42,7 +42,7 @@ Para que se genere una release lo importante es que se genere el evento push de 
 
 3. Se pushean los cambios al repositorio remoto
 
-`git push --tags`
+`git push`
 
 
 ## Eliminacion de TAGs
