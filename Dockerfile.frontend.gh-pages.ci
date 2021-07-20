@@ -1,8 +1,6 @@
 # pull official node base image
 FROM node:16-alpine3.14 as build-stage
 
-#ENV GITHUB_TOKEN : ${ACCESS_TOKEN}
-
 WORKDIR /app
 
 VOLUME /root/.ssh
@@ -16,8 +14,8 @@ RUN apk --no-cache add git bash curl openssh
 
 COPY . .
 
-RUN git config user.name $GITHUB_CONFIG_USERNAME
-RUN git config user.email $GITHUB_CONFIG_EMAIL
+RUN git config --global user.name "$GITHUB_CONFIG_USERNAME"
+RUN git config --global user.email "$GITHUB_CONFIG_EMAIL"
 
 RUN npm cache clean --force
 
