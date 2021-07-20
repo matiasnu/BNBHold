@@ -43,7 +43,7 @@ jobs:
          
       - name: Buildeamos la imagen para deploy en gh-pages
         run: |
-          docker-compose -f docker-compose-gh-pages.yml build --build-arg GITHUB_CONFIG_USERNAME=${{ steps.gitinfoid.outputs.GITHUB_CONFIG_USERNAME }} --build-arg GITHUB_CONFIG_EMAIL=${{ steps.gitinfoid.outputs.GITHUB_CONFIG_EMAIL }} gh-pages-deploy
+          docker-compose -f docker-compose-gh-pages.yml build --build-arg GITHUB_CONFIG_USERNAME="${{ steps.gitinfoid.outputs.GITHUB_CONFIG_USERNAME }}" --build-arg GITHUB_CONFIG_EMAIL="${{ steps.gitinfoid.outputs.GITHUB_CONFIG_EMAIL }}" gh-pages-deploy
       
       - name: Ejecutamos el deploy en gh-pages
         run: |
