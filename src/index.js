@@ -6,24 +6,26 @@ import { Lottery } from "./components/Lottery";
 import { NotFound } from "./components/NotFound";
 import Stats from "./components/Stats";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 import getChat from "./components/Chat";
 
 //ReactDOM.render(<App />, document.getElementById('root'));
 
 ReactDOM.render(
-  <Router>
+  <React.StrictMode>
+  <Router basename={process.env.PUBLIC_URL}>
     <Container>
       <Switch>
         <Route exact path="/" component={App}></Route>
         {/* <Route exact path="/lottery" component={Lottery}></Route>  Ya se añade la lottery como component en el Home*/}
         <Route exact path="/chat" component={getChat}></Route>
         <Route exact path="/stats" component={Stats}></Route>
-        <Route component={NotFound} />
+        <Route component={NotFound} status={404}/>
       </Switch>
     </Container>
-  </Router>,
+  </Router>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 

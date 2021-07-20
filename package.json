@@ -2,7 +2,8 @@
   "name": "bnbhold",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
+  "homepage": "https://Matiasnu.github.io/BNBHold",
+    "dependencies": {
     "@portis/web3": "^4.0.0",
     "@truffle/hdwallet-provider": "^1.4.0",
     "@web3-react/portis-connector": "^6.1.9",
