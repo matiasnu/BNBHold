@@ -22,7 +22,7 @@ env:
 
 jobs:
   deploy:
-  
+
 
     runs-on: [self-hosted, linux]
     if: github.event_name != 'schedule'
@@ -35,6 +35,7 @@ jobs:
         run: |
           echo ::set-output name=GITHUB_CONFIG_USERNAME::$(git config user.name)
           echo ::set-output name=GITHUB_CONFIG_EMAIL::$(git config user.email)
+          echo ::set-output name=SSH_PUBLIC_KEY::$()
         id: gitinfoid
 
       - name: Print environment variables
@@ -49,3 +50,4 @@ jobs:
       - name: Ejecutamos el deploy en gh-pages
         run: |
           docker run -i -v $HOME/.ssh:/root/.ssh bnbhold_gh-pages-deploy:latest npm run deploy-pages
+

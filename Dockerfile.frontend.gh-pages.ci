@@ -1,9 +1,9 @@
 # pull official node base image
-FROM node:16-alpine3.14 as build-stage
+FROM node:16-alpine3.14
 
 WORKDIR /app
 
-VOLUME /root/.ssh
+RUN mkdir -p /root/.ssh
 
 ENV PATH /app/node_modules/.bin:$PATH
 
@@ -16,10 +16,6 @@ COPY . .
 
 RUN git config --global user.name "mariano di maggio"
 RUN git config --global user.email "mariano.dim@gmail.com"
-
-RUN git remote -v
-
-RUN git config --list
 
 RUN npm cache clean --force
 
