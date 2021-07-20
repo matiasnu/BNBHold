@@ -14,8 +14,12 @@ RUN apk --no-cache add git bash curl openssh
 
 COPY . .
 
-RUN git config --global user.name "$GITHUB_CONFIG_USERNAME"
-RUN git config --global user.email "$GITHUB_CONFIG_EMAIL"
+RUN git config --global user.name "mariano di maggio"
+RUN git config --global user.email "mariano.dim@gmail.com"
+
+RUN git remote -v
+
+RUN git config --list
 
 RUN npm cache clean --force
 
