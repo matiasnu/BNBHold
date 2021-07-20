@@ -32,10 +32,14 @@ jobs:
       
       - name: Seteo variable de entorno  
         run: |
-          echo ::set-env name=GITHUB_CONFIG_USERNAME::$(git config user.user)
-          echo ::set-env name=GITHUB_CONFIG_EMAIL::$(git config user.email)
-          echo $GITHUB_CONFIG_USERNAME
-          echo $GITHUB_CONFIG_EMAIL
+          echo ::set-output name=GITHUB_CONFIG_USERNAME::$(git config user.user)
+          echo ::set-output name=GITHUB_CONFIG_EMAIL::$(git config user.email)
+        id: gitinfoid
+
+      - name: Print environment variables
+        run: |
+          echo ${{ steps.gitinfoid.outputs.GITHUB_CONFIG_USERNAME }}
+          echo ${{ steps.gitinfoid.outputs.GITHUB_CONFIG_EMAIL }}
 
       # - name: Buildeamos la imagen para deploy en gh-pages
       #   run: |
