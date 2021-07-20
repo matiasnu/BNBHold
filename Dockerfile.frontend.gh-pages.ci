@@ -1,6 +1,7 @@
 # pull official node base image
 FROM node:16-alpine3.14 as build-stage
 
+
 WORKDIR /app
 
 VOLUME /root/.ssh
