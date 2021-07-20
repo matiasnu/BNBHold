@@ -24,7 +24,9 @@ jobs:
 
   coverage:
     needs: test
+
     runs-on: [self-hosted, linux]
+
     if: github.event_name != 'schedule'
     steps:
       - name: Checkout repo code for testing
@@ -32,7 +34,7 @@ jobs:
 
       - name: Buildeamos la imagen para coverage
         run: |
-          docker-compose --file docker-compose-coverage.yml buil web-coverage
+          docker-compose --file docker-compose-coverage.yml build web-coverage
 
       - name: Ejecutamos docker con coverage
         run: |
@@ -40,7 +42,9 @@ jobs:
 
 
   test:
+    
     runs-on: [self-hosted, linux]
+    
     if: github.event_name != 'schedule'
     steps:
       - name: Checkout repo code for testing
@@ -64,7 +68,7 @@ jobs:
 
   
   build:
-    needs: test
+    needs: coverage
 
     runs-on: [self-hosted, linux]
 
