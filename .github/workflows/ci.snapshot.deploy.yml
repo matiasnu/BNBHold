@@ -1,0 +1,49 @@
+name: Entorno CI 'snapshot' vesions
+
+on:
+  push:
+    # publish image as master=snapshot or on new tag
+    # except on document and ci changes
+    branches:
+      - master
+    tags:
+      - '*'
+#    paths-ignore:
+#      - '**.md'
+#      - '.github/workflows/*yml'
+
+env:
+  # TODO: remember to update version on new tag
+  # Si se quiere generar una release
+  # LATEST_TAG default snapshot
+  LATEST_TAG: v1.0.4
+  DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
+  DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
+
+jobs:
+  deploy:
+
+    runs-on: [self-hosted, linux]
+    if: github.event_name != 'schedule'
+    steps:
+
+      - name: Checkout repo code
+        uses: actions/checkout@v2
+      
+      - name: Seteo variable de entorno  
+        run: |
+          echo ::set-env name=GITHUB_CONFIG_USERNAME::$(git config user.user)
+          echo ::set-env name=GITHUB_CONFIG_EMAIL::$(git config user.email)
+          echo $GITHUB_CONFIG_USERNAME
+          echo $GITHUB_CONFIG_EMAIL
+
+      # - name: Buildeamos la imagen para deploy en gh-pages
+      #   run: |
+      #     docker-compose -f docker-compose-gh-pages.yml build
+      #     --build-arg GITHUB_CONFIG_USERNAME=${{ env.GITHUB_CONFIG_USERNAME }} 
+      #     --build-arg GITHUB_CONFIG_EMAIL=${{ env.GITHUB_CONFIG_EMAIL }} 
+      #     gh-pages-deploy
+      
+      # - name: Ejecutamos el deploy en gh-pages
+      #   run: |
+      #     docker run -i -v $HOME/.ssh:/root/.ssh bnbhold_gh-pages-deploy:latest npm run deploy-pages

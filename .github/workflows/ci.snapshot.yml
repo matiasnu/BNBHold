@@ -5,7 +5,7 @@ on:
     # publish image as master=snapshot or on new tag
     # except on document and ci changes
     branches:
-      - master
+      - avoid
     tags:
       - '*'
 #    paths-ignore:
@@ -78,7 +78,7 @@ jobs:
       - name: Checkout repo code
         uses: actions/checkout@v2
 
-      - name: Logging into github
+      - name: Logging into dockerhub
         run: echo $DOCKER_HUB_PASS | docker login docker.io -u $DOCKER_HUB_USER --password-stdin
       
       - name: Build docker images and publish to Dockehub
@@ -107,10 +107,20 @@ jobs:
 
       - name: Checkout repo code
         uses: actions/checkout@v2
+      
+      - name: Seteo variable de entorno  
+        run: |
+          echo ::set-env name=GITHUB_CONFIG_USERNAME::$(git config user.user)
+          echo ::set-env name=GITHUB_CONFIG_EMAIL::$(git config user.email)
+          echo $GITHUB_CONFIG_USERNAME
+          echo $GITHUB_CONFIG_EMAIL
 
       - name: Buildeamos la imagen para deploy en gh-pages
         run: |
-          docker-compose -f docker-compose-gh-pages.yml build --build-arg=GITHUB_CONFIG_USERNAME="deployuser" --build-arg=GITHUB_CONFIG_EMAIL="deployuser@gmail.com" gh-pages-deploy
+          docker-compose -f docker-compose-gh-pages.yml build
+          --build-arg GITHUB_CONFIG_USERNAME=${{ env.GITHUB_CONFIG_USERNAME }} 
+          --build-arg GITHUB_CONFIG_EMAIL=${{ env.GITHUB_CONFIG_EMAIL }} 
+          gh-pages-deploy
       
       - name: Ejecutamos el deploy en gh-pages
         run: |
