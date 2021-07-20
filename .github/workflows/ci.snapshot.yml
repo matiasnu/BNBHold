@@ -22,12 +22,37 @@ env:
 
 jobs:
 
-  test:
+  coverage:
+    needs: test
+
     runs-on: [self-hosted, linux]
+
     if: github.event_name != 'schedule'
     steps:
       - name: Checkout repo code for testing
         uses: actions/checkout@v2
+
+      - name: Buildeamos la imagen para coverage
+        run: |
+          docker-compose --file docker-compose-coverage.yml build web-coverage
+
+      - name: Ejecutamos docker con coverage
+        run: |
+          docker run -i bnbhold_web-coverage:latest truffle run coverage
+
+
+  test:
+    
+    runs-on: [self-hosted, linux]
+    
+    if: github.event_name != 'schedule'
+    steps:
+      - name: Checkout repo code for testing
+        uses: actions/checkout@v2
+
+      - name: Downing pre up docker compose artifact
+        run: |
+          docker-compose --file docker-compose-test.yml down
 
       - name: Buildeamos todos las imagenes requeridas
         run: |
@@ -43,7 +68,7 @@ jobs:
 
   
   build:
-    needs: test
+    needs: coverage
 
     runs-on: [self-hosted, linux]
 
