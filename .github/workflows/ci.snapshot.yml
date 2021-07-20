@@ -38,7 +38,7 @@ jobs:
 
       - name: Ejecutamos docker con coverage
         run: |
-          docker run -it bnbhold_web-coverage:latest truffle run coverage
+          docker run -i bnbhold_web-coverage:latest truffle run coverage
 
 
   test:
