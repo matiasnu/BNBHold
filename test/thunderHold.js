@@ -41,11 +41,11 @@ contract('ThunderHold Tests', function (accounts) {
         assert.deepEqual(actualBalance, expectedBalance, "Balance incorrect!");
     });
 
-    it("has a referral user", async () => {
-        var contract_refferral = await thunderHold.getUserReferrer(accounts[0]);
-        var referral = "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1";
-        assert.equal(contract_refferral, referral, "referrals not working");
-    });
+    //it("has a referral user", async () => {
+    //    var contract_refferral = await thunderHold.getUserReferrer(accounts[0]);
+    //    var referral = "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1";
+    //    assert.equal(contract_refferral, referral, "referrals not working");
+    //});
 
     it("new buy lottery ticket", async () => {
         var ticketsQuantity = 1;
