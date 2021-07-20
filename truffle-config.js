@@ -39,7 +39,7 @@ module.exports = {
 //      confirmations: 1,
 //    },
   },
-
+  plugins: ["solidity-coverage"],
   // MAD Esto es para forzar a truffle a que compile con la vesion definida en el pragma
   // Configure your compilers
   compilers: {

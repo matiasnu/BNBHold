@@ -2,7 +2,7 @@
   "name": "bnbhold",
   "version": "0.1.0",
   "private": true,
-    "dependencies": {
+  "dependencies": {
     "@portis/web3": "^4.0.0",
     "@truffle/hdwallet-provider": "^1.4.0",
     "@web3-react/portis-connector": "^6.1.9",
@@ -37,8 +37,9 @@
     "deploy-pages": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test": "mocha",
+    "coverage": "nyc npm run test"
   },
   "browserslist": {
     "production": [
@@ -51,5 +52,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "solidity-coverage": "^0.7.16",
+    "truffle": "^5.4.1"
   }
 }
