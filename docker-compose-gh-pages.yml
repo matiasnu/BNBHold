@@ -1,0 +1,10 @@
+version: "3.2"
+
+services:
+  gh-pages-deploy:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend.gh-pages.ci
+
+
+
