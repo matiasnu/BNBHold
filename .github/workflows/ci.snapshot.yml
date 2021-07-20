@@ -16,7 +16,7 @@ env:
   # TODO: remember to update version on new tag
   # Si se quiere generar una release
   # LATEST_TAG default snapshot
-  LATEST_TAG: v1.0.2
+  LATEST_TAG: v1.0.4
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
 
@@ -107,7 +107,7 @@ jobs:
 
       - name: Checkout repo code
         uses: actions/checkout@v2
-            
+
       - name: Buildeamos la imagen para deploy en gh-pages
         run: |
           docker-compose -f docker-compose-gh-pages.yml build --build-arg=GITHUB_CONFIG_USERNAME=$(git config user.name) --build-arg=GITHUB_CONFIG_EMAIL=$(git config user.email) gh-pages-deploy
