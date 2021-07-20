@@ -39,8 +39,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "test": "mocha",
-    "coverage": "nyc npm run test"
+    "test": "truffle test",
+    "coverage": "truffle run coverage"
   },
   "browserslist": {
     "production": [

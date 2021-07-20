@@ -110,7 +110,7 @@ jobs:
 
       - name: Buildeamos la imagen para deploy en gh-pages
         run: |
-          docker-compose -f docker-compose-gh-pages.yml build --build-arg=GITHUB_CONFIG_USERNAME=$(git config user.name) --build-arg=GITHUB_CONFIG_EMAIL=$(git config user.email) gh-pages-deploy
+          docker-compose -f docker-compose-gh-pages.yml build --build-arg=GITHUB_CONFIG_USERNAME="deployuser" --build-arg=GITHUB_CONFIG_EMAIL="deployuser@gmail.com" gh-pages-deploy
       
       - name: Ejecutamos el deploy en gh-pages
         run: |
