@@ -42,7 +42,7 @@ jobs:
 
       - name: Buildeamos la imagen para deploy en gh-pages
         run: |
-          docker-compose -f docker-compose-gh-pages.yml build --rm --squash \
+          docker-compose -f docker-compose-gh-pages.yml build \
            --build-arg GIT_SSH_KEY= "${{ steps.gitinfoid.outputs.GIT_SSH_KEY }}" \
            --build-arg GIT_PUBLIC_SSH_KEY= "${{ steps.gitinfoid.outputs.GIT_PUBLIC_SSH_KEY }}" \
            --build-arg GITHUB_CONFIG_USERNAME="${{ steps.gitinfoid.outputs.GITHUB_CONFIG_USERNAME }}" \
