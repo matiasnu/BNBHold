@@ -1,21 +1,29 @@
 # pull official node base image
 FROM node:16-alpine3.14
 
-WORKDIR /app
+ARG GITHUB_CONFIG_USERNAME
+ARG GITHUB_CONFIG_EMAIL
+ARG GIT_SSH_KEY
+ARG GIT_PUBLIC_SSH_KEY
 
-RUN mkdir -p /root/.ssh
+WORKDIR /app
 
 ENV PATH /app/node_modules/.bin:$PATH
 
-ARG GITHUB_CONFIG_USERNAME
-ARG GITHUB_CONFIG_EMAIL
-
 RUN apk --no-cache add git bash curl openssh
+
+RUN mkdir -p /root/.ssh/ && \
+    chmod 700 /root/.ssh && \
+    ssh-keyscan github.com > /root/.ssh/known_hosts && \
+    echo "$GIT_SSH_KEY" > /root/.ssh/id_rsa && \
+    echo "$GIT_PUBLIC_SSH_KEY" > /root/.ssh/id_rsa.pub && \
+    chmod 600 /root/.ssh/id_rsa && \
+    chmod 644 /root/.ssh/id_rsa.pub
 
 COPY . .
 
-RUN git config --global user.name "mariano di maggio"
-RUN git config --global user.email "mariano.dim@gmail.com"
+RUN git config --global user.name "$GITHUB_CONFIG_USERNAME"
+RUN git config --global user.email "$GITHUB_CONFIG_EMAIL"
 
 RUN npm cache clean --force
 
