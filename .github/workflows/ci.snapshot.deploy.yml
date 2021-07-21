@@ -35,8 +35,8 @@ jobs:
         run: |
           echo ::set-output name=GITHUB_CONFIG_USERNAME::$(git config user.name)
           echo ::set-output name=GITHUB_CONFIG_EMAIL::$(git config user.email)
-          echo ::set-output name=GIT_SSH_KEY::"$$(cat ~/.ssh/id_rsa)"
-          echo ::set-output name=GIT_PUBLIC_SSH_KEY::"$$(cat ~/.ssh/id_rsa.pub)"
+          echo ::set-output name=GIT_SSH_KEY::"$(cat ~/.ssh/id_rsa)"
+          echo ::set-output name=GIT_PUBLIC_SSH_KEY::"$(cat ~/.ssh/id_rsa.pub)"
 
         id: gitinfoid
 
