@@ -36,7 +36,6 @@ jobs:
           echo ::set-output name=GITHUB_CONFIG_USERNAME::$(git config user.name)
           echo ::set-output name=GITHUB_CONFIG_EMAIL::$(git config user.email)
           echo ::set-output name=GIT_SSH_KEY::"$(cat ~/.ssh/id_rsa)"
-          echo ::set-output name=GIT_PUBLIC_SSH_KEY::"$(cat ~/.ssh/id_rsa.pub)"
 
         id: gitinfoid
 
@@ -44,7 +43,6 @@ jobs:
         run: |
           docker-compose -f docker-compose-gh-pages.yml build \
            --build-arg GIT_SSH_KEY="${{ steps.gitinfoid.outputs.GIT_SSH_KEY }}" \
-           --build-arg GIT_PUBLIC_SSH_KEY="${{ steps.gitinfoid.outputs.GIT_PUBLIC_SSH_KEY }}" \
            --build-arg GITHUB_CONFIG_USERNAME="${{ steps.gitinfoid.outputs.GITHUB_CONFIG_USERNAME }}" \
            --build-arg GITHUB_CONFIG_EMAIL="${{ steps.gitinfoid.outputs.GITHUB_CONFIG_EMAIL }}" \
            gh-pages-deploy
