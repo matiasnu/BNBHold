@@ -108,10 +108,7 @@ jobs:
       - name: Checkout repo code
         uses: actions/checkout@v2
 
-      - name: Buildeamos la imagen para deploy en gh-pages
+      - name: Buildeamos la imagen para deploy en gh-pages y ejecutamos el mismo
         run: |
-          docker-compose -f docker-compose-gh-pages.yml build --build-arg=GITHUB_CONFIG_USERNAME=$(git config user.name) --build-arg=GITHUB_CONFIG_EMAIL=$(git config user.email) gh-pages-deploy
-      
-      - name: Ejecutamos el deploy en gh-pages
-        run: |
-          docker run -i -v $HOME/.ssh:/root/.ssh bnbhold_gh-pages-deploy:latest npm run deploy-pages
+          docker-compose -f docker-compose-gh-pages.yml up --build gh-pages-deploy
+  

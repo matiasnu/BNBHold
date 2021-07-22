@@ -5,19 +5,19 @@ FROM node:16-alpine3.14 as build-stage
 
 WORKDIR /app
 
-VOLUME /root/.ssh
+# VOLUME /root/.ssh
 
 ENV PATH /app/node_modules/.bin:$PATH
 
-ARG GITHUB_CONFIG_USERNAME
-ARG GITHUB_CONFIG_EMAIL
+# ARG GITHUB_CONFIG_USERNAME
+# ARG GITHUB_CONFIG_EMAIL
 
 RUN apk --no-cache add git bash curl openssh
 
 COPY . .
 
-RUN git config user.name $GITHUB_CONFIG_USERNAME
-RUN git config user.email $GITHUB_CONFIG_EMAIL
+# RUN git config user.name $GITHUB_CONFIG_USERNAME
+# RUN git config user.email $GITHUB_CONFIG_EMAIL
 
 RUN npm cache clean --force
 
