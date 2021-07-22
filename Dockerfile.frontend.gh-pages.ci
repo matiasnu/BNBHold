@@ -48,5 +48,10 @@ RUN yarn install
 RUN yarn run build
 
 
+# export GIT_SSH_COMMAND='ssh -i /root/.ssh/id_rsa -o "StrictHostKeyChecking=no"'
+
+# git remote add origin git@github.com:mariano-dim/bnbhold.git
+
+# cat $HOME/.ssh/id_rsa | clipboard
 
 

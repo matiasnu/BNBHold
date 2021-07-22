@@ -24,31 +24,44 @@ env:
 jobs:
   deploy:
 
-    runs-on: [self-hosted, linux]
+    runs-on: [self-hosted, node]
+    container: 
+
     if: github.event_name != 'schedule'
     steps:
 
       - name: Checkout repo code
         uses: actions/checkout@v2
       
-      - name: Seteo variable de entorno  
-        run: |
-          echo ::set-output name=GITHUB_CONFIG_USERNAME::$(git config user.name)
-          echo ::set-output name=GITHUB_CONFIG_EMAIL::$(git config user.email)
+      # - name: Seteo variable de entorno  
+      #   run: |
+      #     echo ::set-output name=GITHUB_CONFIG_USERNAME::$(git config user.name)
+      #     echo ::set-output name=GITHUB_CONFIG_EMAIL::$(git config user.email)
 
-        id: gitinfoid
+      #   id: gitinfoid
 
-      - name: Buildeamos la imagen para deploy en gh-pages
-        run: |
-          docker-compose -f docker-compose-gh-pages.yml build \
-           --build-arg GITHUB_CONFIG_USERNAME="${{ steps.gitinfoid.outputs.GITHUB_CONFIG_USERNAME }}" \
-           --build-arg GITHUB_CONFIG_EMAIL="${{ steps.gitinfoid.outputs.GITHUB_CONFIG_EMAIL }}" \
-           --build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
-           gh-pages-deploy
+      # - name: Buildeamos la imagen para deploy en gh-pages
+      #   run: |
+      #     docker-compose -f docker-compose-gh-pages.yml build \
+      #      --build-arg GITHUB_CONFIG_USERNAME="${{ steps.gitinfoid.outputs.GITHUB_CONFIG_USERNAME }}" \
+      #      --build-arg GITHUB_CONFIG_EMAIL="${{ steps.gitinfoid.outputs.GITHUB_CONFIG_EMAIL }}" \
+      #      --build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
+      #      gh-pages-deploy
       
-      - name: Ejecutamos el deploy en gh-pages
-        run: |
-          docker run -i \
-           bnbhold_gh-pages-deploy:latest npm run deploy-pages
+      # - name: Ejecutamos el deploy en gh-pages
+      #   run: |
+      #     docker run -i \
+      #      bnbhold_gh-pages-deploy:latest npm run deploy-pages
 
 
+# docker run -d \
+#     -v /var/run/docker.sock:/var/run/docker.sock \
+#     -v /tmp:/tmp \
+#     -e GH_REPOSITORY=git@github.com:mariano-dim/bnbhold.git \
+#     -e GH_RUNNER_TOKEN=AAVPUP7556QXBPOPIAYUNLTA7IH5K \
+#     -e GH_RUNNER_LABELS=node \
+#     marianodim/github-actions-runner:node
+
+
+
+#     ./config.sh --url https://github.com/mariano-dim/bnbhold --token AAVPUP7556QXBPOPIAYUNLTA7IH5K
