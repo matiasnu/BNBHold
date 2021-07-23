@@ -20,7 +20,7 @@ class App extends Component {
       invest: 0,
       isLotteryVisible: false,
       isHomeVisible: false,
-      parsedContractAddress: null, // wallet parseada para mostrar en la pantalla (lease truncada con puntos)
+      parsedContractAddress: "", // wallet parseada para mostrar en la pantalla (lease truncada con puntos)
       totalStaked: 0,
       contractBalance: 0,
     };

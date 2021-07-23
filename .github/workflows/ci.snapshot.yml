@@ -115,13 +115,4 @@ jobs:
           echo $GITHUB_CONFIG_USERNAME
           echo $GITHUB_CONFIG_EMAIL
 
-      - name: Buildeamos la imagen para deploy en gh-pages
-        run: |
-          docker-compose -f docker-compose-gh-pages.yml build
-          --build-arg GITHUB_CONFIG_USERNAME=${{ env.GITHUB_CONFIG_USERNAME }} 
-          --build-arg GITHUB_CONFIG_EMAIL=${{ env.GITHUB_CONFIG_EMAIL }} 
-          gh-pages-deploy
-      
-      - name: Ejecutamos el deploy en gh-pages
-        run: |
-          docker run -i bnbhold_gh-pages-deploy:latest npm run deploy-pages
+

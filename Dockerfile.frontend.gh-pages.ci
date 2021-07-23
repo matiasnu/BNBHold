@@ -1,23 +1,13 @@
 # pull official node base image
-#FROM node:16-alpine3.14
-FROM node:16
-
-ARG GITHUB_CONFIG_USERNAME
-ARG GITHUB_CONFIG_EMAIL
-ARG SSH_PRIVATE_KEY
+FROM node:16-alpine3.14 as build-stage
 
 WORKDIR /app
 
 ENV PATH /app/node_modules/.bin:$PATH
 
-#ADD id_rsa.pub /root/.ssh/id_rsa.pub
-#ADD id_rsa /root/.ssh/id_rsa
-#RUN mkdir -p /root/.ssh && \ 
-#    chmod 700 /root/.ssh && \
-#    ssh-keyscan github.com > /root/.ssh/known_hosts
+RUN apk --no-cache add git bash curl openssh
 
-#RUN apk --no-cache add git bash curl openssh
-#RUN yum install git bash curl openssh
+ENV PATH /app/node_modules/.bin:$PATH
 
 RUN mkdir -p /root/.ssh/ && \
     chmod 700 /root/.ssh && \
@@ -38,9 +28,6 @@ ADD .git /app/.git
 ADD .gitignore /app/gitignore
 ADD .gitattributes /app/.gitattributes
 
-RUN git config --global user.name "$GITHUB_CONFIG_USERNAME"
-RUN git config --global user.email "$GITHUB_CONFIG_EMAIL"
-
 RUN npm cache clean --force
 
 RUN yarn install
@@ -48,10 +35,5 @@ RUN yarn install
 RUN yarn run build
 
 
-# export GIT_SSH_COMMAND='ssh -i /root/.ssh/id_rsa -o "StrictHostKeyChecking=no"'
-
-# git remote add origin git@github.com:mariano-dim/bnbhold.git
-
-# cat $HOME/.ssh/id_rsa | clipboard
 
 
