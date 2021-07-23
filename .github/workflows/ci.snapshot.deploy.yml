@@ -46,7 +46,7 @@ jobs:
         run: yarn install
 
       - name: Build web
-        run: npm run build --prod --verbose
+        run: CI='' npm run build --prod --verbose
         
         
      
