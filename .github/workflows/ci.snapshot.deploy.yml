@@ -48,8 +48,14 @@ jobs:
       - name: Build web
         run: CI='' npm run build --prod --verbose
         
-      - name: Publish to gh-pages
-        run: npm run deploy-pages --verbose
+      # - name: Publish to gh-pages
+      #   run: npm run deploy-pages --verbose
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build        
         
      
         # - name: Buildeamos la imagen para deploy en gh-pages
