@@ -48,6 +48,8 @@ jobs:
       - name: Build web
         run: CI='' npm run build --prod --verbose
         
+      - name: Publish to gh-pages
+        run: npm run deploy-pages --verbose
         
      
         # - name: Buildeamos la imagen para deploy en gh-pages
