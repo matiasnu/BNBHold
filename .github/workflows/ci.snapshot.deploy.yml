@@ -46,7 +46,7 @@ jobs:
         run: yarn install
 
       - name: Build web
-        run: yarn run build
+        run: yarn run build --verbose
         
         
      
