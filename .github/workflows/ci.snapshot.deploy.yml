@@ -33,14 +33,24 @@ jobs:
       - name: Checkout repo code
         uses: actions/checkout@v2
       
-      # - name: Seteo variable de entorno  
-      #   run: |
-      #     echo ::set-output name=GITHUB_CONFIG_USERNAME::$(git config user.name)
-      #     echo ::set-output name=GITHUB_CONFIG_EMAIL::$(git config user.email)
+      - name: Seteo variable de entorno  
+        run: |
+          echo ::set-output name=GITHUB_CONFIG_USERNAME::$(git config user.name)
+          echo ::set-output name=GITHUB_CONFIG_EMAIL::$(git config user.email)
+        id: gitinfoid
 
-      #   id: gitinfoid
+      - name: clean cache
+        run: npm cache clean --force
 
-      # - name: Buildeamos la imagen para deploy en gh-pages
+      - name: install packages
+        run: yarn install
+
+      - name: Build web
+        run: yarn run build
+        
+        
+     
+        # - name: Buildeamos la imagen para deploy en gh-pages
       #   run: |
       #     docker-compose -f docker-compose-gh-pages.yml build \
       #      --build-arg GITHUB_CONFIG_USERNAME="${{ steps.gitinfoid.outputs.GITHUB_CONFIG_USERNAME }}" \
