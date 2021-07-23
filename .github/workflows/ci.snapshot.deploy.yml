@@ -1,0 +1,85 @@
+name: Entorno CI 'snapshot' vesions
+
+on:
+  push:
+    # publish image as master=snapshot or on new tag
+    # except on document and ci changes
+    branches:
+      - master
+    tags:
+      - '*'
+#    paths-ignore:
+#      - '**.md'
+#      - '.github/workflows/*yml'
+
+env:
+  # TODO: remember to update version on new tag
+  # Si se quiere generar una release
+  # LATEST_TAG default snapshot
+  LATEST_TAG: v1.0.4
+  DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
+  DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
+  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+jobs:
+  deploy:
+
+    runs-on: [self-hosted, node]
+    container: 
+
+    if: github.event_name != 'schedule'
+    steps:
+
+      - name: Checkout repo code
+        uses: actions/checkout@v2
+      
+      - name: Seteo variable de entorno  
+        run: |
+          echo ::set-output name=GITHUB_CONFIG_USERNAME::$(git config user.name)
+          echo ::set-output name=GITHUB_CONFIG_EMAIL::$(git config user.email)
+        id: gitinfoid
+
+      - name: clean cache
+        run: npm cache clean --force
+
+      - name: install packages
+        run: yarn install
+
+      - name: Build web
+        run: CI='' npm run build --prod --verbose
+        
+      # - name: Publish to gh-pages
+      #   run: npm run deploy-pages --verbose
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build        
+        
+     
+        # - name: Buildeamos la imagen para deploy en gh-pages
+      #   run: |
+      #     docker-compose -f docker-compose-gh-pages.yml build \
+      #      --build-arg GITHUB_CONFIG_USERNAME="${{ steps.gitinfoid.outputs.GITHUB_CONFIG_USERNAME }}" \
+      #      --build-arg GITHUB_CONFIG_EMAIL="${{ steps.gitinfoid.outputs.GITHUB_CONFIG_EMAIL }}" \
+      #      --build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
+      #      gh-pages-deploy
+      
+      # - name: Ejecutamos el deploy en gh-pages
+      #   run: |
+      #     docker run -i \
+      #      bnbhold_gh-pages-deploy:latest npm run deploy-pages
+
+
+# docker run -d \
+#     -v /var/run/docker.sock:/var/run/docker.sock \
+#     -v /tmp:/tmp \
+#     -e GH_REPOSITORY=git@github.com:mariano-dim/bnbhold.git \
+#     -e GH_RUNNER_TOKEN=AAVPUP7556QXBPOPIAYUNLTA7IH5K \
+#     -e GH_RUNNER_LABELS=node \
+#     marianodim/github-actions-runner:node
+
+
+
+#     ./config.sh --url https://github.com/mariano-dim/bnbhold --token AAVPUP7556QXBPOPIAYUNLTA7IH5K
