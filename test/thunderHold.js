@@ -25,45 +25,45 @@ contract('ThunderHold Tests', function (accounts) {
         assert.notEqual(marketingWalletContract, deployWallet, "marketing wallet is deployWallet");
     });
 
-    // it("new deposit in the contract", async () => {
-    //     await thunderHold.invest(
-    //         "0x94B50Ad34FD502831471B6f5583316820C77B94E", 0,
-    //         { from: new_user, value: String(10e16), gas: 500000 } //Deposito 1 ETH
-    //     );
+    it("new deposit in the contract", async () => {
+        await thunderHold.invest(
+            "0x94B50Ad34FD502831471B6f5583316820C77B94E", 0,
+            { from: new_user, value: String(10e16), gas: 500000 } //Deposito 1 ETH
+        );
 
-    //     var new_user_deposits = await thunderHold.getUserAmountOfDeposits(new_user);
-    //     assert.equal(new_user_deposits, 1, "deposit failed");
-    // });
+        var new_user_deposits = await thunderHold.getUserAmountOfDeposits(new_user);
+        assert.equal(new_user_deposits, 1, "deposit failed");
+    });
 
-    // it("has founding balance", async () => {
-    //     var actualBalance = await web3.eth.getBalance(thunderHold.address);
-    //     var expectedBalance = await web3.utils.toWei('0.09', 'ether'); // Me queda 0.9 ETH ya descontamos el 10%
-    //     assert.deepEqual(actualBalance, expectedBalance, "Balance incorrect!");
-    // });
+    it("has founding balance", async () => {
+        var actualBalance = await web3.eth.getBalance(thunderHold.address);
+        var expectedBalance = await web3.utils.toWei('0.09', 'ether'); // Me queda 0.9 ETH ya descontamos el 10%
+        assert.deepEqual(actualBalance, expectedBalance, "Balance incorrect!");
+    });
 
-    // it("has a referral user", async () => {
-    //     var contract_refferral = await thunderHold.getUserReferrer(accounts[0]);
-    //     var referral = "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1";
-    //     assert.equal(contract_refferral, referral, "referrals not working");
-    // });
+    it("has a referral user", async () => {
+        var contract_refferral = await thunderHold.getUserReferrer(accounts[0]);
+        var referral = accounts[0];
+        assert.equal(contract_refferral, referral, "referrals not working");
+    });
 
-    // it("new buy lottery ticket", async () => {
-    //     var ticketsQuantity = 1;
-    //     var valueToWei = web3.utils.toWei(ticketsQuantity.toString(), "ether");
+    it("new buy lottery ticket", async () => {
+        var ticketsQuantity = 1;
+        var valueToWei = web3.utils.toWei(ticketsQuantity.toString(), "ether");
 
-    //     await thunderHold.lottoDeposit(
-    //         ticketsQuantity,
-    //         { from: new_user, value: valueToWei, gas: 500000 }
-    //     );
-    //     var lottoStats = await thunderHold.getlottoStats();
-    //     var lottoParticipations = lottoStats[6];
-    //     assert.equal(lottoParticipations, ticketsQuantity, "lottery failed!");
-    // });
+        await thunderHold.lottoDeposit(
+            ticketsQuantity,
+            { from: new_user, value: valueToWei, gas: 500000 }
+        );
+        var lottoStats = await thunderHold.getlottoStats();
+        var lottoParticipations = lottoStats[6];
+        assert.equal(lottoParticipations, ticketsQuantity, "lottery failed!");
+    });
 
-    // it("user has a lottery ticket", async () => {
-    //     userLottoStats = await thunderHold.getUserlottoStats(new_user);
-    //     var userParticipations = userLottoStats[1];
-    //     assert.equal(userParticipations, 1, "user hasn't lottery ticket");
-    // });
+    it("user has a lottery ticket", async () => {
+        userLottoStats = await thunderHold.getUserlottoStats(new_user);
+        var userParticipations = userLottoStats[1];
+        assert.equal(userParticipations, 1, "user hasn't lottery ticket");
+    });
 
 });
