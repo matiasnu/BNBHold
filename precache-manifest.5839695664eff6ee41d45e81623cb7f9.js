@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0dd3826bbc662e6bc5799a866fa9a64d",
+    "revision": "df59cc5b2c24dd5ae4490716123ae564",
     "url": "/BNBHold/index.html"
   },
   {
-    "revision": "411503d0113c8a33a927",
+    "revision": "2eae3ebe20d6ffef3b97",
     "url": "/BNBHold/static/css/main.ca2a323d.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/BNBHold/static/js/2.56de4dd3.chunk.js"
   },
   {
-    "revision": "411503d0113c8a33a927",
-    "url": "/BNBHold/static/js/main.3b77fc79.chunk.js"
+    "revision": "2eae3ebe20d6ffef3b97",
+    "url": "/BNBHold/static/js/main.d901526f.chunk.js"
   },
   {
     "revision": "3b04ee55b4c6b4a638c7",
