@@ -79,14 +79,14 @@ jobs:
       - name: Checkout repo code
         uses: actions/checkout@v2
 
-      #- name: Logging into dockerhub
-      # run: echo $DOCKER_HUB_PASS | docker login docker.io -u $DOCKER_HUB_USER --password-stdin
+      - name: Logging into dockerhub
+        run: echo $DOCKER_HUB_PASS | sudo docker login docker.io -u $DOCKER_HUB_USER --password-stdin
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_HUB_USER }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}        
+#      - name: Login to Docker Hub
+#        uses: docker/login-action@v1
+#        with:
+#          username: ${{ secrets.DOCKER_HUB_USER }}
+#          password: ${{ secrets.DOCKER_HUB_TOKEN }}        
       
       - name: Build docker images and publish to Dockehub
         run: |
@@ -131,3 +131,5 @@ jobs:
           publish_dir: ./build 
 
 
+# docker hub token
+# 0be86853-409d-4d9e-9f10-8318dbf1923c
