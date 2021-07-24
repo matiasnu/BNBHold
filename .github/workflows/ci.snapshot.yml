@@ -32,14 +32,15 @@ jobs:
       - name: Checkout repo code for testing
         uses: actions/checkout@v2
 
+      - name: Instalamos truffle
+        run: |
+          npm install -g truffle
+          truffle version
+
       - name: Buildeamos la imagen para coverage
         run: |
           # docker-compose --file docker-compose-coverage.yml build web-coverage
           yarn install
-
-      - name: Instalamos truffle
-        run: |
-          yarn add truffle
 
       - name: Evaluamos coverage
         run: |
