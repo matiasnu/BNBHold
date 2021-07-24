@@ -37,6 +37,10 @@ jobs:
           # docker-compose --file docker-compose-coverage.yml build web-coverage
           yarn install
 
+      - name: Instalamos truffle
+        run: |
+          yarn add truffle
+
       - name: Evaluamos coverage
         run: |
           # docker run -i bnbhold_web-coverage:latest truffle run coverage
