@@ -23,28 +23,60 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
 jobs:
-  deploy:
 
+
+
+  test:
+    
     runs-on: [self-hosted, node]
-
+    
     if: github.event_name != 'schedule'
     steps:
-
-      - name: Checkout repo code
+      - name: Checkout repo code for testing
         uses: actions/checkout@v2
 
-      - name: clean cache
-        run: npm cache clean --force
+      - name: Logging into dockerhub
+        run: echo $DOCKER_HUB_PASS | docker login -u $DOCKER_HUB_USER --password-stdin        
 
-      - name: install packages
-        run: yarn install
+      - name: Buildeamos todos las imagenes requeridas
+        run: |
+          echo 'build'
+          # docker-compose --file docker-compose-test.yml build
 
-      - name: Build web
-        run: CI='' npm run build --prod --verbose
+      - name: Levantamos el entorno de test
+        run: |
+          echo 'tests'
+          # docker-compose --file docker-compose-test.yml up --remove-orphans --exit-code-from tests
+
+      - name: Bajamos el entorno de test
+        run: |
+          echo 'down'
+          # docker-compose --file docker-compose-test.yml down
+
+
+
+  # deploy:
+
+  #   runs-on: [self-hosted, node]
+
+  #   if: github.event_name != 'schedule'
+  #   steps:
+
+  #     - name: Checkout repo code
+  #       uses: actions/checkout@v2
+
+  #     - name: clean cache
+  #       run: npm cache clean --force
+
+  #     - name: install packages
+  #       run: yarn install
+
+  #     - name: Build web
+  #       run: CI='' npm run build --prod --verbose
         
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build        
+  #     - name: Deploy to gh-pages
+  #       uses: peaceiris/actions-gh-pages@v3
+  #       with:
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+  #         publish_dir: ./build        
         
