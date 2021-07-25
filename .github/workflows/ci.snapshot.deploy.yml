@@ -7,7 +7,7 @@ on:
     branches:
       - master
     tags:
-      - '*'
+      - "*"
 #    paths-ignore:
 #      - '**.md'
 #      - '.github/workflows/*yml'
@@ -19,41 +19,56 @@ env:
   LATEST_TAG: v1.0.4
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
-  # DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
+
 jobs:
+  coverage:
+    #    needs: test
 
-
-
-  test:
-    
     runs-on: [self-hosted, node]
-    
+
     if: github.event_name != 'schedule'
     steps:
       - name: Checkout repo code for testing
         uses: actions/checkout@v2
 
-      - name: Logging into dockerhub
-        run: echo $DOCKER_HUB_TOKEN | docker login -u $DOCKER_HUB_USER --password-stdin        
+      - name: clean cache
+        run: npm cache clean --force
 
-      - name: Buildeamos todos las imagenes requeridas
+      - name: Instalamos las deps
         run: |
-          echo 'build'
-          docker-compose --file docker-compose-test.yml build
+          yarn install
 
-      - name: Levantamos el entorno de test
+      - name: Evaluamos coverage
         run: |
-          echo 'tests'
-          docker-compose --file docker-compose-test.yml up --remove-orphans --exit-code-from tests
+          truffle run coverage
 
-      - name: Bajamos el entorno de test
-        run: |
-          echo 'down'
-          docker-compose --file docker-compose-test.yml down
+  # test:
 
+  #   runs-on: [self-hosted, node]
 
+  #   if: github.event_name != 'schedule'
+  #   steps:
+  #     - name: Checkout repo code for testing
+  #       uses: actions/checkout@v2
+
+  #     - name: Logging into dockerhub
+  #       run: echo $DOCKER_HUB_TOKEN | docker login -u $DOCKER_HUB_USER --password-stdin
+
+  #     - name: Buildeamos todos las imagenes requeridas
+  #       run: |
+  #         echo 'build'
+  #         docker-compose --file docker-compose-test.yml build
+
+  #     - name: Levantamos el entorno de test
+  #       run: |
+  #         echo 'tests'
+  #         docker-compose --file docker-compose-test.yml up --remove-orphans --exit-code-from tests
+
+  #     - name: Bajamos el entorno de test
+  #       run: |
+  #         echo 'down'
+  #         docker-compose --file docker-compose-test.yml down
 
   # deploy:
 
@@ -73,10 +88,9 @@ jobs:
 
   #     - name: Build web
   #       run: CI='' npm run build --prod --verbose
-        
+
   #     - name: Deploy to gh-pages
   #       uses: peaceiris/actions-gh-pages@v3
   #       with:
   #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         publish_dir: ./build        
-        
+  #         publish_dir: ./build
