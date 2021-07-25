@@ -5,7 +5,7 @@ on:
     # publish image as master=snapshot or on new tag
     # except on document and ci changes
     branches:
-      - avoid
+      - master
     tags:
       - '*'
 #    paths-ignore:
@@ -17,6 +17,10 @@ env:
   # Si se quiere generar una release
   # LATEST_TAG default snapshot
   LATEST_TAG: v1.0.4
+  DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
+  DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+  DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
 jobs:
   deploy:
@@ -44,4 +48,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build        
         
-     
