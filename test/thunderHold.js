@@ -43,7 +43,7 @@ contract('ThunderHold Tests', function (accounts) {
     it("has founding balance", async () => {
         var actualBalance = await web3.eth.getBalance(thunderHold.address);
         var expectedBalance = await web3.utils.toWei('0.09', 'ether'); // Me queda 0.9 ETH ya descontamos el 10%
-        assert.deepEqual(actualBalance, expectedBalance, "Balance incorrect!");
+        assert.equal(actualBalance, expectedBalance, "Balance incorrect!");
     });
 
     it("has a referral user", async () => {
@@ -76,6 +76,12 @@ contract('ThunderHold Tests', function (accounts) {
         assert.equal(contractPlan.time, mockPlan.time, "plan created failed!");
         assert.equal(contractPlan.percent, mockPlan.percent, "plan created failed!");
         assert.equal(contractPlan.reinvest, mockPlan.reinvest, "plan created failed!");
+    });
+
+    it("lottery user rate bonus", async () => {
+        var bonusContract = await thunderHold.getUserLottoRate(new_user);
+        var bonus = 5
+        assert.equal(bonusContract, bonus, "bonus user loto rate error");
     });
 
 });
