@@ -2,6 +2,11 @@ const ThunderHold = artifacts.require("./ThunderHold.sol");
 let thunderHold;
 // Mock constants
 const marketingWallet = "0x22d491Bde2303f2f43325b2108D26f1eAbA1e32b";
+const mockPlan = {
+    'time': 7,
+    'percent': 200e2,
+    'reinvest': 300e2,
+};
 
 before(async () => {
     thunderHold = await ThunderHold.new(
@@ -64,6 +69,13 @@ contract('ThunderHold Tests', function (accounts) {
         userLottoStats = await thunderHold.getUserlottoStats(new_user);
         var userParticipations = userLottoStats[1];
         assert.equal(userParticipations, 1, "user hasn't lottery ticket");
+    });
+
+    it ("info about unique plan", async () => {
+        var contractPlan = await thunderHold.getPlanInfo(0);
+        assert.equal(contractPlan.time, mockPlan.time, "plan created failed!");
+        assert.equal(contractPlan.percent, mockPlan.percent, "plan created failed!");
+        assert.equal(contractPlan.reinvest, mockPlan.reinvest, "plan created failed!");
     });
 
 });
