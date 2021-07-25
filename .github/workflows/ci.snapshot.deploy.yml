@@ -20,15 +20,16 @@ env:
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
  
+  
 jobs:
   build:
     needs: coverage
 
     runs-on: [self-hosted, node]
 
-    if: ${{ github.event_name != 'schedule' && secrets._GITHUB_RUN_BUILD == 'true' }}
+    if: ${{ secrets._GITHUB_RUN_BUILD == 'true' }}
+    if: github.event_name != 'schedule'
     steps:
       - name: Checkout repo code
         uses: actions/checkout@v2
@@ -59,7 +60,7 @@ jobs:
 
     runs-on: [self-hosted, node]
 
-    if: ${{ github.event_name != 'schedule' && secrets._GITHUB_RUN_COVERAGE == 'true' }}
+    if: github.event_name != 'schedule'
     steps:
       - name: Checkout repo code for testing
         uses: actions/checkout@v2
@@ -78,7 +79,7 @@ jobs:
   test:
     runs-on: [self-hosted, node]
 
-    if: ${{ github.event_name != 'schedule' && secrets._GITHUB_RUN_TEST == 'true' }}
+    if: github.event_name != 'schedule'
     steps:
       - name: Checkout repo code for testing
         uses: actions/checkout@v2
@@ -106,7 +107,7 @@ jobs:
 
     runs-on: [self-hosted, node]
 
-    if: ${{ github.event_name != 'schedule' && secrets._GITHUB_RUN_DEPLOY == 'true' }}
+    if: github.event_name != 'schedule'
     steps:
       - name: Checkout repo code
         uses: actions/checkout@v2
