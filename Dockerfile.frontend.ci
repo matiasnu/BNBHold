@@ -11,7 +11,7 @@ COPY . .
 RUN yarn install
 # --frozen-lockfile
 
-RUN yarn run build
+RUN CI='' npm run build --prod --verbose
 
 # TODO
 # Se debe buscar la forma de que no se elimine el contenido del primer stage, asi podemos alimentar a la red ethereum

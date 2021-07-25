@@ -51,4 +51,4 @@ services:
       - ganache
     environment:
       TRUFFLE_VERSION: "5.3.14"
-          
+

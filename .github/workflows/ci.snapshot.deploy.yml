@@ -41,17 +41,17 @@ jobs:
       - name: Buildeamos todos las imagenes requeridas
         run: |
           echo 'build'
-          # docker-compose --file docker-compose-test.yml build
+          docker-compose --file docker-compose-test.yml build
 
       - name: Levantamos el entorno de test
         run: |
           echo 'tests'
-          # docker-compose --file docker-compose-test.yml up --remove-orphans --exit-code-from tests
+          docker-compose --file docker-compose-test.yml up --remove-orphans --exit-code-from tests
 
       - name: Bajamos el entorno de test
         run: |
           echo 'down'
-          # docker-compose --file docker-compose-test.yml down
+          docker-compose --file docker-compose-test.yml down
 
 
 
