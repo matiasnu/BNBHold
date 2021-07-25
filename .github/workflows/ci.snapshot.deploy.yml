@@ -22,26 +22,63 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  coverage:
-    #    needs: test
+  build:
+    #    needs: coverage
 
     runs-on: [self-hosted, node]
 
-    if: github.event_name != 'schedule'
+    if: github.event_name == 'push'
     steps:
-      - name: Checkout repo code for testing
+      - name: Checkout repo code
         uses: actions/checkout@v2
 
-      - name: clean cache
-        run: npm cache clean --force
+      - name: Login to Docker Hub
+        run: echo $DOCKER_HUB_TOKEN | docker login -u $DOCKER_HUB_USER --password-stdin
 
-      - name: Instalamos las deps
-        run: |
-          yarn install
+      #      - name: Login to Docker Hub
+      #        uses: docker/login-action@v1
+      #        with:
+      #          username: ${{ secrets.DOCKER_HUB_USER }}
+      #          password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      - name: Evaluamos coverage
+      - name: Build docker images and publish to Dockehub
         run: |
-          truffle run coverage
+          export VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && export VERSION=$VERSION
+          [ "$VERSION" == "master" ] && export VERSION=snapshot
+
+          echo VERSION=$VERSION
+          docker-compose -f docker-compose.yml build web
+          docker-compose -f docker-compose.yml push web
+
+          # tag and push versions X.X and latest
+          if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
+              export VERSION="latest"
+              echo VERSION=$VERSION
+              docker-compose -f docker-compose.yml build web
+              docker-compose -f docker-compose.yml push web
+          fi
+
+  # coverage:
+  #   #    needs: test
+
+  #   runs-on: [self-hosted, node]
+
+  #   if: github.event_name != 'schedule'
+  #   steps:
+  #     - name: Checkout repo code for testing
+  #       uses: actions/checkout@v2
+
+  #     - name: clean cache
+  #       run: npm cache clean --force
+
+  #     - name: Instalamos las deps
+  #       run: |
+  #         yarn install
+
+  #     - name: Evaluamos coverage
+  #       run: |
+  #         truffle run coverage
 
   # test:
 
