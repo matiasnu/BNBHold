@@ -20,6 +20,7 @@ env:
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_BUILD_STEP: ${{ secrets.CI_BUILD_STEP }}
  
   
 jobs:
@@ -28,7 +29,7 @@ jobs:
 
     runs-on: [self-hosted, node]
 
-    if: ${{ secrets._GITHUB_RUN_BUILD }} == 'true'
+    if: $CI_BUILD_STEP == 'true'
     steps:
       - name: Checkout repo code
         uses: actions/checkout@v2
@@ -123,5 +124,5 @@ jobs:
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: $GITHUB_TOKEN
           publish_dir: ./build
