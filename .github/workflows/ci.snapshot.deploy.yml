@@ -7,7 +7,7 @@ on:
     branches:
       - master
     tags:
-      - '*'
+      - "*"
 #    paths-ignore:
 #      - '**.md'
 #      - '.github/workflows/*yml'
@@ -18,26 +18,97 @@ env:
   # LATEST_TAG default snapshot
   LATEST_TAG: v1.0.4
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
-  DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
-  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+  DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  deploy:
+  build:
+    needs: coverage
 
     runs-on: [self-hosted, node]
-    container: 
+
+    if: github.event_name == 'push'
+    steps:
+      - name: Checkout repo code
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        run: echo $DOCKER_HUB_TOKEN | docker login -u $DOCKER_HUB_USER --password-stdin
+
+      - name: Build docker images and publish to Dockehub
+        run: |
+          export VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && export VERSION=$VERSION
+          [ "$VERSION" == "master" ] && export VERSION=snapshot
+
+          echo VERSION=$VERSION
+          docker-compose -f docker-compose.yml build web
+          docker-compose -f docker-compose.yml push web
+
+          # tag and push versions X.X and latest
+          if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
+              export VERSION="latest"
+              echo VERSION=$VERSION
+              docker-compose -f docker-compose.yml build web
+              docker-compose -f docker-compose.yml push web
+          fi
+
+  coverage:
+    needs: test
+
+    runs-on: [self-hosted, node]
 
     if: github.event_name != 'schedule'
     steps:
+      - name: Checkout repo code for testing
+        uses: actions/checkout@v2
 
+      - name: clean cache
+        run: npm cache clean --force
+
+      - name: Instalamos las deps
+        run: |
+          yarn install
+
+      - name: Evaluamos coverage
+        run: |
+          truffle run coverage
+
+  test:
+    runs-on: [self-hosted, node]
+
+    if: github.event_name != 'schedule'
+    steps:
+      - name: Checkout repo code for testing
+        uses: actions/checkout@v2
+
+      - name: Logging into dockerhub
+        run: echo $DOCKER_HUB_TOKEN | docker login -u $DOCKER_HUB_USER --password-stdin
+
+      - name: Buildeamos todos las imagenes requeridas
+        run: |
+          echo 'build'
+          docker-compose --file docker-compose-test.yml build
+
+      - name: Levantamos el entorno de test
+        run: |
+          echo 'tests'
+          docker-compose --file docker-compose-test.yml up --remove-orphans --exit-code-from tests
+
+      - name: Bajamos el entorno de test
+        run: |
+          echo 'down'
+          docker-compose --file docker-compose-test.yml down
+
+  deploy:
+    needs: build
+
+    runs-on: [self-hosted, node]
+
+    if: github.event_name != 'schedule'
+    steps:
       - name: Checkout repo code
         uses: actions/checkout@v2
-      
-      - name: Seteo variable de entorno  
-        run: |
-          echo ::set-output name=GITHUB_CONFIG_USERNAME::$(git config user.name)
-          echo ::set-output name=GITHUB_CONFIG_EMAIL::$(git config user.email)
-        id: gitinfoid
 
       - name: clean cache
         run: npm cache clean --force
@@ -47,39 +118,9 @@ jobs:
 
       - name: Build web
         run: CI='' npm run build --prod --verbose
-        
-      # - name: Publish to gh-pages
-      #   run: npm run deploy-pages --verbose
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build        
-        
-     
-        # - name: Buildeamos la imagen para deploy en gh-pages
-      #   run: |
-      #     docker-compose -f docker-compose-gh-pages.yml build \
-      #      --build-arg GITHUB_CONFIG_USERNAME="${{ steps.gitinfoid.outputs.GITHUB_CONFIG_USERNAME }}" \
-      #      --build-arg GITHUB_CONFIG_EMAIL="${{ steps.gitinfoid.outputs.GITHUB_CONFIG_EMAIL }}" \
-      #      --build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" \
-      #      gh-pages-deploy
-      
-      # - name: Ejecutamos el deploy en gh-pages
-      #   run: |
-      #     docker run -i \
-      #      bnbhold_gh-pages-deploy:latest npm run deploy-pages
-
-
-# docker run -d \
-#     -v /var/run/docker.sock:/var/run/docker.sock \
-#     -v /tmp:/tmp \
-#     -e GH_REPOSITORY=git@github.com:mariano-dim/bnbhold.git \
-#     -e GH_RUNNER_TOKEN=AAVPUP7556QXBPOPIAYUNLTA7IH5K \
-#     -e GH_RUNNER_LABELS=node \
-#     marianodim/github-actions-runner:node
-
-
-
-#     ./config.sh --url https://github.com/mariano-dim/bnbhold --token AAVPUP7556QXBPOPIAYUNLTA7IH5K
+          publish_dir: ./build
