@@ -8,9 +8,9 @@ on:
       - master
     tags:
       - "*"
-#    paths-ignore:
-#      - '**.md'
-#      - '.github/workflows/*yml'
+    paths-ignore:
+      - "**.md"
+      - ".github/workflows/*yml"
 
 env:
   # TODO: remember to update version on new tag
@@ -27,7 +27,7 @@ jobs:
 
     runs-on: [self-hosted, node]
 
-    if: github.event_name == 'push'
+    if: github.event_name != 'schedule'
     steps:
       - name: Checkout repo code
         uses: actions/checkout@v2
@@ -122,5 +122,5 @@ jobs:
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: $GITHUB_TOKEN
           publish_dir: ./build
