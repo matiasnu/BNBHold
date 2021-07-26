@@ -39,7 +39,7 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "truffle test",
-    "coverage": "truffle run coverage"
+    "coverage": "truffle run coverage && cat coverage/lcov.info | coveralls"
   },
   "browserslist": {
     "production": [
@@ -54,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "coveralls": "^3.1.1",
     "solidity-coverage": "^0.7.16",
     "truffle": "^5.4.1"
   }

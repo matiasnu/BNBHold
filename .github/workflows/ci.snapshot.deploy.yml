@@ -72,7 +72,7 @@ jobs:
 
       - name: Evaluamos coverage
         run: |
-          truffle run coverage
+          yarn run coverage
 
   test:
     runs-on: [self-hosted, node]
