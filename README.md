@@ -1,5 +1,7 @@
 [![Entorno CI 'snapshot' vesions](https://github.com/Matiasnu/BNBHold/actions/workflows/ci.snapshot.yml/badge.svg?branch=master)](https://github.com/Matiasnu/BNBHold/actions/workflows/ci.snapshot.yml)
 
+[![Coverage Status](https://coveralls.io/repos/github/Matiasnu/BNBHold/badge.svg?branch=main&t=7CKSyi)](https://coveralls.io/github/Matiasnu/BNBHold?branch=main)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
