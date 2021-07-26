@@ -18,6 +18,7 @@ services:
       interval: 20s
       timeout: 10s
       retries: 20
+      
 
   ganache:
     image: trufflesuite/ganache-cli:latest
