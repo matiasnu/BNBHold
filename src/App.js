@@ -34,11 +34,19 @@ class App extends Component {
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
+
       let deployedNetwork = ThunderHold.networks[networkId];
+
       const thunderInstance = new web3.eth.Contract(
         ThunderHold.abi,
         deployedNetwork && deployedNetwork.address
       );
+
+      // const thunderInstance = new web3.eth.Contract(
+      //   ThunderHold.abi,
+      //   "0xee90a6eE04Be481956ee2ce203e685aB84c4d7c4"
+      // );
+
       this.onChange = this.onChange.bind(this);
 
       // Use web3 to get the user's accounts.
@@ -46,8 +54,10 @@ class App extends Component {
       console.log(accounts);
 
       // Para poder utilizar una cuenta debo desbloquearla por un tiempo determinado
-      // web3.eth.personal.unlockAccount(accounts[0], "", 300);
-      // console.log("Wallet a utilizar: ", accounts[0]);
+      // web3.eth.personal.unlockAccount(accounts[0], "", 300).then(()=>{
+      //   console.log("Wallet a utilizar: ", accounts[0]);
+      // }).catch(console.error);
+      
 
       // Obtengo e imprimo el Balance en Ether de la cuenta principal 'coinBase'
       // Probar con otra cuenta cualquiera que desee el usuario
