@@ -69,9 +69,10 @@ class App extends Component {
         accounts,
         thunderContract: thunderInstance,
         parsedContractAddress:
-          thunderInstance._address.substring(1, 16) +
-          "..." +
-          thunderInstance._address.substring(36),
+        "",
+          // thunderInstance._address.substring(1, 16) +
+          // "..." +
+          // thunderInstance._address.substring(36),
       });
 
       // Me suscribo a los eventos de interes
