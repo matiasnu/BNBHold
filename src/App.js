@@ -37,6 +37,10 @@ class App extends Component {
 
       let deployedNetwork = ThunderHold.networks[networkId];
 
+      // Este codigo solo funciona si la direccon del contrato esta registrada en el json del contrato, en 
+      // caso contrato, al no conocer la direccion falla
+      // Para despliegue locales con truffle o despliegues remotos con truffle (donde se obtenga la direccion del contrato)
+      // funciona. En caso de no desplegar el contrato con truffle se debe harcodear la direccion con el metodo comentado mas abajo
       const thunderInstance = new web3.eth.Contract(
         ThunderHold.abi,
         deployedNetwork && deployedNetwork.address
