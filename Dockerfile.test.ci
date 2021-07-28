@@ -4,6 +4,8 @@ FROM node:16-alpine3.14 as base
 RUN mkdir /app
 WORKDIR /app
 
+ENV COMMAND "migrate"
+ENV NETWORK "docker"
 ENV TRUFFLE_VERSION "5.3.14"
 
 RUN apk --no-cache add bash git
