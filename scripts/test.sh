@@ -3,7 +3,7 @@
 
 echo "###### Running truffle migrate"
 
-tail -F waitfile
+# tail -F waitfile
 
 echo "[INFO] Deploy smart contracts (truffle migrate --reset --compile-all --network $NETWORK -f 3) ..."
 output=$(truffle migrate --reset --compile-all --network $NETWORK -f 3) || { echo '[ERROR] Failed to migrate' ; exit 1; }
