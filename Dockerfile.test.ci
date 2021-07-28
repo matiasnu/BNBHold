@@ -8,7 +8,7 @@ ENV COMMAND "migrate"
 ENV NETWORK "docker"
 ENV TRUFFLE_VERSION "5.3.14"
 
-RUN apk --no-cache add bash
+RUN apk --no-cache add bash git
 
 # Copio unicamente lo necesario para ejecutar truffle
 COPY /scripts/test.sh /app/test.sh
@@ -16,9 +16,11 @@ COPY migrations /app/migrations
 COPY contracts /app/contracts
 COPY test /app/test
 COPY truffle-config.js /app/truffle-config.js
+COPY package.test.json /app/package.json
 
 # Install
 RUN npm install -g truffle@$TRUFFLE_VERSION && npm config set bin-links false
+RUN yarn install --save-dev
 
 RUN chmod +x /app/test.sh
 

@@ -1,24 +1,23 @@
 version: "3.2"
 
 services:
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile.frontend.ci
-    image: marianodim/cryptohold:${VERSION:-dev}
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "20m"
-        max-file: "1"
-    ports:
-      - "1337:80"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -q --method=HEAD localhost/system-status.txt"]
-      interval: 20s
-      timeout: 10s
-      retries: 20
-      
+  # web:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.frontend.ci
+  #   image: marianodim/cryptohold:${VERSION:-dev}
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "20m"
+  #       max-file: "1"
+  #   ports:
+  #     - "1337:80"
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "wget -q --method=HEAD localhost/system-status.txt"]
+  #     interval: 20s
+  #     timeout: 10s
+  #     retries: 20
 
   ganache:
     image: trufflesuite/ganache-cli:latest
@@ -36,7 +35,7 @@ services:
       - "5777"
       - --hostname
       - "ganache"
-#      - --debug
+  #      - --debug
 
   # ENTRYPOINT ["node", "./build/cli.node.js"]
   # ENTRYPOINT ["node", "/app/ganache-core.docker.cli.js"]
@@ -50,4 +49,3 @@ services:
       - ganache
     environment:
       TRUFFLE_VERSION: "5.3.14"
-
