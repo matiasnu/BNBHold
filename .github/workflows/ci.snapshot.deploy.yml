@@ -56,7 +56,7 @@ jobs:
   coverage:
     needs: test
 
-    runs-on: [self-hosted, node]
+    runs-on: [self-hosted, vagrant]
 
     if: github.event_name != 'schedule'
     steps:
@@ -75,7 +75,7 @@ jobs:
           yarn run coverage
 
   test:
-    runs-on: [self-hosted, node]
+    runs-on: [self-hosted, vagrant]
 
     if: github.event_name != 'schedule'
     steps:
@@ -103,7 +103,7 @@ jobs:
   deploy:
     needs: build
 
-    runs-on: [self-hosted, node]
+    runs-on: [self-hosted, vagrant]
 
     if: github.event_name != 'schedule'
     steps:
