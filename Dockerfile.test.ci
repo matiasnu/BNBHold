@@ -19,6 +19,7 @@ COPY truffle-config.js /app/truffle-config.js
 COPY package.test.json /app/package.json
 
 # Install
+RUN npm install --global node-gyp
 RUN npm install -g truffle@$TRUFFLE_VERSION && npm config set bin-links false
 RUN yarn install --save-dev
 

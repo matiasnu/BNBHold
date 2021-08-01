@@ -16,7 +16,7 @@ env:
   # TODO: remember to update version on new tag
   # Si se quiere generar una release
   # LATEST_TAG default snapshot
-  LATEST_TAG: v1.0.4
+  LATEST_TAG: v1.0.5
   DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
   DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
