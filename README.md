@@ -71,3 +71,19 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+### Notas relacionadas con ganache
+
+`ganache-cli -d --db /tmp/db -i  --accounts 20 --deterministic --mnemonic="myth like bonus scare over problem client lizard pioneer submit female collect"`
+
+
+### Deploy contract on rinkey or kovan networks
+
+`truffle migrate --reset -f 3 --network kovan`
+
+`truffle migrate --reset -f 3 --network rinkeby`
+
+
+
+
