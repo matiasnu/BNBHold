@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import { Lottery } from "./components/Lottery";
 import { NotFound } from "./components/NotFound";
-import {Stats} from "./components/Stats";
+import Stats from "./components/Stats";
 import * as serviceWorker from "./serviceWorker";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Container } from "semantic-ui-react";

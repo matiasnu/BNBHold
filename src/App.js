@@ -601,7 +601,7 @@ class App extends Component {
 
         <span className="min-tt">
           {this.state.INVEST_MIN_AMOUNT} TT
-          {/* <EtherGetter web3={this.state.web3} thunderContract={this.state.thunderContract} accounts={this.state.accounts} />           */}
+          <EtherGetter/>          
         </span>
 
         
