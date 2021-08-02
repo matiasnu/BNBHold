@@ -5,6 +5,8 @@ import getWeb3Modal from "./getWeb3Modal";
 import { Button, Header, Input } from "semantic-ui-react";
 import history from "./history";
 import { Lottery } from "./components/Lottery";
+import EtherGetter from "./components/EtherGetter";
+
 
 import "./views/app.css";
 import coonectWalletLogo from "./views/images/connect-wallet-dashboard.png";
@@ -77,6 +79,17 @@ class App extends Component {
       // example of interacting with the contract's methods.
       //this.setState({ web3, accounts, contract: antiWalletContract }, this.updateState);
       // Seteo como estado un objeto state y le agrego un metodo que se ejecuta..
+
+
+      // const aggregatorV3InterfaceABI = [{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"description","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint80","name":"_roundId","type":"uint80"}],"name":"getRoundData","outputs":[{"internalType":"uint80","name":"roundId","type":"uint80"},{"internalType":"int256","name":"answer","type":"int256"},{"internalType":"uint256","name":"startedAt","type":"uint256"},{"internalType":"uint256","name":"updatedAt","type":"uint256"},{"internalType":"uint80","name":"answeredInRound","type":"uint80"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"latestRoundData","outputs":[{"internalType":"uint80","name":"roundId","type":"uint80"},{"internalType":"int256","name":"answer","type":"int256"},{"internalType":"uint256","name":"startedAt","type":"uint256"},{"internalType":"uint256","name":"updatedAt","type":"uint256"},{"internalType":"uint80","name":"answeredInRound","type":"uint80"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"version","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}];
+      // const addr = "0x9326BFA02ADD2366b30bacB125260Af641031331";
+      // const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, addr);
+      // priceFeed.methods.latestRoundData().call()
+      //     .then((roundData) => {
+      //         // Do something with roundData
+      //         console.log("Latest Round Data", roundData)
+      //     });
+
 
       this.setState({
         web3,
@@ -585,9 +598,13 @@ class App extends Component {
           value={this.state.invest}
           onChange={this.onChange}
         />
+
         <span className="min-tt">
-          Minimum {this.state.INVEST_MIN_AMOUNT} TT
+          {this.state.INVEST_MIN_AMOUNT} TT
+          {/* <EtherGetter web3={this.state.web3} thunderContract={this.state.thunderContract} accounts={this.state.accounts} />           */}
         </span>
+
+        
         <span className="max-tt">
           Maximum {this.state.INVEST_MAX_AMOUNT} TT
         </span>
@@ -674,6 +691,7 @@ class App extends Component {
             Home
           </a>
         </span>
+
         <span className="lottery">
           <a
             className="chat-link"

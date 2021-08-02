@@ -38,6 +38,17 @@ module.exports = {
       //      gasPrice: 29970705,
       confirmations: 1,
     },
+    kovan: {
+      provider: () =>
+        new HDWalletProvider(
+          "under smart shiver card hurt tourist true crater flee quiz group sad",
+          "wss://kovan.infura.io/ws/v3/776e2e5b48554e709e4727937add828c",
+          0
+        ),
+      network_id: "42",
+      gas: 6000000,
+      confirmations: 1,
+    },    
   },
   plugins: ["solidity-coverage"],
   // MAD Esto es para forzar a truffle a que compile con la vesion definida en el pragma
@@ -56,3 +67,6 @@ module.exports = {
     },
   },
 };
+
+
+
