@@ -42,14 +42,14 @@ jobs:
           [ "$VERSION" == "master" ] && export VERSION=snapshot
 
           echo VERSION=$VERSION
-          docker-compose -f docker-compose.yml build web
+          COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build web
           docker-compose -f docker-compose.yml push web
 
           # tag and push versions X.X and latest
           if echo "$VERSION" | grep -qE '^\w+\.\w+\.\w+$' && [ "$LATEST_TAG" == "$VERSION" ]; then
               export VERSION="latest"
               echo VERSION=$VERSION
-              docker-compose -f docker-compose.yml build web
+              COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build web
               docker-compose -f docker-compose.yml push web
           fi
 
@@ -88,7 +88,7 @@ jobs:
       - name: Buildeamos todos las imagenes requeridas
         run: |
           echo 'build'
-          docker-compose --file docker-compose-test.yml build
+          COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose --file docker-compose-test.yml build
 
       - name: Levantamos el entorno de test
         run: |
