@@ -1,0 +1,16 @@
+.getter-price {
+  top: 630px;
+  left: 940px;
+  position: absolute;
+}
+
+.getter-price-usd {
+  width: 364px;
+  top: 70px;
+  left: 60px;
+  font-family: Poppins;
+  font-weight: SemiBold;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}

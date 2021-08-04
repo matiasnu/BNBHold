@@ -600,14 +600,13 @@ class App extends Component {
         />
 
         <span className="min-tt">
-          {this.state.INVEST_MIN_AMOUNT} TT
-          <EtherGetter/>          
+          Minimum {this.state.INVEST_MIN_AMOUNT} TT        
         </span>
-
         
         <span className="max-tt">
           Maximum {this.state.INVEST_MAX_AMOUNT} TT
         </span>
+        
         <span className="dato5">In 7 days you will get</span>
         <span className="dato4">{Number(this.state.userAvailable).toFixed(5)} TT</span>
         <button className="stake" type="button" onClick={this.investContract}>
@@ -639,7 +638,8 @@ class App extends Component {
 
         <div className="idea-block"></div>
         <div className="pinguino-logo"></div>
-        <span className="idea">Agregado</span>
+        <span className="idea"></span>
+        <EtherGetter/>
         <div className="stakes-block">
         <span className="my-stakes">My stakes</span>
 

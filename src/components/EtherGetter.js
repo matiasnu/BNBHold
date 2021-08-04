@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CoinGecko from "coingecko-api"
+import "../views/etherGetter.css";
+import logoThunder from "../views/images/thunder-token-icon.png";
 
 
 function EtherGetter(props) {
@@ -26,8 +28,9 @@ function EtherGetter(props) {
 
   return (
 
-    <div>
-      <p>{dollarsEQ} US Dollars</p>
+    <div className="getter-price">
+      <p className="getter-price-usd">{dollarsEQ} USD</p>
+      <img src={logoThunder} style={{width:'17%', height:'17%'}} />
     </div>
   );
 
