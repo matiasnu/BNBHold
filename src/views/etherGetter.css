@@ -14,3 +14,35 @@
   opacity: 1;
   text-align: left;
 }
+
+.getter-change {
+  top: 800px;
+  left: 940px;
+  position: absolute;
+}
+
+.getter-change-text{
+    top: 70px;
+  font-family: Poppins;
+  font-weight: SemiBold;
+  font-size: 20px;
+  opacity: 1;
+  text-align: left;
+}
+
+.getter-change-num {
+  font-family: Poppins;
+  font-weight: SemiBold;
+  font-size: 20px;
+  opacity: 1;
+  text-align: left;
+  
+}
+
+.getter-change-success {
+  color: green;
+}
+
+.getter-change-fail {
+  color: red;
+}

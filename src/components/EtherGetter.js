@@ -8,6 +8,7 @@ function EtherGetter(props) {
 
   // Estadisticas Generales del contrato
   const [dollarsEQ, setDollarsEQ] = useState(0);
+  const [change24Hr, setchange24Hr] = useState(1);
 
 
   useEffect(() => {
@@ -21,16 +22,41 @@ function EtherGetter(props) {
     let data = await CoinGeckoClient.simple.price({
       ids: cryptocurrency,
       vs_currencies: 'usd',
+      include_24hr_change: true
     });
     console.log("PRECIO EN DOLARES " + data.data.ethereum.usd);
     setDollarsEQ(data.data.ethereum.usd);
+    setchange24Hr(data.data.ethereum.usd_24h_change)
+  }
+
+  var getterChangeSuccess = (
+    <React.Fragment>
+      <div className="getter-change-success">{change24Hr.toPrecision(4)} %</div>
+    </React.Fragment>
+  );
+  var getterChangeFail = (
+    <React.Fragment>
+      <div className="getter-change-fail">{change24Hr.toPrecision(4).slice(1)} %</div>
+    </React.Fragment>
+  );
+
+  var my_stake_change = getterChangeFail;
+  if ({change24Hr} >= 0) {
+    my_stake_change = getterChangeSuccess;
   }
 
   return (
-
-    <div className="getter-price">
-      <p className="getter-price-usd">{dollarsEQ} USD</p>
-      <img src={logoThunder} style={{width:'17%', height:'17%'}} />
+    <div>
+      <div className="getter-price">
+        <p className="getter-price-usd">{dollarsEQ} USD</p>
+        <img src={logoThunder} style={{width:'17%', height:'17%'}} />
+      </div>
+      <div className="getter-change">
+        <h3 className="getter-change-text">24h variation: </h3>
+        <div className="getter-change-num">
+          {my_stake_change}
+        </div>
+      </div>
     </div>
   );
 
