@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Button } from 'semantic-ui-react'
 import CoinGecko from "coingecko-api"
 import "../views/etherGetter.css";
 import logoThunder from "../views/images/thunder-token-icon.png";
-
+import configData from "../config/config.json";
 
 function EtherGetter(props) {
 
@@ -18,32 +19,33 @@ function EtherGetter(props) {
 
   const convertCryptocurrencyPriceToDollars = async () => {
     const CoinGeckoClient = new CoinGecko();
-    const cryptocurrency = 'ethereum';
+    const cryptocurrency = configData.cryptocurrency;
     let data = await CoinGeckoClient.simple.price({
       ids: cryptocurrency,
       vs_currencies: 'usd',
       include_24hr_change: true
     });
-    console.log("PRECIO EN DOLARES " + data.data.ethereum.usd);
     setDollarsEQ(data.data.ethereum.usd);
     setchange24Hr(data.data.ethereum.usd_24h_change)
   }
 
   var getterChangeSuccess = (
     <React.Fragment>
-      <div className="getter-change-success">{change24Hr.toPrecision(4)} %</div>
+      <div className="getter-change-success">{change24Hr.toPrecision(3)} %</div>
     </React.Fragment>
   );
   var getterChangeFail = (
     <React.Fragment>
-      <div className="getter-change-fail">{change24Hr.toPrecision(4).slice(1)} %</div>
+      <div className="getter-change-fail">{change24Hr.toPrecision(3).slice(1)} %</div>
     </React.Fragment>
   );
 
   var my_stake_change = getterChangeFail;
-  if ({change24Hr} >= 0) {
+  if (change24Hr >= 0) {
     my_stake_change = getterChangeSuccess;
   }
+
+  var redirect_crypto_stats = "https://coinmarketcap.com/currencies/" + configData.cryptocurrency;
 
   return (
     <div>
@@ -56,6 +58,11 @@ function EtherGetter(props) {
         <div className="getter-change-num">
           {my_stake_change}
         </div>
+      </div>
+      <div className="getter-stats">
+        <Button color='yellow'>
+          <a className="getter-stats-button-text" target="_blank" href={redirect_crypto_stats}>View stats</a>
+        </Button>
       </div>
     </div>
   );
