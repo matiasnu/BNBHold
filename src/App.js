@@ -21,7 +21,7 @@ class App extends Component {
       userWallet: "Connect wallet",
       invest: 0,
       isLotteryVisible: false,
-      isHomeVisible: false,
+      isHomeVisible: true,
       parsedContractAddress: "", // wallet parseada para mostrar en la pantalla (lease truncada con puntos)
       totalStaked: 0,
       contractBalance: 0,
@@ -685,7 +685,7 @@ class App extends Component {
           <a
             className="chat-link"
             onClick={() =>
-              this.setState({ isHomeVisible: !this.state.isHomeVisible })
+              this.setStateViews()
             }
           >
             Home
@@ -696,7 +696,7 @@ class App extends Component {
           <a
             className="chat-link"
             onClick={() =>
-              this.setState({ isLotteryVisible: !this.state.isLotteryVisible })
+              this.setStateViews()
             }
           >
             Lottery
@@ -733,6 +733,13 @@ class App extends Component {
 
   onChange(event) {
     this.setState({ invest: event.target.value });
+  }
+
+  setStateViews() {
+    this.setState({
+      isLotteryVisible: !this.state.isLotteryVisible,
+      isHomeVisible: !this.state.isHomeVisible
+     })
   }
 
 }
