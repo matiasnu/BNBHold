@@ -6,7 +6,8 @@ import { Button, Header, Input } from "semantic-ui-react";
 import history from "./history";
 import { Lottery } from "./components/Lottery";
 import EtherGetter from "./components/EtherGetter";
-
+import Influx from "./components/InfluxDB"
+import {Point} from '@influxdata/influxdb-client';
 
 import "./views/app.css";
 import coonectWalletLogo from "./views/images/connect-wallet-dashboard.png";
@@ -740,6 +741,19 @@ class App extends Component {
       isLotteryVisible: !this.state.isLotteryVisible,
       isHomeVisible: !this.state.isHomeVisible
      })
+  }
+
+  sendInfluxData() {
+    const influxdb = new Influx();
+    /**
+     * Un point es como un punto de graficacion que se le pasa al influxDB, el mem es justamente la medicion que se crea,
+     * o topic mientras que el used_percent es el campo a completar, y este se completa con la info que se
+     * le pasa despues de la coma. Lo ideal es que el point se defina en cada metodo a enviar info, example:
+     * this.sendInfluxData(point)
+     * */
+    const point = new Point('mem')
+            .floatField('used_percent', 30)
+    influxdb.writeData(point);
   }
 
 }

@@ -4,8 +4,10 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
+    "@influxdata/influxdb-client": "^1.16.0",
     "@portis/web3": "^4.0.0",
     "@truffle/hdwallet-provider": "^1.4.0",
+    "coingecko-api": "1.0.10",
     "firebase": "^7.24.0",
     "gh-pages": "^3.2.3",
     "history": "^5.0.0",
@@ -19,9 +21,7 @@
     "solc": "^0.8.6",
     "sweetalert": "^2.1.2",
     "web3": "1.2.2",
-    "web3modal": "^1.9.3",
-    "coingecko-api": "1.0.10"
-    
+    "web3modal": "^1.9.3"
   },
   "scripts": {
     "deploy": "yarn serve -s build/",
