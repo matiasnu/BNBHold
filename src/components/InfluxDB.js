@@ -1,15 +1,17 @@
 import {InfluxDB} from '@influxdata/influxdb-client';
+import configData from "../config/config.json";
 class Influx{
     constructor(){
         // You can generate a Token from the "Tokens Tab" in the UI
-        const token = 'hrf_2_qx597SrGp6StMcmKF3F1gl8t0ayfqhPpoJmwKQ5k7mdiqVFFDbAeBoiTUA7nVkdPWzWBbrpR3tb3Irhw==';
-        const org = 'matiasne45@gmail.com'
-        const bucket = 'BNBHold'
+        const token = configData.influx_db_token;
+        const org = configData.influx_db_org;
+        const bucket = configData.influx_db_bucket;
+        const url = configData.influx_db_url;
         /**
         * Instantiate the InfluxDB client
          * with a configuration object.
          **/
-        const client = new InfluxDB({url: 'https://us-east-1-1.aws.cloud2.influxdata.com', token: token})
+        const client = new InfluxDB({url: url, token: token})
         /**
          * Create a write client from the getWriteApi method.
          * Provide your `org` and `bucket`.

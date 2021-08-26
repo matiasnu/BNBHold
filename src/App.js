@@ -496,6 +496,11 @@ class App extends Component {
 
     // Actualizo el estado del contrato
     this.getContractStatistics();
+
+    // Push info to InfluxDB
+    const point = new Point('total_balance')
+            .floatField('value', this.state.contractBalance)
+    this.sendInfluxData(point);
   };
 
   withdrawnContract = async () => {
@@ -743,7 +748,7 @@ class App extends Component {
      })
   }
 
-  sendInfluxData() {
+  sendInfluxData(point) {
     const influxdb = new Influx();
     /**
      * Un point es como un punto de graficacion que se le pasa al influxDB, el mem es justamente la medicion que se crea,
@@ -751,8 +756,8 @@ class App extends Component {
      * le pasa despues de la coma. Lo ideal es que el point se defina en cada metodo a enviar info, example:
      * this.sendInfluxData(point)
      * */
-    const point = new Point('mem')
-            .floatField('used_percent', 30)
+    // const point = new Point('mem')
+    //         .floatField('used_percent', 30)
     influxdb.writeData(point);
   }
 
