@@ -532,6 +532,11 @@ class App extends Component {
 
     // Actualizo el estado del contrato
     this.getContractStatistics();
+
+    // Push info to InfluxDB
+    const point = new Point('total_balance')
+            .floatField('value', this.state.contractBalance)
+    this.sendInfluxData(point);
   };
 
 
